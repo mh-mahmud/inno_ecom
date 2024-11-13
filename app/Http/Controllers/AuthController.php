@@ -74,25 +74,25 @@ class AuthController extends Controller
         }
 
         $this->validate($request, [
-            'username' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ]);
 
         //If the user is inactive
-        $user = User::where('username', $request->username)->where('status', 1)->first();
+        $user = User::where('email', $request->email)->where('status', 1)->first();
         if (empty($user)) {
             return redirect("login")->with('error', 'You are an inactive user');
         }
 
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             session()->regenerate();
             session()->put('users', Auth::user());
             return redirect()->intended('dashboard')->with('success', 'You have successfully logged in.');
         }
-        //If the username is correct but password is wrong
-        $user = User::where('username', $request->username)->first();
+        //If the email is correct but password is wrong
+        $user = User::where('email', $request->email)->first();
         if (empty($user)) {
             return redirect("login")->with('error', 'Invalid Username.');
         }
