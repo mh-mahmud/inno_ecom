@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--begin::Head-->
 
 <head>
 	<base href="">
@@ -33,12 +32,10 @@
 	<script src="{{url('/')}}/assets/js/jquery-3.6.0.min.js"></script>
 	<!--end::Global Stylesheets Bundle-->
 </head>
-<!--end::Head-->
-<!--begin::Body-->
 
-<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px" data-kt-aside-minimize="on">
-	<!--begin::Main-->
-	<!--begin::Root-->
+
+<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px" data-kt-aside-minimize="off">
+
 	<div class="d-flex flex-column flex-root">
 		<!--begin::Page-->
 		<div class="page d-flex flex-row flex-column-fluid">
