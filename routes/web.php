@@ -315,5 +315,16 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('add-customer/{leadid?}', [CustomerController::class, 'add_customer'])->name('add-customer')->middleware(['check-permission']);
 	Route::post('add-customer', [CustomerController::class, 'save_customer'])->name('post-add-customer');
 
+	// slider routes
+	Route::get('/sliders', [SliderController::class, 'index'])->name('slider-list')->middleware(['check-permission']);
+    Route::get('/slider/create', [SliderController::class, 'create'])->name('slider-create')->middleware(['check-permission']);
+	Route::post('/slider', [SliderController::class, 'store'])->name('slider-store');
+	Route::get('/slider/{id?}', [SliderController::class, 'show'])->name('slider-show')->middleware(['check-permission']);
+	Route::get('/slider/{id?}/edit', [SliderController::class, 'edit'])->name('slider-edit')->middleware(['check-permission']);
+	Route::put('/slider/{id?}', [SliderController::class, 'update'])->name('slider-update');
+	Route::post('/slider/search', [SliderController::class, 'search'])->name('slider-search');
+	Route::delete('/slider/{id?}', [SliderController::class, 'destroy'])->name('slider-destroy')->middleware(['check-permission']);
+
+
 
 });
