@@ -14,12 +14,12 @@
                  data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                  class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Agent
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Sliders
                     <!--begin::Separator-->
                     <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                     <!--end::Separator-->
                     <!--begin::Description-->
-                    <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Agent List</small>
+                    <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Slider List</small>
                     <!--end::Description--></h1>
                 <!--end::Title-->
             </div>
@@ -124,7 +124,7 @@
                 </div>
                 <!--end::Wrapper-->
                 <!--begin::Button-->
-                <a href="{{ route('agents-create') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Create</a>
+                <a href="{{ route('slider-create') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Create</a>
 
                 <!--end::Button-->
             </div>
@@ -174,12 +174,12 @@
                     <!--begin::Header-->
                     <div class="d-flex justify-content-between align-items-start card-header border-0 p-1">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bolder fs-3 mb-1">Agent List</span>
-                            <!-- <span class="text-muted mt-1 fw-bold fs-7">Agent data here</span> -->
+                            <span class="card-label fw-bolder fs-3 mb-1">Slider List</span>
+                            <!-- <span class="text-muted mt-1 fw-bold fs-7">slider data here</span> -->
                         </h3>
 
                         <div class="d-flex flex-wrap gap-2">
-                            <form action="{{ route('agents-search') }}" method="POST" class="d-flex">
+                            <form action="{{ route('slider-search') }}" method="POST" class="d-flex">
                                 @csrf
                                 <!--begin::Input group-->
                                 <div class="d-flex align-items-center position-relative">
@@ -198,7 +198,7 @@
                                     <!--end::Svg Icon-->
                                     <input type="text" name="search"
                                            class="form-control form-control-sm form-control-solid w-250px ps-15"
-                                           value="{{ request('search') }}" placeholder="Search by Agent ID or Name">
+                                           value="{{ request('search') }}" placeholder="Search by Slider title or description">
                                 </div>
                                 <!--end::Input group-->
                                 <button type="submit" class="btn btn-primary btn-sm ms-2">Search</button>
@@ -212,7 +212,7 @@
                     <div class="card-body p-1">
                         <!--begin::Table container-->
                         <div class="table-responsive">
-                            @if($agents->isNotEmpty())
+                            @if($sliders->isNotEmpty())
                                 <!--begin::Table-->
                                 <table
                                     class="table table-sm table-condensed table-row-gray-100 align-middle gs-0 gy-3 table-row-bordered">
@@ -220,13 +220,9 @@
                                     <thead>
                                     <tr class="fw-bolder text-muted bg-light bd-cyan">
                                         <th class="ps-4 min-w-50px">SL</th>
-                                        <th class="min-w-150px">Agent ID</th>
-                                        <th class="min-w-140px">First Name</th>
-                                        <th class="min-w-140px">Last Name</th>
-                                        <th class="min-w-140px">Username</th>
-                                        <th class="min-w-120px">Email</th>
-                                        <th class="min-w-120px">Phone Number</th>
-                                        {{--<th class="min-w-200px">Date Of Birth</th>--}}
+                                        <th class="min-w-150px">Slider Title</th>
+                                        <th class="min-w-140px">Slider Image</th>
+                                        <th class="min-w-140px">Description</th>
                                         <th class="min-w-120px">Status</th>
                                         <th class="min-w-100px text-end text-end-new">Actions</th>
                                     </tr>
@@ -234,32 +230,23 @@
                                     <!--end::Table head-->
                                     <!--begin::Table body-->
                                     <tbody>
-                                    @foreach ($agents as $agent)
+                                    @foreach ($sliders as $slider)
                                         <tr>
 
-							                <td class="ps-5 text-dark fs-6">{{($agents->currentPage() - 1) * $agents->perPage() + $loop->iteration}}</td>
-                                            <td class="text-dark fs-6">{{$agent->agent_id}}</td>
-                                            <td class="text-dark fs-6 w-200px">{{$agent->first_name }}</td>
-                                            <td class="text-dark fs-6 w-200px">{{$agent->last_name }}</td>
-                                            <td class="text-dark fs-6 w-200px">{{$agent->username }}</td>
-                                            <td class="text-dark fs-6">{{$agent->user->email}}</td>
-                                            <td class="text-dark fs-6">{{$agent->phone_number}}</td>
-                                            {{--<td class="text-dark fs-6 w-200px">
-                                                @if($agent->birth_day)
-                                                    {{ \Carbon\Carbon::parse($agent->birth_day)->format('d-m-Y') }}
-                                                @endif
-                                            </td>--}}
-
+							                <td class="ps-5 text-dark fs-6">{{($sliders->currentPage() - 1) * $sliders->perPage() + $loop->iteration}}</td>
+                                            <td class="text-dark fs-6">{{$slider->slider_title}}</td>
+                                            <td class="text-dark fs-6 w-200px">{{$slider->slider_image }}</td>
+                                            <td class="text-dark fs-6 w-200px">{{$slider->slider_description }}</td>
                                             <td>
-                                                @if ($agent->status == 1)
+                                                @if ($slider->status == 1)
                                                     <span class="badge badge-light-success">Active</span>
-                                                @elseif ($agent->status == 0)
+                                                @elseif ($slider->status == 0)
                                                     <span class="badge badge-light-danger">Inactive</span>
                                                 @endif
                                             </td>
                                             <td>
                                                 <div class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
-                                                    <a href="{{ route('agents-show', $agent->agent_id) }}"
+                                                    <a href="{{ route('slider-show', $slider->id) }}"
                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                         <span class="svg-icon svg-icon-3">
             												<svg xmlns="http://www.w3.org/2000/svg"
@@ -279,7 +266,7 @@
             													</svg>
 											             </span>
                                                     </a>
-                                                    <a href="{{ route('agents-edit', $agent->agent_id) }}"
+                                                    <a href="{{ route('slider-edit', $slider->id) }}"
                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                         <span class="svg-icon svg-icon-3">
             												<svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -293,7 +280,7 @@
             												</svg>
             											</span>
                                                     </a>
-                                                    <form action="{{ route('agents-destroy', $agent->agent_id) }}"
+                                                    <form action="{{ route('slider-destroy', $slider->id) }}"
                                                           method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
@@ -337,7 +324,7 @@
 
                 </div>
 
-                @include('components.pagination', ['paginator' => $agents])
+                @include('components.pagination', ['paginator' => $sliders])
 
 
                 <!--End Table Pagination-->
@@ -348,7 +335,7 @@
 
     <script>
         function confirmDelete() {
-            if (confirm("Are you sure you want to delete Agent?")) {
+            if (confirm("Are you sure you want to delete this slider?")) {
                 document.getElementById('deleteForm').submit();
             }
             return false;

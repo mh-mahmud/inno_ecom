@@ -8,7 +8,7 @@ class SliderService
 {
 
 
-    public function getAllAgents()
+    public function getAllSliders()
     {
         return Slider::orderBy('created_at', 'desc')->paginate(config('constants.ROW_PER_PAGE'));
     }
@@ -26,81 +26,43 @@ class SliderService
             
             $fileNameToStore = '';
         }
-        $agent_id = str_pad(mt_rand(1, 9999), 4);
-        $user = User::create([
-            'user_id' => str_pad(mt_rand(1, 9999999999999), 20),
-            'email' => $request->email,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'username' =>  $request->username,
-            'phone_number' => $request->phone_number,
-            'gender' => $request->gender,
-            'address' => $request->address,
+        
+        $slider = new Slider([
+            'slider_title' => $request->slider_title,
             'slider_image' => $fileNameToStore,
-            'status' => $request->status,
-            'user_type' =>'agent',
-            'password' => bcrypt($request->password),
-        ]);
-        //$agent_id = str_pad(mt_rand(1, 9999), 4);
-        $agent = new Agent([
-            'agent_id' => $agent_id,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'birth_day' => $request->birth_day,
-            'phone_number' => $request->phone_number,
-            'status' => $request->status,
-            'address' => $request->address,
-            'description' => $request->description,
+            'slider_description' => $request->slider_description,
+            'status' => $request->status
         ]);
 
-        
-        $user->agent()->save($agent);
-
-        return $user;
+        $slider->save();
+        // $user->agent()->save($agent);
+        return $slider;
     }
 
-    public function getAgentWithUser($id)
+    public function getSlider($id)
     {
-        $agent = Agent::findOrFail($id);
-        $user = $agent->user()->firstOrFail();
-        
-        return compact('agent', 'user');
+        $slider = Slider::findOrFail($id);
+        return compact('slider');
     }
 
-    public function getAgentEditData($id)
+    public function getSliderEditData($id)
     {
-        $agent = Agent::findOrFail($id);
-        $user = $agent->user()->firstOrFail();
-        
-        return compact('agent', 'user');
+        $slider = Slider::findOrFail($id);
+        return compact('slider');
     }
 
 
-    public function updateAgent($request, $id)
+    public function updateSlider($request, $id)
     {
-        // Find the user by id
-        //dd($id);die();
-        $agent = Agent::findOrFail($id);
-        $user = User::findOrFail($agent->user_id);
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->username = $request->username;
-        //$user->username = $id;
-        $user->email = $request->email;
-        $user->gender = $request->gender;
-        $user->phone_number = $request->phone_number;
-        $user->address = $request->address;
-        $user->status = $request->status;
-        $user->user_type ='agent';
-        //$user->password = bcrypt($request->password);
-        if(!empty($request->password)) {
-			$user->password = bcrypt($request->password);
-		}
+        $slider = Slider::findOrFail($id);
+        $slider->slider_title = $request->slider_title;
+        $slider->slider_description = $request->slider_description;
+        $slider->status = $request->status;
+
         if ($request->hasFile('slider_image')) {
            
-            if ($user->slider_image) {
-                $previousImagePath = getcwd().'/uploads/agents/'.$user->slider_image;
+            if ($slider->slider_image) {
+                $previousImagePath = getcwd().'/uploads/sliders/'.$slider->slider_image;
                 if (file_exists($previousImagePath)) {
                     @unlink($previousImagePath);
                 }
@@ -109,53 +71,39 @@ class SliderService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('slider_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('slider_image')->move(getcwd().'/uploads/agents', $fileNameToStore);
-            $user->slider_image = $fileNameToStore;
+            $path = $request->file('slider_image')->move(getcwd().'/uploads/sliders', $fileNameToStore);
+            $slider->slider_image = $fileNameToStore;
                
         }
-        $user->save();
-        $agent = $user->agent;
-        $agent->first_name = $request->first_name;
-        $agent->last_name = $request->last_name;
-        $agent->gender = $request->gender;
-        $agent->birth_day = $request->birth_day;
-        $agent->phone_number = $request->phone_number;
-        $agent->status = $request->status;
-        $agent->address = $request->address;
-        $agent->description = $request->description;
-        
-
-        // Save the agent
-        $agent->save();
+        $slider->save();
+        return $slider;
     }
 
-    public function searchAgents($request)
+    public function searchSlider($request)
     {
         $searchTerm = trim($request->input('search'));
-        $query = Agent::query();
+        $query = Slider::query();
 
         $query->where(function($q) use ($searchTerm) {
-            $q->where('agent_id', 'LIKE', '%' . $searchTerm . '%')
-              ->orWhere('first_name', 'LIKE', '%' . $searchTerm . '%')
-              ->orWhere('last_name', 'LIKE', '%' . $searchTerm . '%');
+            $q->where('slider_title', 'LIKE', '%' . $searchTerm . '%')
+              ->orWhere('slider_image', 'LIKE', '%' . $searchTerm . '%')
+              ->orWhere('slider_description', 'LIKE', '%' . $searchTerm . '%');
         });
 
         return $query->paginate(config('constants.ROW_PER_PAGE'));
     }
 
-    public function deleteAgentAndUser($id)
+    public function deleteSlider($id)
     {
-        $agent = Agent::findOrFail($id);
-        $user = $agent->user;
-        if ($user->slider_image) {
-            $imagePath = getcwd().'/uploads/agents/'.$user->slider_image;
+        $slider = Slider::findOrFail($id);
+        if ($slider->slider_image) {
+            $imagePath = getcwd().'/uploads/sliders/'.$slider->slider_image;
             if (file_exists($imagePath)) {
                 @unlink($imagePath);
             }
         }
-        $agent->delete();
-        $user->delete();
-        if($user->delete()) {
+
+        if($slider->delete()) {
             return true;
         }
         return false;

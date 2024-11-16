@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LeadsFormController;
 use App\Http\Controllers\PromotionController;
@@ -324,6 +325,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::put('/slider/{id?}', [SliderController::class, 'update'])->name('slider-update');
 	Route::post('/slider/search', [SliderController::class, 'search'])->name('slider-search');
 	Route::delete('/slider/{id?}', [SliderController::class, 'destroy'])->name('slider-destroy')->middleware(['check-permission']);
+	Route::put('/slider/{id}/update-slider-image', [SliderController::class, 'updateSliderImage'])->name('update-slider-image');
 
 
 

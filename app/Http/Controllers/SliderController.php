@@ -7,42 +7,37 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Slider;
 use Carbon\Carbon;
 use App\Services\SliderService;
 
 class SliderController extends Controller
 {
 
-    protected $agentService;
+    protected $sliderService;
 
-    public function __construct(AgentService $agentService)
+    public function __construct(SliderService $sliderService)
     {
-        $this->agentService = $agentService;
-        // $this->middleware('auth');
+        $this->sliderService = $sliderService;
     }
 
     public function index()
     {
         
-        $agents = $this->agentService->getAllAgents();
-        return view('agents.index', compact('agents'));
+        $sliders = $this->sliderService->getAllSliders();
+        return view('sliders.index', compact('sliders'));
     }
 
     function create() {
-        return view('agents.create');
+        return view('sliders.create');
     }
 
     public function store(Request $request)
     {
         
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users,email',
-            'username' => 'required|string|unique:users,username',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'username' => 'required|string|unique:users,username',
-            'password' => 'required|string',
-            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'slider_title' => 'required|unique:sliders,slider_title',
+            'slider_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
            
         ]);
        
@@ -50,39 +45,35 @@ class SliderController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $user = $this->agentService->create_agent($request);
-        return redirect()->route('agents-index')->with('success', 'Agent created successfully.');
+        $user = $this->sliderService->create_slider($request);
+        return redirect()->route('slider-list')->with('success', 'Slider created successfully.');
     }
 
    
     public function show($id)
     {
-        $agentData = $this->agentService->getAgentWithUser($id);
-        return view('agents.show', $agentData);
+        $sliderData = $this->sliderService->getSlider($id);
+        return view('sliders.show', $sliderData);
     }
 
    
     public function edit($id)
     {
-        $agentData = $this->agentService->getAgentEditData($id);
-        return view('agents.edit', $agentData);
+        $sliderData = $this->sliderService->getSliderEditData($id);
+        return view('sliders.edit', $sliderData);
     }
 
 
     public function update(Request $request, $id)
-    {    //dd($request);die();
+    {
         
         $request->validate([
-            'first_name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $request->id,
-            'username' => 'required|string|unique:users,username,' . $request->id,
-            'last_name' => 'required|string',
+            'slider_title' => 'required|unique:sliders,slider_title,' . $request->id,
             'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-       
-        $this->agentService->updateAgent($request, $id);
-        return redirect()->route('agents-index')->with('success', 'Agent updated successfully.');
+        $this->sliderService->updateSlider($request, $id);
+        return redirect()->route('slider-list')->with('success', 'Slider updated successfully.');
     }
 
   
@@ -93,15 +84,15 @@ class SliderController extends Controller
         $searchTerm = trim($request->input('search'));
 
         if (empty($searchTerm)) {
-            return redirect()->route('agents-index')->with('error', 'Search Field cannot be blank.');
+            return redirect()->route('slider-list')->with('error', 'Search Field cannot be blank.');
         }
 
         $request->validate([
             'search' => 'required|string',
         ]);
        
-        $agents = $this->agentService->searchAgents($request);
-        return view('agents.index', compact('agents'));
+        $sliders = $this->sliderService->searchSlider($request);
+        return view('slider.index', compact('sliders'));
     }
 
 
@@ -110,11 +101,31 @@ class SliderController extends Controller
     public function destroy($id)
     {
         try {
-            $this->agentService->deleteAgentAndUser($id);
-            return redirect()->route('agents-index')->with('success', 'Agent deleted successfully.');
+            $this->sliderService->deleteSlider($id);
+            return redirect()->route('slider-list')->with('success', 'Slider deleted successfully.');
         } catch (\Exception $e) {
            return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    public function updateSliderImage($id)
+    {
+        $slider = Slider::findOrFail($id);
+        if ($slider->slider_image) {
+            // path to the image file
+            $imagePath =getcwd().'/uploads/sliders/'.$slider->slider_image;
+            // delete the file if it exists
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+            //Update the slider record to remove the profile image
+            $slider->slider_image = null;
+            $slider->save();
+    
+            return response()->json(['success' => true]);
+        }
+    
+        return response()->json(['success' => false, 'message' => 'No slider image found']);
     }
 
 }
