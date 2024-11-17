@@ -56,11 +56,12 @@
                                     <!-- Start Form-->
 
                                     <form class="g-form w-100" action="{{ route('add-product-pro') }}"  method="POST" enctype="multipart/form-data">
-                                         @csrf
+                                        @csrf
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <!--begin::Label-->
-                                                    <label class="form-label fw-bolder text-dark">Name<span class="text-danger">*</span></label>
+                                                    <label class="form-label fw-bolder text-dark">Product Name<span class="text-danger">*</span></label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input class="form-control form-control-sm form-control-solid"
@@ -75,7 +76,7 @@
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <!--begin::Label-->
-                                                    <label class="form-label fw-bolder text-dark">Code<span class="text-danger">*</span></label>
+                                                    <label class="form-label fw-bolder text-dark">Product Code<span class="text-danger">*</span></label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input class="form-control form-control-sm form-control-solid"
@@ -90,7 +91,7 @@
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <!--begin::Label-->
-                                                    <label class="form-label fw-bolder text-dark">Type<span class="text-danger">*</span></label>
+                                                    <label class="form-label fw-bolder text-dark">Type of Product<span class="text-danger">*</span></label>
                                                     <select class="form-control form-control-sm form-control-solid"
                                                         id="assigned_to" name="product_type" aria-label="Default select example">
                                                         <option value='' {{ old('product_type', '') === '' ? 'selected' : '' }}>Select</option>
@@ -109,7 +110,7 @@
                                           
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
-                                                    <label class="form-label fw-bolder text-dark">Cost</label>
+                                                    <label class="form-label fw-bolder text-dark">Product Cost</label>
                                                     <input class="form-control form-control-sm form-control-solid"
                                                            type="text" name="product_cost" autocomplete="off" value="{{ old('product_cost') }}" />
                                                     @if ($errors->has('product_cost'))
@@ -120,7 +121,7 @@
 
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
-                                                    <label class="form-label fw-bolder text-dark">Value</label>
+                                                    <label class="form-label fw-bolder text-dark">Product Price</label>
                                                     <input class="form-control form-control-sm form-control-solid"
                                                            type="text" name="product_value" autocomplete="off" value="{{ old('product_value') }}" />
                                                     @if ($errors->has('product_value'))
@@ -131,16 +132,78 @@
 
                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label fw-bolder text-dark" for="textarea">Description</label>
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Description</label>
                                                     <textarea class="form-control form-control-sm  form-control-solid" name="description" rows="3">{{ old('description') }}</textarea>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">How to Order</label>
+                                                    <textarea class="form-control form-control-sm  form-control-solid" name="how_to_order" rows="3">{{ old('how_to_order') }}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">Return Policy</label>
+                                                    <textarea class="form-control form-control-sm  form-control-solid" name="return_policy" rows="3">{{ old('return_policy') }}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
                                                 <div class="fv-row mb-3">
-                                                    <label class="form-label fw-bolder text-dark">Image</label>
-                                                    <input class="form-control form-control-sm form-control-solid"
-                                                           type="file" name="img_path" autocomplete="off" />
+                                                    <label class="form-label fw-bolder text-dark">Main Image</label>
+                                                    <input class="form-control form-control-sm form-control-solid" type="file" name="img_path" autocomplete="off" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Image 2</label>
+                                                    <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_2" autocomplete="off" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Image 3</label>
+                                                    <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_3" autocomplete="off" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Image 4</label>
+                                                    <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_4" autocomplete="off" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Image 5</label>
+                                                    <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_5" autocomplete="off" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Image 6</label>
+                                                    <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_6" autocomplete="off" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Image 7</label>
+                                                    <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_7" autocomplete="off" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Image 8</label>
+                                                    <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_8" autocomplete="off" />
                                                 </div>
                                             </div>
 
@@ -156,12 +219,10 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                        </div>
 
                                       <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                            <input type="reset" value="Reset" class="btn btn-light me-2">
-                                            <button type="submit" class="btn btn-primary"
-                                                    id="kt_account_profile_details_submit">Save Changes
-                                            </button>
+                                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Submit</button>
                                         </div>
 
                                     </form>
