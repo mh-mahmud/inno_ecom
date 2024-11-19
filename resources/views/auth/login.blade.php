@@ -9,6 +9,8 @@
         <!-- <link rel="preload" href="/web/static/src/libs/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" crossorigin=""/> -->
         <!-- <link type="text/css" rel="stylesheet" href="web.assets_frontend.min.css"/> -->
         <link type="text/css" rel="stylesheet" href="{{url('/')}}/assets/login/web.assets_frontend.min.css"/>
+        <link href="{{url('/')}}/assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css"/>
+        <script src="{{url('/')}}/assets/js/sweetalert2.min.js"></script>
         <!-- <script type="text/javascript">
             odoo.__session_info__ = {"is_admin": false, "is_system": false, "is_public": true, "is_website_user": false, "user_id": false, "uid": false, "is_frontend": true, "profile_session": null, "profile_collectors": null, "profile_params": null, "show_effect": true, "currencies": {"55": {"symbol": "\u09f3", "position": "after", "digits": [69, 2]}}, "bundle_params": {"lang": "en_US"}, "test_mode": false, "websocket_worker_version": "17.4-2", "translationURL": "/website/translations", "cache_hashes": {"translations": "5546cfff153b9e36c0aa4bdbcfc09f75c561342a"}};
             if (!/(^|;\s)tz=/.test(document.cookie)) {

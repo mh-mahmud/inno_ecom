@@ -69,6 +69,7 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         //Check user is already logged in
+        //dd($request);die();
         if (session()->has('users')) {
             return redirect('dashboard')->with('success', 'You are already logged in.');
         }
