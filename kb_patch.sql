@@ -22,3 +22,25 @@ ALTER TABLE `products` ADD `xxs_stock` INT NOT NULL DEFAULT '0' AFTER `img_path`
 ALTER TABLE `products` ADD `colors` VARCHAR(255) NULL DEFAULT NULL AFTER `xxxxl_stock`;
 ALTER TABLE `products` ADD `img_path_2` VARCHAR(255) NULL DEFAULT NULL AFTER `img_path`, ADD `img_path_3` VARCHAR(255) NULL DEFAULT NULL AFTER `img_path_2`, ADD `img_path_4` VARCHAR(255) NULL DEFAULT NULL AFTER `img_path_3`, ADD `img_path_5` VARCHAR(255) NULL DEFAULT NULL AFTER `img_path_4`, ADD `img_path_6` VARCHAR(255) NULL DEFAULT NULL AFTER `img_path_5`;
 ALTER TABLE `products` ADD `product_specification` TEXT NULL DEFAULT NULL AFTER `description`; 
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,        
+    invoice_no VARCHAR(20) NOT NULL,                
+    customer_name VARCHAR(100),                     
+    mobile_number VARCHAR(15),                      
+    area ENUM('Inside Dhaka', 'Outside Dhaka'),     
+    address TEXT,                                   
+    product_code VARCHAR(20) NOT NULL,              
+    product_name VARCHAR(255),                      
+    product_color VARCHAR(50),                      
+    product_size VARCHAR(10),                       
+    unit_price DECIMAL(10, 2) NOT NULL,            
+    quantity INT NOT NULL,                          
+    total_price DECIMAL(10, 2) NOT NULL,
+    sub_total DECIMAL(10, 2) NOT NULL,              
+    shipping_charge DECIMAL(10, 2) DEFAULT 0,       
+    payable_amount DECIMAL(10, 2) NOT NULL,         
+    discount DECIMAL(10, 2) DEFAULT 0,              
+    status ENUM('New','Pending','Processing','Completed','Cancelled') DEFAULT 'New', 
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP
+);

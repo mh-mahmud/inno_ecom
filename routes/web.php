@@ -24,6 +24,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceCustomFormController;
 use App\Http\Controllers\ProductSpecificationController;
+use App\Http\Controllers\OrderController;
 
 
 use App\Models\Promotion;
@@ -326,6 +327,18 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/slider/search', [SliderController::class, 'search'])->name('slider-search');
 	Route::delete('/slider/{id?}', [SliderController::class, 'destroy'])->name('slider-destroy')->middleware(['check-permission']);
 	Route::put('/slider/{id}/update-slider-image', [SliderController::class, 'updateSliderImage'])->name('update-slider-image');
+
+
+	// Orders Routes
+	Route::get('/orders', [OrderController::class, 'index'])->name('orders-index')->middleware(['check-permission']);
+	Route::get('/orders/create', [OrderController::class, 'create'])->name('orders-create')->middleware(['check-permission']);
+	Route::post('/orders', [OrderController::class, 'store'])->name('orders-store');
+	Route::get('/orders/{id?}', [OrderController::class, 'show'])->name('orders-show')->middleware(['check-permission']);
+	Route::get('/orders/{id?}/edit', [OrderController::class, 'edit'])->name('orders-edit')->middleware(['check-permission']);
+	Route::put('/orders/{id?}', [OrderController::class, 'update'])->name('orders-update');
+	Route::post('/orders/search', [OrderController::class, 'search'])->name('orders-search');
+	Route::delete('/orders/{id?}', [OrderController::class, 'destroy'])->name('orders-destroy')->middleware(['check-permission']);
+
 
 
 
