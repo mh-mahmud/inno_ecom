@@ -38,8 +38,11 @@ class OrderService
         return $order->delete();
     }
 
-    public function searchOrders($searchTerm)
+
+    public function searchOrders($request)
     {
+        $searchTerm = trim($request->input('search'));
+
         return Order::where('customer_name', 'LIKE', "%$searchTerm%")
             ->orWhere('invoice_no', 'LIKE', "%$searchTerm%")
             ->orWhere('product_name', 'LIKE', "%$searchTerm%")

@@ -220,7 +220,7 @@ use Carbon\Carbon;
                             <thead>
                                 <tr class="fw-bolder text-muted bg-light bd-cyan">
                                     <th class="ps-4 min-w-50px">SL</th>
-                                    <th class="min-w-150px">Order ID</th>
+                                    <th class="min-w-150px">Invoice No</th>
                                     <th class="min-w-150px">Customer Name</th>
                                     <th class="min-w-150px">Total Amount</th>
                                     <th class="min-w-150px">Order Date</th>
@@ -234,7 +234,7 @@ use Carbon\Carbon;
                                 @foreach ($orders as $order)
                                 <tr>
                                     <td class="ps-5 text-dark fs-6">{{ ($orders->currentPage() - 1) * $orders->perPage() + $loop->iteration }}</td>
-                                    <td class="text-dark fs-6">{{ $order->order_id }}</td>
+                                    <td class="text-dark fs-6">{{ $order->invoice_no }}</td>
                                     <td class="text-dark fs-6">{{ $order->customer_name }}</td>
                                     <td class="text-dark fs-6">{{ number_format($order->payable_amount, 2) }}</td>
                                     <td class="text-dark fs-6">{{ \Carbon\Carbon::parse($order->order_date)->format('d-m-Y') }}</td>

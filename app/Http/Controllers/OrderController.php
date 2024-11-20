@@ -86,10 +86,17 @@ class OrderController extends Controller
         return redirect()->route('orders-index')->with('success', 'Order deleted successfully!');
     }
 
+    // searech for invoice
+
     public function search(Request $request)
     {
-        $searchTerm = $request->validate(['search' => 'required|string'])['search'];
-        $orders = $this->orderService->searchOrders($searchTerm);
+        $searchTerm = trim($request->input('search'));
+        if (empty($searchTerm)) {
+            return redirect()->route('orders-index')->with('error', 'Search field cannot be blank.');
+        }
+        $orders = $this->orderService->searchOrders($request);
         return view('orders.index', compact('orders'));
     }
+
+    
 }
