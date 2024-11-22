@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LeadsFormController;
 use App\Http\Controllers\PromotionController;
@@ -319,26 +320,37 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('add-customer', [CustomerController::class, 'save_customer'])->name('post-add-customer');
 
 	// slider routes
-	Route::get('/sliders', [SliderController::class, 'index'])->name('slider-list')->middleware(['check-permission']);
-    Route::get('/slider/create', [SliderController::class, 'create'])->name('slider-create')->middleware(['check-permission']);
-	Route::post('/slider', [SliderController::class, 'store'])->name('slider-store');
-	Route::get('/slider/{id?}', [SliderController::class, 'show'])->name('slider-show')->middleware(['check-permission']);
-	Route::get('/slider/{id?}/edit', [SliderController::class, 'edit'])->name('slider-edit')->middleware(['check-permission']);
-	Route::put('/slider/{id?}', [SliderController::class, 'update'])->name('slider-update');
-	Route::post('/slider/search', [SliderController::class, 'search'])->name('slider-search');
-	Route::delete('/slider/{id?}', [SliderController::class, 'destroy'])->name('slider-destroy')->middleware(['check-permission']);
-	Route::put('/slider/{id}/update-slider-image', [SliderController::class, 'updateSliderImage'])->name('update-slider-image');
+	Route::get('sliders', [SliderController::class, 'index'])->name('slider-list')->middleware(['check-permission']);
+    Route::get('slider/create', [SliderController::class, 'create'])->name('slider-create')->middleware(['check-permission']);
+	Route::post('slider', [SliderController::class, 'store'])->name('slider-store');
+	Route::get('slider/{id?}', [SliderController::class, 'show'])->name('slider-show')->middleware(['check-permission']);
+	Route::get('slider/{id?}/edit', [SliderController::class, 'edit'])->name('slider-edit')->middleware(['check-permission']);
+	Route::put('slider/{id?}', [SliderController::class, 'update'])->name('slider-update');
+	Route::post('slider/search', [SliderController::class, 'search'])->name('slider-search');
+	Route::delete('slider/{id?}', [SliderController::class, 'destroy'])->name('slider-destroy')->middleware(['check-permission']);
+	Route::put('slider/{id}/update-slider-image', [SliderController::class, 'updateSliderImage'])->name('update-slider-image');
 
 	// brand routes
-	Route::get('/brands', [BrandController::class, 'index'])->name('brand-list')->middleware(['check-permission']);
-    Route::get('/brand/create', [BrandController::class, 'create'])->name('brand-create')->middleware(['check-permission']);
-	Route::post('/brand', [BrandController::class, 'store'])->name('brand-store');
-	Route::get('/brand/{id?}', [BrandController::class, 'show'])->name('brand-show')->middleware(['check-permission']);
-	Route::get('/brand/{id?}/edit', [BrandController::class, 'edit'])->name('brand-edit')->middleware(['check-permission']);
-	Route::put('/brand/{id?}', [BrandController::class, 'update'])->name('brand-update');
-	Route::post('/brand/search', [BrandController::class, 'search'])->name('brand-search');
-	Route::delete('/brand/{id?}', [BrandController::class, 'destroy'])->name('brand-destroy')->middleware(['check-permission']);
-	Route::put('/brand/{id}/update-brand-image', [BrandController::class, 'updatebrandImage'])->name('update-brand-image');
+	Route::get('brands', [BrandController::class, 'index'])->name('brand-list')->middleware(['check-permission']);
+    Route::get('brand/create', [BrandController::class, 'create'])->name('brand-create')->middleware(['check-permission']);
+	Route::post('brand', [BrandController::class, 'store'])->name('brand-store');
+	Route::get('brand/{id?}', [BrandController::class, 'show'])->name('brand-show')->middleware(['check-permission']);
+	Route::get('brand/{id?}/edit', [BrandController::class, 'edit'])->name('brand-edit')->middleware(['check-permission']);
+	Route::put('brand/{id?}', [BrandController::class, 'update'])->name('brand-update');
+	Route::post('brand/search', [BrandController::class, 'search'])->name('brand-search');
+	Route::delete('brand/{id?}', [BrandController::class, 'destroy'])->name('brand-destroy')->middleware(['check-permission']);
+	Route::put('brand/{id}/update-brand-image', [BrandController::class, 'updatebrandImage'])->name('update-brand-image');
+
+	// category routes
+	Route::get('categories', [CategoryController::class, 'index'])->name('category-list')->middleware(['check-permission']);
+    Route::get('category/create', [CategoryController::class, 'create'])->name('category-create')->middleware(['check-permission']);
+	Route::post('category', [CategoryController::class, 'store'])->name('category-store');
+	Route::get('category/{id?}', [CategoryController::class, 'show'])->name('category-show')->middleware(['check-permission']);
+	Route::get('category/{id?}/edit', [CategoryController::class, 'edit'])->name('category-edit')->middleware(['check-permission']);
+	Route::put('category/{id?}', [CategoryController::class, 'update'])->name('category-update');
+	Route::post('category/search', [CategoryController::class, 'search'])->name('category-search');
+	Route::delete('category/{id?}', [CategoryController::class, 'destroy'])->name('category-destroy')->middleware(['check-permission']);
+	Route::put('category/{id}/update-category-image', [CategoryController::class, 'updatecategoryImage'])->name('update-category-image');
 
 
 	// Orders Routes
