@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LeadsFormController;
 use App\Http\Controllers\PromotionController;
@@ -327,6 +328,17 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/slider/search', [SliderController::class, 'search'])->name('slider-search');
 	Route::delete('/slider/{id?}', [SliderController::class, 'destroy'])->name('slider-destroy')->middleware(['check-permission']);
 	Route::put('/slider/{id}/update-slider-image', [SliderController::class, 'updateSliderImage'])->name('update-slider-image');
+
+	// brand routes
+	Route::get('/brands', [BrandController::class, 'index'])->name('brand-list')->middleware(['check-permission']);
+    Route::get('/brand/create', [BrandController::class, 'create'])->name('brand-create')->middleware(['check-permission']);
+	Route::post('/brand', [BrandController::class, 'store'])->name('brand-store');
+	Route::get('/brand/{id?}', [BrandController::class, 'show'])->name('brand-show')->middleware(['check-permission']);
+	Route::get('/brand/{id?}/edit', [BrandController::class, 'edit'])->name('brand-edit')->middleware(['check-permission']);
+	Route::put('/brand/{id?}', [BrandController::class, 'update'])->name('brand-update');
+	Route::post('/brand/search', [BrandController::class, 'search'])->name('brand-search');
+	Route::delete('/brand/{id?}', [BrandController::class, 'destroy'])->name('brand-destroy')->middleware(['check-permission']);
+	Route::put('/brand/{id}/update-brand-image', [BrandController::class, 'updatebrandImage'])->name('update-brand-image');
 
 
 	// Orders Routes

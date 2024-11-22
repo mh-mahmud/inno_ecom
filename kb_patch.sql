@@ -44,3 +44,16 @@ CREATE TABLE orders (
     status ENUM('New','Pending','Processing','Completed','Cancelled') DEFAULT 'New', 
     order_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+
+-- # date: 22-11-2024
+CREATE TABLE IF NOT EXISTS `brands` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `brand_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `brand_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `brand_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
