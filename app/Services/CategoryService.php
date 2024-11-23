@@ -2,13 +2,47 @@
 
 namespace App\Services;
 
-use App\Models\LeadsForm;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use App\Models\LeadFormDetail;
 use App\Models\Lead;
 
-class LeadsFormService
+class CategoryService
 {
+
+    public function get_category_data($id)
+    {
+        return Category::findOrFail($id);
+    }
+
+    public function update_category($request, $id)
+    {
+        $category = Category::findOrFail($id);
+        $category->category_name = $request->category_name;
+        $category->category_description = $request->category_description;
+        $category->parent_id = $request->parent_id;
+        $category->status = $request->status;
+
+        if ($request->hasFile('category_image')) {
+           
+            if ($category->category_image) {
+                $previousImagePath = getcwd().'/uploads/categories/'.$category->category_image;
+                if (file_exists($previousImagePath)) {
+                    @unlink($previousImagePath);
+                }
+            }
+            $fileNameWithExt = $request->file('category_image')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('category_image')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $path = $request->file('category_image')->move(getcwd().'/uploads/categories', $fileNameToStore);
+            $category->category_image = $fileNameToStore;
+        }
+        
+        $category->save();
+        return $category;
+    }
+
     public function getAllLeadsForms_backup()
     {
         return LeadsForm::leftJoin('leads_form as parents', 'leads_form.parent_id', '=', 'parents.form_id')
@@ -24,28 +58,10 @@ class LeadsFormService
                     ->paginate(config('constants.ROW_PER_PAGE'));*/
     }
 
-    public function getAllLeadsForms_live_server_problem()
+    public function getAllCategory()
     {
-        return LeadsForm::leftJoin('leads_form as parents', 'leads_form.parent_id', '=', 'parents.form_id')
-            ->leftJoin('lead_form_details', 'leads_form.form_id', '=', 'lead_form_details.form_id')
-            ->select(
-                'leads_form.id',
-                'leads_form.form_id',
-                'leads_form.form_name',
-                'leads_form.form_status',
-                'leads_form.parent_id',
-                'parents.form_name as parent_name',
-                DB::raw('GROUP_CONCAT(DISTINCT lead_form_details.table_name) as table_names'),
-            )
-            ->groupBy(
-                'leads_form.id',
-                'leads_form.form_id',
-                'leads_form.form_name',
-                'leads_form.form_status',
-                'leads_form.parent_id',
-                'parents.form_name'
-            )
-            ->orderBy('leads_form.id', 'asc')
+        return Category::where('status', '!=', 3)
+            ->orderBy('id', 'desc')
             ->paginate(config('constants.ROW_PER_PAGE'));
     }
 
@@ -86,15 +102,37 @@ class LeadsFormService
 
     
     
-    public function createLeadsForm($data)
+    public function createCategory($request)
     {
-        $data['form_id'] = str_pad(mt_rand(1, 9999999999), 10);
-        return LeadsForm::create($data);
+        // $request['form_id'] = str_pad(mt_rand(1, 9999999999), 10);
+
+        if ($request->hasFile('category_image')) {
+            $fileNameWithExt = $request->file('category_image')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('category_image')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $path = $request->file('category_image')->move(getcwd().'/uploads/categories', $fileNameToStore);
+            
+        } else {
+            $fileNameToStore = '';
+        }
+        
+        $category = new Category([
+            'category_name' => $request->category_name,
+            'parent_id' => $request->parent_id,
+            'category_image' => $fileNameToStore,
+            'category_description' => $request->category_description,
+            'status' => $request->status
+        ]);
+
+        $category->save();
+        return $category;
+
     }
 
-    public function getLeadsFormById($id)
+    public function get_category_details($id)
     {
-        return LeadsForm::findOrFail($id);
+        return Category::findOrFail($id);
     }
 
     public function updateLeadsForm($id, $data)
@@ -197,11 +235,20 @@ class LeadsFormService
 
 
 
-    public function deleteLeadsForm($id)
+    public function delete_category($id)
     {
-        $leadsForm = LeadsForm::findOrFail($id);
-        Lead::where('form_id',$leadsForm->form_id)->delete();
-        $leadsForm->delete();
+        $category = Category::findOrFail($id);
+        if ($category->category_image) {
+            $imagePath = getcwd().'/uploads/categories/'.$category->category_image;
+            if (file_exists($imagePath)) {
+                @unlink($imagePath);
+            }
+        }
+
+        if($category->delete()) {
+            return true;
+        }
+        return false;
     }
 }
 

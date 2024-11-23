@@ -14,12 +14,12 @@
                  data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                  class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Leads Form
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Category 
                     <!--begin::Separator-->
                     <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                     <!--end::Separator-->
                     <!--begin::Description-->
-                    <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Leads Form List</small>
+                    <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Category List</small>
                     <!--end::Description-->
                 </h1>
                 <!--end::Title-->
@@ -29,11 +29,9 @@
             <div class="d-flex align-items-center py-1">
 
                 <!--begin::Button-->
-                <a href="{{ route('lead-create') }}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#add_lead_modal">Create a Lead</a>
+                <a href="{{ route('category-create') }}" class="btn btn-sm btn-success" id="kt_toolbar_primary_button">Create Category</a>
                 &nbsp;&nbsp;
-                <a href="{{ route('dynamictable-create') }}" class="btn btn-sm btn-success" id="kt_toolbar_primary_button">Create Table</a>
-                &nbsp;&nbsp;
-                <a href="{{ route('leadsform-create') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Create Form</a>
+
 
                 <!--end::Button-->
             </div>
@@ -99,33 +97,7 @@
                     </div>
                     <!--begin::Modal header-->
                     <!--begin::Modal body-->
-                    <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
-                        <!--begin::Heading-->
-                        <!--begin::Textarea-->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="fv-row mb-3">
-                                    <label class="form-label fw-bolder text-dark">Form Name</label>
-                                    <select class="form-control form-control-sm form-control-solid" id="form_id"
-                                            name="form_id" aria-label="Default select example">
-                                        <option value="">Select Form Name</option>
-                                        @foreach($formName as $id => $name)
-                                            <option value="{{ $id }}">{{ $name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('form_id'))
-                                        <span class="text-danger">{{ $errors->first('form_id') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-footer d-flex justify-content-end py-0 px-0">
-                            <a href="{{ route('lead-index') }}" class="btn btn-light me-2 btn-sm">Reset</a>
-                            <button type="button" class="btn btn-primary btn-sm" id="submit_button">Submit</button>
-                        </div>
-                        <!--end::Textarea-->
-                    </div>
+                    
                     <!--end::Modal body-->
                 </div>
                 <!--end::Modal content-->
@@ -192,12 +164,12 @@
                     <!--begin::Header-->
                     <div class="d-flex justify-content-between align-items-start card-header px-2 border-0 pt-1">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bolder fs-3 mb-1">Leads Form List</span>
+                            <span class="card-label fw-bolder fs-3 mb-1">Category List</span>
                             <!-- <span class="text-muted mt-1 fw-bold fs-7">Leads Form data here</span> -->
                         </h3>
 
                         <div class="d-flex align-items-center flex-wrap gap-2">
-                            <form action="{{ route('leadsform-search') }}" method="POST" class="d-flex">
+                            <form action="{{ route('category-search') }}" method="POST" class="d-flex">
                                 @csrf
                                 <!--begin::Input group-->
                                 <div class="d-flex align-items-center position-relative">
@@ -236,7 +208,7 @@
                     <div class="card-body px-2 pt-2">
                         <!--begin::Table container-->
                         <div class="table-responsive">
-                            @if($leadsForms->isNotEmpty())
+                            @if($cats->isNotEmpty())
                                 <!--begin::Table-->
                                 <table
                                     class="table table-sm table-condensed table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
@@ -245,10 +217,10 @@
                                     <tr class="fw-bolder text-muted bg-light bd-cyan">
                                         <th class="ps-4 rounded-start min-w-20px">SL</th>
                                         <!-- <th class="min-w-150px">Form ID</th> -->
-                                        <th class="min-w-150px">Form Name</th>
-                                        <th class="min-w-150px">Tables</th>
-                                        <th class="min-w-150px">Total Leads</th>
+                                        <th class="min-w-150px">Category Name</th>
                                         <th class="min-w-140px">Parent Name</th>
+                                        <th class="min-w-150px">Description</th>
+                                        <th class="min-w-150px">Category Image</th>
                                         <th class="min-w-120px">Status</th>
                                         <th class="min-w-100px text-end rounded-end text-end-new">Actions</th>
                                     </tr>
@@ -256,41 +228,28 @@
                                     <!--end::Table head-->
                                     <!--begin::Table body-->
                                     <tbody>
-                                    @foreach ($leadsForms as $leadsForm)
+                                    @foreach ($cats as $cat)
                                         <tr>
 
-                                            <td class="ps-5 text-dark fs-6">{{($leadsForms->currentPage() - 1) * $leadsForms->perPage() + $loop->iteration}}</td>
+                                            <td class="ps-5 text-dark fs-6">{{($cats->currentPage() - 1) * $cats->perPage() + $loop->iteration}}</td>
 
-                                            <!-- <td class="text-dark fs-6">{{$leadsForm->form_id}}</td> -->
-                                            <td class="text-dark fs-6">{{$leadsForm->form_name }}</td>
-                                            <td class="text-dark fs-6 w-400px">{{ $leadsForm->table_names }}</td>
-                                            <td class="text-dark fs-6">{{ $totalLeadsCounts[$leadsForm->form_id] ?? 0 }}</td>
-                                            <td class="text-dark fs-6">{{$leadsForm->parent_name}}</td>
+                                            <td class="text-dark fs-6">{{$cat->category_name }}</td>
+                                            <td class="text-dark fs-6">{{$cat->parent_name }}</td>
+                                            <td class="text-dark fs-6 ">{{ $cat->category_description }}</td>
+                                            <td class="text-dark fs-6">{{$cat->category_image }}</td>
                                             <td>
-                                                @if ($leadsForm->form_status == 1)
+                                                @if ($cat->status == 1)
                                                     <span class="badge badge-light-success">Active</span>
-                                                @elseif ($leadsForm->form_status == 0)
+                                                @elseif ($cat->status == 0)
                                                     <span class="badge badge-light-danger">Inactive</span>
                                                 @endif
                                             </td>
                                             <td>
                                                 <div
                                                     class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
-                                                    <a href="{{ route('lead-index', $leadsForm->form_id) }}"
-                                                       class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                                        <span class="svg-icon svg-icon-3">
-                                                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none"
-                                                         xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8 6.00067L21 6.00139M8 12.0007L21 12.0015M8 18.0007L21 18.0015M3.5 6H3.51M3.5 12H3.51M3.5 18H3.51M4 6C4 6.27614 3.77614 6.5 3.5 6.5C3.22386 6.5 3 6.27614 3 6C3 5.72386 3.22386 5.5 3.5 5.5C3.77614 5.5 4 5.72386 4 6ZM4 12C4 12.2761 3.77614 12.5 3.5 12.5C3.22386 12.5 3 12.2761 3 12C3 11.7239 3.22386 11.5 3.5 11.5C3.77614 11.5 4 11.7239 4 12ZM4 18C4 18.2761 3.77614 18.5 3.5 18.5C3.22386 18.5 3 18.2761 3 18C3 17.7239 3.22386 17.5 3.5 17.5C3.77614 17.5 4 17.7239 4 18Z"
-                                                            stroke="#000000" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"/>
-                                                    </svg>
-                                                </span>
-                                                        <!--end::Svg Icon-->
-                                                    </a>
-                                                    <a href="{{ route('leadsform-show', $leadsForm->id) }}"
+                                                    
+                                                 
+                                                    <a href="{{ route('category-show', $cat->id) }}"
                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                         <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
                                                         <span class="svg-icon svg-icon-3">
@@ -310,7 +269,7 @@
                                                 </span>
                                                         <!--end::Svg Icon-->
                                                     </a>
-                                                    <a href="{{ route('leadsform-edit', $leadsForm->id) }}"
+                                                    <a href="{{ route('category-edit', $cat->id) }}"
                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                         <span class="svg-icon svg-icon-3">
@@ -326,7 +285,7 @@
                                                 </span>
                                                         <!--end::Svg Icon-->
                                                     </a>
-                                                    <form action="{{ route('leadsform-destroy', $leadsForm->id) }}"
+                                                    <form action="{{ route('category-destroy', $cat->id) }}"
                                                           method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
@@ -383,28 +342,28 @@
                         <li class="page-item next"><a class="page-link" href="#">Next</span></a></li>
                     </ul> -->
 
-                @include('components.pagination', ['paginator' => $leadsForms])
+                @include('components.pagination', ['paginator' => $cats])
 
                 {{-- <ul class="pagination mt-2">
                         <!-- Previous Page Link -->
-                        @if ($leadsForms->onFirstPage())
+                        @if ($cats->onFirstPage())
                             <li class="page-item previous disabled"><span class="page-link"><i class="previous"></i></span></li>
                         @else
-                            <li class="page-item previous"><a href="{{ $leadsForms->previousPageUrl() }}" class="page-link"><i class="previous"></i></a></li>
+                            <li class="page-item previous"><a href="{{ $cats->previousPageUrl() }}" class="page-link"><i class="previous"></i></a></li>
                 @endif
 
                 <!-- Pagination Elements -->
-                @for ($page = 1; $page <= $leadsForms->lastPage(); $page++)
-                    @if ($page == $leadsForms->currentPage())
+                @for ($page = 1; $page <= $cats->lastPage(); $page++)
+                    @if ($page == $cats->currentPage())
                     <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
                     @else
-                    <li class="page-item"><a href="{{ $leadsForms->url($page) }}" class="page-link">{{ $page }}</a></li>
+                    <li class="page-item"><a href="{{ $cats->url($page) }}" class="page-link">{{ $page }}</a></li>
                     @endif
                     @endfor
 
                     <!-- Next Page Link -->
-                    @if ($leadsForms->hasMorePages())
-                    <li class="page-item next"><a href="{{ $leadsForms->nextPageUrl() }}" class="page-link"><i class="next"></i></a></li>
+                    @if ($cats->hasMorePages())
+                    <li class="page-item next"><a href="{{ $cats->nextPageUrl() }}" class="page-link"><i class="next"></i></a></li>
                     @else
                     <li class="page-item next disabled"><span class="page-link"><i class="next"></i></span></li>
                     @endif
@@ -418,11 +377,11 @@
 
     <script>
         document.getElementById('submit_button').addEventListener('click', function () {
-            var formId = document.getElementById('form_id').value;
+            var formId = document.getElementById('id').value;
             if (formId) {
                 var baseUrl = '{{ url('/') }}';
-                //window.location.href = 'http://localhost/gplexCRM/public/lead/create?form_id=' + formId;
-                window.location.href = baseUrl + '/lead/create?form_id=' + formId;
+                //window.location.href = 'http://localhost/gplexCRM/public/lead/create?id=' + formId;
+                window.location.href = baseUrl + '/lead/create?id=' + formId;
             } else {
                 alert('Please select a form.');
             }

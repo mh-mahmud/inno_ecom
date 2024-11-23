@@ -22,89 +22,55 @@ class CategoryController extends Controller
     public function __construct(CategoryService $cat_service)
     {
         $this->cat_service = $cat_service;
-        // $this->middleware(['auth']);
-    }
-
-    public function index_backup()
-    {
-        $leadsForms = $this->cat_service->getAllLeadsForms();
-        $formName = LeadsForm::whereNull('parent_id')->pluck('form_name', 'form_id');
-        return view('leads_forms.index', compact('leadsForms', 'formName'));
     }
 
     public function index()
     {
-        $leadsForms = $this->cat_service->getAllLeadsForms();
-        $formName = LeadsForm::whereNull('parent_id')->pluck('form_name', 'form_id');
-        //total lead data count for each form
-        $totalLeadsCounts = $this->getTotalLeadsCountsForForms($leadsForms);
-
-        return view('leads_forms.index', compact('leadsForms', 'formName', 'totalLeadsCounts'));
+        $cats = $this->cat_service->getAllCategory();
+        return view('category.index', compact('cats'));
     }
 
     public function create()
     {
-        $parents = LeadsForm::whereNull('parent_id')->pluck('form_name', 'form_id');
-        return view('leads_forms.create', compact('parents'));
+        $parents = Category::whereNull('parent_id')->pluck('category_name', 'id');
+        return view('category.create', compact('parents'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'form_id' => 'nullable|string|max:10',
-            'parent_id' => 'nullable|string|max:10',
-            'form_name' => 'required|string|max:191',
-            'form_description' => 'nullable|string',
+            'category_name' => 'required|string|max:191',
+            'category_description' => 'nullable|string',
+            'category_image' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:2048',
         ]);
+        $this->cat_service->createCategory($request);
 
-        $this->cat_service->createLeadsForm($request->all());
-
-        return redirect()->route('leadsform-index')->with('success', 'Leads Form created successfully.');
+        return redirect()->route('category-list')->with('success', 'Category created successfully.');
     }
 
     public function show($id)
     {
-        $leadsForm = $this->cat_service->getLeadsFormParentName($id);
-        return view('leads_forms.show', compact('leadsForm'));
+        $category = $this->cat_service->get_category_details($id);
+        return view('category.show', compact('category'));
     }
 
     public function edit($id)
     {
-        $leadsForm = $this->cat_service->getLeadsFormById($id);
-        $parents = LeadsForm::whereNull('parent_id')->pluck('form_name', 'form_id');
-        return view('leads_forms.edit', compact('leadsForm', 'parents'));
+        $category = $this->cat_service->get_category_data($id);
+        $parents = Category::whereNull('parent_id')->pluck('category_name', 'id');
+        return view('category.edit', compact('category', 'parents'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'form_id' => 'nullable|string|max:10',
-            'parent_id' => 'nullable|string|max:10',
-            'form_name' => 'required|string|max:191',
-            'form_description' => 'nullable|string',
-            'form_status' => 'required|integer',
+            'category_name' => 'required|string|max:191',
+            'category_description' => 'nullable|string',
+            'category_image' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        $this->cat_service->updateLeadsForm($id, $request->all());
-
-        return redirect()->route('leadsform-index')->with('success', 'Leads Form updated successfully.');
-    }
-
-    public function search_backup(Request $request)
-    {
-        $searchTerm = trim($request->input('search'));
-        $formName = LeadsForm::whereNull('parent_id')->pluck('form_name', 'form_id');
-
-        if (empty($searchTerm)) {
-            return redirect()->route('leadsform-index')->with('error', 'Search Field cannot be blank.');
-        }
-
-        $request->validate([
-            'search' => 'required|string',
-        ]);
-
-        $leadsForms = $this->cat_service->searchLeadForm($request);
-        return view('leads_forms.index', compact('leadsForms','formName'));
+        $this->cat_service->update_category($request, $id);
+        return redirect()->route('category-list')->with('success', 'Category updated successfully.');
     }
 
     public function search(Request $request)
@@ -123,14 +89,14 @@ class CategoryController extends Controller
 
         $leadsForms = $this->cat_service->searchLeadForm($request);
         $totalLeadsCounts = $this->getTotalLeadsCountsForForms($leadsForms);
-        return view('leads_forms.index', compact('leadsForms', 'formName', 'totalLeadsCounts'));
+        return view('category.index', compact('leadsForms', 'formName', 'totalLeadsCounts'));
     }
 
 
     public function destroy($id)
     {
-        $this->cat_service->deleteLeadsForm($id);
-        return redirect()->route('leadsform-index')->with('success', 'Leads Form deleted successfully.');
+        $this->cat_service->delete_category($id);
+        return redirect()->route('category-list')->with('success', 'Category deleted successfully.');
     }
 
     private function getTotalLeadsCountsForForms_backup($leadsForms)
@@ -166,6 +132,26 @@ class CategoryController extends Controller
         }
 
         return $totalLeadsCounts;
+    }
+
+    public function updatecategoryImage($id)
+    {
+        $category = Category::findOrFail($id);
+        if ($category->category_image) {
+            // path to the image file
+            $imagePath =getcwd().'/uploads/categoreis/'.$category->category_image;
+            // delete the file if it exists
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+            //Update the category record to remove the profile image
+            $category->category_image = null;
+            $category->save();
+    
+            return response()->json(['success' => true]);
+        }
+    
+        return response()->json(['success' => false, 'message' => 'No category image found']);
     }
 
 }
