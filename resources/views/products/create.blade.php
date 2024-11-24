@@ -76,7 +76,7 @@
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <!--begin::Label-->
-                                                    <label class="form-label fw-bolder text-dark">Product Code<span class="text-danger">*</span></label>
+                                                    <label class="form-label fw-bolder text-dark">Product Code/SKU<span class="text-danger">*</span></label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <input class="form-control form-control-sm form-control-solid"
@@ -106,8 +106,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                                                                                                             
-                                          
+
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <label class="form-label fw-bolder text-dark">Product Cost</label>
@@ -121,7 +120,7 @@
 
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
-                                                    <label class="form-label fw-bolder text-dark">Product Price</label>
+                                                    <label class="form-label fw-bolder text-dark">Product Price<span class="text-danger">*</span></label>
                                                     <input class="form-control form-control-sm form-control-solid"
                                                            type="text" name="product_value" autocomplete="off" value="{{ old('product_value') }}" />
                                                     @if ($errors->has('product_value'))
@@ -130,14 +129,45 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Discount Price</label>
+                                                    <input class="form-control form-control-sm form-control-solid"
+                                                           type="text" name="discount_price" autocomplete="off" value="{{ old('discount_price') }}" />
+                                                    @if ($errors->has('discount_price'))
+                                                        <span class="text-danger">{{ $errors->first('discount_price') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Description</label>
-                                                    <textarea class="form-control form-control-sm  form-control-solid" name="description" rows="3">{{ old('description') }}</textarea>
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Description<span class="text-danger">*</span></label>
+                                                    <textarea
+                                                        class="form-control form-control-sm  form-control-solid editor"
+                                                        id="description" name="description"
+                                                        rows="3">{{ old('description') }}</textarea>
+                                                    @if ($errors->has('description'))
+                                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Specification</label>
+                                                    <textarea
+                                                        class="form-control form-control-sm  form-control-solid editor"
+                                                        id="product_specification" name="product_specification"
+                                                        rows="3">{{ old('product_specification') }}</textarea>
+                                                    @if ($errors->has('product_specification'))
+                                                        <span
+                                                            class="text-danger">{{ $errors->first('product_specification') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            {{--<div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label fw-bolder text-dark" for="textarea">How to Order</label>
                                                     <textarea class="form-control form-control-sm  form-control-solid" name="how_to_order" rows="3">{{ old('how_to_order') }}</textarea>
@@ -149,7 +179,7 @@
                                                     <label class="form-label fw-bolder text-dark" for="textarea">Return Policy</label>
                                                     <textarea class="form-control form-control-sm  form-control-solid" name="return_policy" rows="3">{{ old('return_policy') }}</textarea>
                                                 </div>
-                                            </div>
+                                            </div>--}}
 
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
@@ -193,7 +223,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            {{--<div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <label class="form-label fw-bolder text-dark">Image 7</label>
                                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_7" autocomplete="off" />
@@ -204,6 +234,41 @@
                                                 <div class="fv-row mb-3">
                                                     <label class="form-label fw-bolder text-dark">Image 8</label>
                                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_8" autocomplete="off" />
+                                                </div>
+                                            </div>--}}
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Stock Status</label>
+                                                    <select class=" form-control form-control-sm form-control-solid" name="stock_status" aria-label="Default select example">
+
+                                                        <option value="In Stock" selected>In Stock</option>
+                                                        <option value="Out of Stock">Out of Stock</option>
+                                                        <option value="Limit Out">Limit Out</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Stock Quantity<span class="text-danger">*</span></label>
+                                                    <input class="form-control form-control-sm form-control-solid"
+                                                           type="number" name="stock_quantity" autocomplete="off" value="{{ old('stock_quantity') }}" />
+                                                    @if ($errors->has('stock_quantity'))
+                                                        <span class="text-danger">{{ $errors->first('stock_quantity') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Max Purchase Limit</label>
+                                                    <input class="form-control form-control-sm form-control-solid"
+                                                           type="number" name="max_purchase_limit" autocomplete="off" value="{{ old('max_purchase_limit') }}" />
+                                                    @if ($errors->has('max_purchase_limit'))
+                                                        <span class="text-danger">{{ $errors->first('max_purchase_limit') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -246,4 +311,15 @@
             <!--end::Content-->
 
 
+@endsection
+@section('endScript')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var summernoteElement = document.querySelectorAll('.editor');         
+            document.getElementById('resetButton').addEventListener('click', function() {
+                $(summernoteElement).summernote('code', ''); // Clear the content of Summernote
+            });
+        });
+    </script>
 @endsection

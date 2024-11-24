@@ -26,7 +26,7 @@ class ProductController extends Controller {
     }
 
     public function productStore(Request $request)
-    { 
+    {
         $result = $this->productService->productStore($request);
         if($result->status == 201){
             return redirect()->route('product-list')->with('success', 'Product added successfully.');

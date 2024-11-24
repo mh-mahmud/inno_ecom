@@ -53,10 +53,21 @@
                 <!--begin::Body-->
                 <div class="card-body p-1">
 
-
+                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Image</span>
+                        <div class="me-7 mb-4">
+                            <div class="position-relative">
+                                @if($product->img_path)
+                                    <img style="width: 100%;" src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}">
+                                @else
+                                    <img alt="Logo" src="{{ asset('uploads/noimage.jpg') }}"/>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Name</span>
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Product Name</span>
                         <span>{{ $product->name }}</span>
                     </div>
 
@@ -71,29 +82,38 @@
                     </div>
 
                     <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Cost</span>
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Product Cost</span>
                         <span>{{ $product->product_cost }}</span>
                     </div>
 
                     <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Value</span>
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Product Price</span>
                         <span>{{ $product->product_value }}</span>
                     </div>
 
                     <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
                         <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px flex-shrink-0">Description</span>
-                        <span>{{ $product->description }}</span>
+                        <span>{!! $product->description !!}</span>
                     </div>
 
                     <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Image</span>
-                        <div class="me-7 mb-4">
-                            <div class="symbol symbol-100px symbol-lg-140px symbol-fixed position-relative">
-                                @if ($product->img_path)
-                                <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="Product Image"/>
-                                @endif
-                            </div>
-                        </div>
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px flex-shrink-0">Description</span>
+                        <span>{!! $product->product_specification !!}</span>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Stock Status</span>
+                        <span>{{ $product->stock_status }}</span>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Stock Quantity</span>
+                        <span>{{ $product->stock_quantity }}</span>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Max Purchase Limit</span>
+                        <span>{{ $product->max_purchase_limit }}</span>
                     </div>
 
                     <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">

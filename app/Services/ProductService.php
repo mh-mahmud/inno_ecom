@@ -28,17 +28,26 @@ class ProductService
 
     public function productStore($request)
     {
+
         $request->validate([
             'name' => 'required|unique:products|max:191',
             'product_code' => 'required|max:20',
             'product_type' => 'required',
+            'description' => 'required',
+            'stock_quantity' => 'required|numeric',
+            'img_path' => 'required|image|mimes:avif,jpeg,png,jpg,gif,webp|max:1048',
+            'img_path_2' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:1048',
+            'img_path_3' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:1048',
+            'img_path_4' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:1048',
+            'img_path_5' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:1048',
+            'img_path_6' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:1048',
             'product_cost' => [
                 'nullable',
                 'numeric',
                 'regex:/^\d{1,11}(\.\d{1,2})?$/'
             ],
             'product_value' => [
-                'nullable',
+                'required',
                 'numeric',
                 'regex:/^\d{1,11}(\.\d{1,2})?$/'
             ],
@@ -62,17 +71,21 @@ class ProductService
             return  DB::transaction(function () use ($data, $fileNameToStore) {
                 $dataObj                        = new Product();
                 $dataObj->name                  = $data['name'];
+                $dataObj->product_code          = $data['product_code'];
                 $dataObj->product_type          = $data['product_type'];
                 $dataObj->product_cost          = $data['product_cost'];
                 $dataObj->product_value         = $data['product_value'];
-                $dataObj->product_code          = $data['product_code'];
                 $dataObj->description           = $data['description'];
-                $dataObj->status                = $data['status'];
+                $dataObj->product_specification           = $data['product_specification'];
                 $dataObj->img_path              = $fileNameToStore;
+                $dataObj->stock_status                = $data['stock_status'];
+                $dataObj->stock_quantity                = $data['stock_quantity'];
+                $dataObj->max_purchase_limit                = $data['max_purchase_limit'];
+                $dataObj->status                = $data['status'];
                 $dataObj->created_by            = Auth::id();
                 $dataObj->save();
 
-                Helper::storeLog($data['name'], "Products", "Add Product", "Added");
+                Helper::storeLog($data['name'], "Products", "Add Product {$data['name']}", "Added");
 
                 return (object)[
                     'status'                 => 201,
@@ -80,6 +93,7 @@ class ProductService
                 ];
             });
         } catch (Exception $e) {
+            dd($e->getMessage());
             return (object)[
                 'status'             => 424,
                 'error'              => $e->getMessage()
