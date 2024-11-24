@@ -82,10 +82,10 @@ public function createOrder($request)
 {
     $searchTerm = trim($request->input('search'));
 
-    return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id') 
+    return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id')
+        ->select('order_info.*', 'customers.name as customer_name')
         ->where('customers.name', 'LIKE', "%$searchTerm%") 
         ->orWhere('order_info.invoice_no', 'LIKE', "%$searchTerm%")
-        ->orWhere('order_details.product_name', 'LIKE', "%$searchTerm%")
         ->orderBy('order_info.order_date', 'desc')
         ->paginate(config('constants.ROW_PER_PAGE'));
 }
