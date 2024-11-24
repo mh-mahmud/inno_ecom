@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\OrderService;
+use App\Models\Product;
+use App\Models\Customer;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -22,30 +26,36 @@ class OrderController extends Controller
 
     public function create()
     {
-        return view('orders.create');
+        
+        $products = Product::all();
+        $customers = Customer::all();
+
+        return view('orders.create', compact('products', 'customers'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'invoice_no' => 'required|string|unique:orders,invoice_no',
-            'customer_name' => 'required|string',
-            'mobile_number' => 'required|string',
+       
+        $validator = Validator::make($request->all(), [
+            'customer_id' => 'required|exists:customers,id',
+            'mobile_number' => 'nullable|regex:/^\+?[1-9]\d{1,14}$/',
             'area' => 'required|in:Inside Dhaka,Outside Dhaka',
-            'address' => 'required|string',
-            'product_code' => 'required|string',
-            'product_name' => 'required|string',
-            'product_color' => 'nullable|string',
-            'product_size' => 'nullable|string',
-            'unit_price' => 'required|numeric',
-            'quantity' => 'required|integer',
-            'shipping_charge' => 'nullable|numeric',
-            'discount' => 'nullable|numeric',
+            'contact_address' => 'nullable|string',
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+            'unit_price' => 'required|numeric|min:0',
+            'mprize' => 'nullable|numeric',
         ]);
-
-        $this->orderService->createOrder($validated);
-        return redirect()->route('orders-index')->with('success', 'Order created successfully!');
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        $this->orderService->createOrder($request);
+        Helper::storeLog("Order created successfully", "Order", "Create Order", null, $request->customer_id);
+        return redirect()->route('orders-index')->with('success', 'Order created successfully.');
     }
+    
 
     public function show($id)
     {

@@ -3,26 +3,65 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\OrderInfo;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use App\Models\OrderDetail;
+use Illuminate\Support\Str;
 
 class OrderService
 {
     public function getAllOrders()
-    {
-        return Order::orderBy('order_date', 'desc')->paginate(config('constants.ROW_PER_PAGE'));
-    }
+{
+    return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id') 
+                    ->select('order_info.*', 'customers.name as customer_name') 
+                    ->orderBy('order_info.order_date', 'desc')
+                    ->paginate(config('constants.ROW_PER_PAGE'));
+}
 
-    public function createOrder($data)
-    {
-       
-        $data['total_price'] = $data['unit_price'] * $data['quantity'];
-        return Order::create($data);
-    }
+public function createOrder($request)
+{
+    
+    $order = OrderInfo::create([
+        'invoice_no' => 'INV-' . Str::upper(Str::random(8)),
+        'customer_id' => $request->customer_id,
+        'mobile_number' => $request->mobile_number,
+        'area' => $request->area,
+        'contact_address' => $request->contact_address,
+        'sub_total' => $request->unit_price * $request->quantity, 
+        'order_tax' => 0,  
+        'shipping_charge' => 0, 
+        'discount' => 0,  
+        'payable_amount' => $request->unit_price * $request->quantity,
+        'status' => 'New',
+        'order_date' => now(),
+    ]);
+
+    
+    OrderDetail::create([
+        'order_id' => $order->order_id,
+        'product_id' => $request->product_id,
+        'product_code' => Product::find($request->product_id)->product_code,
+        'product_name' => Product::find($request->product_id)->name,
+        'product_color' => $request->product_color,
+        'product_size' => $request->product_size,
+        'unit_price' => $request->unit_price,
+        'mprize' => $request->mprize,
+        'quantity' => $request->quantity,
+        'total_price' => $request->unit_price * $request->quantity, 
+    ]);
+
+}
+
 
     public function getOrder($id)
-    {
-        return Order::findOrFail($id);
-    }
+{
+    return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id') 
+                    ->select('order_info.*', 'customers.name as customer_name')
+                    ->where('order_info.order_id', $id)
+                    ->firstOrFail(); 
+}
+
 
     public function updateOrder($id, $data)
     {
@@ -40,13 +79,15 @@ class OrderService
 
 
     public function searchOrders($request)
-    {
-        $searchTerm = trim($request->input('search'));
+{
+    $searchTerm = trim($request->input('search'));
 
-        return Order::where('customer_name', 'LIKE', "%$searchTerm%")
-            ->orWhere('invoice_no', 'LIKE', "%$searchTerm%")
-            ->orWhere('product_name', 'LIKE', "%$searchTerm%")
-            ->orderBy('order_date', 'desc')
-            ->paginate(config('constants.ROW_PER_PAGE'));
-    }
+    return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id') 
+        ->where('customers.name', 'LIKE', "%$searchTerm%") 
+        ->orWhere('order_info.invoice_no', 'LIKE', "%$searchTerm%")
+        ->orWhere('order_details.product_name', 'LIKE', "%$searchTerm%")
+        ->orderBy('order_info.order_date', 'desc')
+        ->paginate(config('constants.ROW_PER_PAGE'));
+}
+
 }

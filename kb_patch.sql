@@ -110,3 +110,61 @@ CREATE TABLE IF NOT EXISTS `products` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE order_info (
+  order_id INT(11) NOT NULL AUTO_INCREMENT,
+  invoice_no VARCHAR(20) NOT NULL,
+  customer_id INT(11) DEFAULT NULL,
+  mobile_number VARCHAR(15) DEFAULT NULL,
+  area ENUM('Inside Dhaka', 'Outside Dhaka'),
+  contact_address TEXT DEFAULT NULL,
+  sub_total DECIMAL(10,2) NOT NULL,
+  order_tax DECIMAL(10,2) DEFAULT 0.00,
+  shipping_charge DECIMAL(10,2) DEFAULT 0.00,
+  discount DECIMAL(10,2) DEFAULT 0.00,
+  payable_amount DECIMAL(10,2) NOT NULL,
+  status ENUM('New', 'Pending', 'Processing', 'Completed', 'Cancelled') DEFAULT 'New',
+  order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP NULL DEFAULT NULL,
+  updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (order_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `order_details` (
+  `detail_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `order_id` INT(11) NOT NULL,                    
+  `product_id` BIGINT UNSIGNED NOT NULL,          
+  `product_code` VARCHAR(20) NOT NULL,            
+  `product_name` VARCHAR(255) DEFAULT NULL,       
+  `product_color` VARCHAR(50) DEFAULT NULL,       
+  `product_size` VARCHAR(10) DEFAULT NULL,        
+  `unit_price` DECIMAL(10,2) NOT NULL,            
+  `mprize` DECIMAL(10,2) DEFAULT NULL,            
+  `quantity` INT(11) NOT NULL,                    
+  `total_price` DECIMAL(10,2) NOT NULL,          
+  `created_at` TIMESTAMP NULL DEFAULT NULL,       
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`detail_id`),
+  KEY `fk_order_id` (`order_id`),          
+  KEY `fk_product_id` (`product_id`),
+  CONSTRAINT `fk_order_id` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `customers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `lead_id` char(10) DEFAULT NULL,
+  `customer_id` varchar(20) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `mobile_number` varchar(15) DEFAULT NULL,
+  `email_address` varchar(100) DEFAULT NULL,
+  `contact_address` text DEFAULT NULL,
+  `customer_group` varchar(20) DEFAULT NULL,
+  `customer_notes` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
