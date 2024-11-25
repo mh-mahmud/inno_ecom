@@ -91,6 +91,38 @@
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
                                     <!--begin::Label-->
+                                    <label class="form-label fw-bolder text-dark">Category<span class="text-danger">*</span></label>
+                                    <select class="form-control form-control-sm form-control-solid" name="category_id" aria-label="Default select example">
+                                        <option value=''>Select</option>
+                                        @foreach ($categories as $key => $val)
+                                            <option value="{{ $val->id }}" {{ $product->category_id == $val->id ? 'selected' : '' }}>{{ $val->category_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('category_id'))
+                                        <span class="text-danger">{{ $errors->first('category_id') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-bolder text-dark">Brand Name</label>
+                                    <select class="form-control form-control-sm form-control-solid" name="brand_id" aria-label="Default select example">
+                                        <option value=''>Select</option>
+                                        @foreach ($brands as $key => $val)
+                                            <option value="{{ $val->id }}" {{ $product->brand_id == $val->id ? 'selected' : '' }}>{{ $val->brand_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('brand_id'))
+                                        <span class="text-danger">{{ $errors->first('brand_id') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <!--begin::Label-->
                                     <label class="form-label fw-bolder text-dark">Type of Product<span class="text-danger">*</span></label>
                                     <select class="form-control form-control-sm form-control-solid"
                                         id="assigned_to" name="product_type" aria-label="Default select example">

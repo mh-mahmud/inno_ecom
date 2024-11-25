@@ -49,8 +49,10 @@ class ProductController extends Controller {
 
     public function productEdit($id)
     {
+        $categories = Category::where('status', 1)->get(['id', 'category_name']);
+        $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
         $product = $this->productService->getProductById($id);
-        return view('products.edit', compact('product'));
+        return view('products.edit', compact('product', 'categories', 'brands'));
     }
 
     public function productUpdate(Request $request, $id)

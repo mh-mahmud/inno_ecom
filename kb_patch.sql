@@ -169,6 +169,6 @@ CREATE TABLE `customers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-
+ALTER TABLE `products` ADD `discount_price` DECIMAL(10,2) NULL DEFAULT NULL AFTER `product_code`;
 ALTER TABLE `products` CHANGE `product_type` `product_type` CHAR(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL; 
 ALTER TABLE `products` ADD `category_id` INT NULL DEFAULT NULL AFTER `id`, ADD `brand_id` INT NULL DEFAULT NULL AFTER `category_id`;
