@@ -77,13 +77,41 @@
                                                 <div class="fv-row mb-3">
                                                     <!--begin::Label-->
                                                     <label class="form-label fw-bolder text-dark">Product Code/SKU<span class="text-danger">*</span></label>
-                                                    <!--end::Label-->
-                                                    <!--begin::Input-->
-                                                    <input class="form-control form-control-sm form-control-solid"
-                                                           type="text" name="product_code" autocomplete="off" value="{{ old('product_code') }}" />
-                                                    <!--end::Input-->
+                                                    <input class="form-control form-control-sm form-control-solid" type="text" name="product_code" autocomplete="off" value="{{ old('product_code') }}" />
                                                     @if ($errors->has('product_code'))
                                                         <span class="text-danger">{{ $errors->first('product_code') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <!--begin::Label-->
+                                                    <label class="form-label fw-bolder text-dark">Category<span class="text-danger">*</span></label>
+                                                    <select class="form-control form-control-sm form-control-solid" name="category_id" aria-label="Default select example">
+                                                        <option value=''>Select</option>
+                                                        @foreach ($categories as $key => $val)
+                                                            <option value="{{ $val->id }}" {{ old('category_id') === (string)$val->id ? 'selected' : '' }}>{{ $val->category_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @if ($errors->has('category_id'))
+                                                        <span class="text-danger">{{ $errors->first('category_id') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <!--begin::Label-->
+                                                    <label class="form-label fw-bolder text-dark">Brand Name</label>
+                                                    <select class="form-control form-control-sm form-control-solid" name="brand_id" aria-label="Default select example">
+                                                        <option value=''>Select</option>
+                                                        @foreach ($brands as $key => $val)
+                                                            <option value="{{ $val->id }}" {{ old('brand_id') === (string)$val->id ? 'selected' : '' }}>{{ $val->brand_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @if ($errors->has('brand_id'))
+                                                        <span class="text-danger">{{ $errors->first('brand_id') }}</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -96,7 +124,7 @@
                                                         id="assigned_to" name="product_type" aria-label="Default select example">
                                                         <option value='' {{ old('product_type', '') === '' ? 'selected' : '' }}>Select</option>
                                                         @foreach (config('constants.PRODUCT_TYPE') as $key => $type)
-                                                            <option value="{{ $key }}" {{ old('product_type') === (string)$key ? 'selected' : '' }}>
+                                                            <option value="{{ $type }}" {{ old('product_type') === (string)$type ? 'selected' : '' }}>
                                                                 {{ $type }}
                                                             </option>
                                                         @endforeach
