@@ -12,12 +12,12 @@ use Illuminate\Support\Str;
 class OrderService
 {
     public function getAllOrders()
-{
-    return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id') 
-                    ->select('order_info.*', 'customers.name as customer_name') 
-                    ->orderBy('order_info.order_date', 'desc')
-                    ->paginate(config('constants.ROW_PER_PAGE'));
-}
+    {
+        return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id')
+            ->select('order_info.*', 'customers.name as customer_name')
+            ->orderBy('order_info.order_date', 'desc')
+            ->paginate(config('constants.ROW_PER_PAGE'));
+    }
 
     public function createOrder_backup($request)
     {
@@ -89,13 +89,30 @@ class OrderService
     }
 
 
-    public function getOrder($id)
+    public function getOrder_backup($id)
     {
         return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id')
         ->select('order_info.*', 'customers.name as customer_name')
         ->where('order_info.order_id', $id)
         ->firstOrFail();
     }
+
+    public function getOrder($id)
+    {
+
+        $order = OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id')
+        ->select('order_info.*')
+        ->where('order_info.order_id', $id)
+        ->firstOrFail();
+        $orderDetails = OrderDetail::where('order_id', $id)
+            ->get();
+        return [
+            'order' => $order,
+            'orderDetails' => $orderDetails,
+        ];
+    }
+
+
 
 
     public function updateOrder($id, $data)
