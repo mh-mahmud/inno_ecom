@@ -14,4 +14,8 @@ class Brand extends Model
         'brand_description',
         'status'
     ];
+
+    public function product() {
+        return $this->hasOne(Product::class);
+    }
 }

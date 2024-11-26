@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\ProductService;
+use App\Models\Category;
+use App\Models\Brand;
 
 class ProductController extends Controller {
 
@@ -15,14 +17,17 @@ class ProductController extends Controller {
     }
 
     public function productList(Request $request)
-    {      
+    {
         $products = $this->productService->productList($request);
+        // dd($products[0]->category->category_name);
         return view('products.product-list', compact('products'));
     }
 
     public function productCreate()
-    {       
-        return view('products.create');
+    {
+        $categories = Category::where('status', 1)->get(['id', 'category_name']);
+        $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
+        return view('products.create', compact('categories', 'brands'));
     }
 
     public function productStore(Request $request)
@@ -45,12 +50,15 @@ class ProductController extends Controller {
 
     public function productEdit($id)
     {
+        $categories = Category::where('status', 1)->get(['id', 'category_name']);
+        $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
         $product = $this->productService->getProductById($id);
-        return view('products.edit', compact('product'));
+        return view('products.edit', compact('product', 'categories', 'brands'));
     }
 
     public function productUpdate(Request $request, $id)
-    { 
+    {
+        //dd($request->all());
         $result = $this->productService->productUpdate($request, $id);
         if($result->status == 208){
             return redirect()->route('product-list')->with('success', 'Product updated successfully.');

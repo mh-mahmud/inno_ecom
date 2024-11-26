@@ -27,7 +27,7 @@
                         <!--begin::Actions-->
                         <div class="d-flex align-items-center py-1">
 
-                            <a href="{{ route('add-product') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Add</a>
+                            <a href="{{ route('add-product') }}" class="btn btn-sm btn-success" id="kt_toolbar_primary_button">Create Product</a>
 
                             <!--end::Button-->
                         </div>
@@ -119,23 +119,26 @@
 						<thead>
 						<tr class="fw-bolder text-muted bg-light bd-cyan">
 						    <th class="ps-4 rounded-start min-w-40px">SL</th>
-							<th class="min-w-150px">Name</th>
-							<th class="min-w-140px">Code</th>
-							<th class="min-w-140px">Type</th>
-							<th class="min-w-140px">Price</th>
-							<th class="min-w-120px">Status</th>
+							<th class="min-w-110px">Product Name</th>
+							<th class="min-w-110px">Category Name</th>
+							<th class="min-w-110px">Brand</th>
+							<th class="min-w-110px">Code</th>
+							<th class="min-w-110px">Type</th>
+							<th class="min-w-110px">Price</th>
+							<th class="min-w-110px">Status</th>
 							<th class="min-w-100px text-end-new">Actions</th>
 						</tr>
 						</thead>
-						<!--end::Table head-->
-						<!--begin::Table body-->
+
 						<tbody>
 						@foreach ($products as $product)
 						<tr>
 							<td class="ps-5 text-dark fs-6">{{($products->currentPage() - 1) * $products->perPage() + $loop->iteration}}</td>
 							<td class="text-dark fs-6">{{ $product->name }}</td>
+							<td class="text-dark fs-6">{{ @$product->category->category_name }}</td>
+							<td class="text-dark fs-6">{{ @$product->brand->brand_name }}</td>
 							<td class="text-dark fs-6">{{ $product->product_code }}</td>
-							<td class="text-dark fs-6">{{ config('constants.PRODUCT_TYPE')[$product->product_type] }}</td>
+							<td class="text-dark fs-6">{{ $product->product_type }}</td>
 							<td class="text-dark fs-6">{{ $product->product_value }}</td>
 		                    <td>
 								@if ($product->status == 1)
@@ -146,28 +149,21 @@
                             </td>
 							<td>
 								<div
-                                                    class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
-									<a href="{{ route('product-show', $product->id) }}"
-									class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-										<!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                                    class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
+									<a href="{{ route('product-show', $product->id) }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+
 										<span class="svg-icon svg-icon-3">
-													<svg xmlns="http://www.w3.org/2000/svg"
-														width="24px" height="24px" viewBox="0 0 24 24">
-															<g stroke="none" stroke-width="1"
-															fill="none" fill-rule="evenodd">
-																<rect x="0" y="0" width="24"
-																	height="24"/>
-																<path
-																	d="M3,12 C3,12 5.45454545,6 12,6 C16.9090909,6 21,12 21,12 C21,12 16.9090909,18 12,18 C5.45454545,18 3,12 3,12 Z"
-																	fill="black" fill-rule="nonzero"
-																	opacity="0.7"/>
-																<path
-																	d="M12,15 C10.3431458,15 9,13.6568542 9,12 C9,10.3431458 10.3431458,9 12,9 C13.6568542,9 15,10.3431458 15,12 C15,13.6568542 13.6568542,15 12,15 Z"
-																	fill="black" opacity="0.7"/>
-															</g>
-														</svg>
-												</span>
-										<!--end::Svg Icon-->
+											<svg xmlns="http://www.w3.org/2000/svg"
+												width="24px" height="24px" viewBox="0 0 24 24">
+													<g stroke="none" stroke-width="1"
+													fill="none" fill-rule="evenodd">
+														<rect x="0" y="0" width="24" height="24"/>
+														<path d="M3,12 C3,12 5.45454545,6 12,6 C16.9090909,6 21,12 21,12 C21,12 16.9090909,18 12,18 C5.45454545,18 3,12 3,12 Z" fill="black" fill-rule="nonzero" opacity="0.7"/>
+														<path d="M12,15 C10.3431458,15 9,13.6568542 9,12 C9,10.3431458 10.3431458,9 12,9 C13.6568542,9 15,10.3431458 15,12 C15,13.6568542 13.6568542,15 12,15 Z" fill="black" opacity="0.7"/>
+													</g>
+												</svg>
+										</span>
+
 									</a>
 									<a href="{{ route('product-edit', $product->id) }}"
 									class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">

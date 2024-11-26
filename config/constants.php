@@ -10,7 +10,10 @@ return [
         'Virtual',
         'Physical',
         'Digital',
-        'Service'
+        'Service',
+        'Home Made',
+        'Organic',
+        'Imported',
     ],  
     'TASK_STATUS' => [
         0 => 'PENDING',

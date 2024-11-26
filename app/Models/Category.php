@@ -15,4 +15,9 @@ class Category extends Model
         'category_image',
         'status'
     ];
+
+    public function product()
+    {
+        return $this->hasOne(Product::class);
+    }
 }
