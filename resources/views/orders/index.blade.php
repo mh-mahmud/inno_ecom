@@ -146,7 +146,7 @@ use Carbon\Carbon;
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: '{{ session('success ')}}',
+            text: '{{ session('success')}}',
             showConfirmButton: false,
             timer: 1500
         });
@@ -222,10 +222,11 @@ use Carbon\Carbon;
                                     <th class="ps-4 min-w-50px">SL</th>
                                     <th class="min-w-150px">Invoice No</th>
                                     <th class="min-w-150px">Customer Name</th>
-                                    <th class="min-w-150px">Total Amount</th>
+                                    <th class="min-w-150px">Discount</th>
+                                    <th class="min-w-150px">Payable Amount</th>
                                     <th class="min-w-150px">Order Date</th>
                                     <th class="min-w-120px">Status</th>
-                                    <th class="min-w-100px text-end">Actions</th>
+                                    <th class="min-w-100px text-end-new">Actions</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -236,6 +237,7 @@ use Carbon\Carbon;
                                     <td class="ps-5 text-dark fs-6">{{ ($orders->currentPage() - 1) * $orders->perPage() + $loop->iteration }}</td>
                                     <td class="text-dark fs-6">{{ $order->invoice_no }}</td>
                                     <td class="text-dark fs-6">{{ $order->customer_name }}</td>
+                                    <td class="text-dark fs-6">{{ number_format($order->discount, 1) }}%</td>
                                     <td class="text-dark fs-6">{{ number_format($order->payable_amount, 2) }}</td>
                                     <td class="text-dark fs-6">{{ \Carbon\Carbon::parse($order->order_date)->format('d-m-Y') }}</td>
                                     <td>
@@ -266,7 +268,7 @@ use Carbon\Carbon;
                                                     </svg>
                                                 </span>
                                             </a>
-                                            <a href="{{ route('orders-edit', $order->order_id) }}"
+                                            <!-- <a href="{{ route('orders-edit', $order->order_id) }}"
                                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -274,7 +276,7 @@ use Carbon\Carbon;
                                                         <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
                                                     </svg>
                                                 </span>
-                                            </a>
+                                            </a> -->
                                             <form action="{{ route('orders-destroy', $order->order_id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
