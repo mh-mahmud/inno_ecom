@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-CREATE TABLE order_info (
+CREATE TABLE `order_info` (
   order_id INT(11) NOT NULL AUTO_INCREMENT,
   invoice_no VARCHAR(20) NOT NULL,
   customer_id INT(11) DEFAULT NULL,

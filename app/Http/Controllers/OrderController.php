@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\Helper;
 
 class OrderController extends Controller
 {
@@ -28,6 +29,7 @@ class OrderController extends Controller
     {
         
         $products = Product::all();
+        //$products = Product::select('id', 'name', 'description', 'product_value')->get();
         $customers = Customer::all();
 
         return view('orders.create', compact('products', 'customers'));
@@ -38,13 +40,13 @@ class OrderController extends Controller
        
         $validator = Validator::make($request->all(), [
             'customer_id' => 'required|exists:customers,id',
-            'mobile_number' => 'nullable|regex:/^\+?[1-9]\d{1,14}$/',
-            'area' => 'required|in:Inside Dhaka,Outside Dhaka',
-            'contact_address' => 'nullable|string',
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1',
-            'unit_price' => 'required|numeric|min:0',
-            'mprize' => 'nullable|numeric',
+            'mobile_number' => 'required|string',
+            'area' => 'required|string',
+            'products.*.product_id' => 'required|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1',
+            'products.*.unit_price' => 'required|numeric|min:0',
+            'products.*.product_color' => 'nullable|string',
+            'products.*.product_size' => 'nullable|string',
         ]);
     
         if ($validator->fails()) {
@@ -52,7 +54,7 @@ class OrderController extends Controller
         }
     
         $this->orderService->createOrder($request);
-        Helper::storeLog("Order created successfully", "Order", "Create Order", null, $request->customer_id);
+        Helper::storeLog("Order created successfully", "Order", "Create Order", null,null);
         return redirect()->route('orders-index')->with('success', 'Order created successfully.');
     }
     
