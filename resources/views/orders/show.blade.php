@@ -152,100 +152,56 @@ use Carbon\Carbon;
                 </div>
                 <!--begin::Body-->
                 <div class="card-body p-1">
-                   <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-150px w-xxl-200px">Invoice No</span>
-                        <span>{{ $order->invoice_no }}</span>
-                    </div>
-
-                    
-                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-150px w-xxl-200px">Customer Name</span>
-                        <span>{{ $order->customer_name }}</span>
-                    </div>
-
-                    
-                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-150px w-xxl-200px">Mobile Number</span>
-                        <span>{{ $order->mobile_number }}</span>
-                    </div>
-
-                    
-                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-150px w-xxl-200px">Delivery Area</span>
-                        <span>{{ $order->area }}</span>
-                    </div>
-
-                   
-                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-150px w-xxl-200px">Address</span>
-                        <span>{{ $order->address }}</span>
-                    </div>
-
-                    
-                    <div class="bg-light p-3 mb-1">
-                        <h6 class="text-gray-900 fw-bold mb-3">Product Details</h6>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Product Code:</span> <span>{{ $order->product_code }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Product Name:</span> <span>{{ $order->product_name }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Product Color:</span> <span>{{ $order->product_color }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Product Size:</span> <span>{{ $order->product_size }}</span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="bg-light p-3 mb-1">
-                        <h6 class="text-gray-900 fw-bold mb-3">Price Details</h6>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Unit Price:</span> <span>{{ number_format($order->unit_price, 2) }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Quantity:</span> <span>{{ $order->quantity }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Total Price:</span> <span>{{ number_format($order->total_price, 2) }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Subtotal:</span> <span>{{ number_format($order->sub_total, 2) }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Shipping Charge:</span> <span>{{ number_format($order->shipping_charge, 2) }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Discount:</span> <span>{{ number_format($order->discount, 2) }}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="fw-bolder w-lg-150px">Payable Amount:</span> <span>{{ number_format($order->payable_amount, 2) }}</span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-150px w-xxl-200px">Order Status</span>
-                        @if ($order->status == 'New')
-                        <span class="badge badge-light-info">New</span>
-                        @elseif ($order->status == 'Pending')
-                        <span class="badge badge-light-warning">Pending</span>
-                        @elseif ($order->status == 'Processing')
-                        <span class="badge badge-light-primary">Processing</span>
-                        @elseif ($order->status == 'Completed')
-                        <span class="badge badge-light-success">Completed</span>
-                        @elseif ($order->status == 'Cancelled')
-                        <span class="badge badge-light-danger">Cancelled</span>
-                        @endif
-                    </div>
-
-                    
-                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-150px w-xxl-200px">Order Date</span>
-                        <span>{{ $order->order_date ? \Carbon\Carbon::parse($order->order_date)->format('d-m-Y H:i:s') : '' }}</span>
-                    </div>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Product</th>
+                                <th>Size</th>
+                                <th>Code</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($orderDetails as $key => $detail)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $detail->product_name }}</td>
+                                <td>{{ $detail->product_size }}</td>
+                                <td>{{ $detail->product_code }}</td>
+                                <td>{{ $detail->quantity }}</td>
+                                <td>{{ $detail->unit_price }}</td>
+                                <td>{{ $detail->quantity * $detail->unit_price }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6" class="text-end fw-bold">Sub Total</td>
+                                <td>{{ $order->sub_total }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" class="text-end fw-bold">Discount (%)</td>
+                                <td>{{ number_format($order->discount, 1) }}%</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" class="text-end fw-bold">Shipping Charge</td>
+                                <td>{{ $order->shipping_charge }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" class="text-end fw-bold">Payable Amount</td>
+                                <td>{{ $order->payable_amount }}</td>
+                            </tr>
+                            <!-- <tr>
+                                <td colspan="6" class="text-end fw-bold text-primary">Due Amount</td>
+                                <td class="text-primary">{{ $order->due_amount }}</td>
+                            </tr> -->
+                        </tfoot>
+                    </table>
                 </div>
+
 
 
 

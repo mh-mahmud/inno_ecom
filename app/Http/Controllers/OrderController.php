@@ -59,11 +59,22 @@ class OrderController extends Controller
     }
     
 
-    public function show($id)
+    public function show_backup($id)
     {
         $order = $this->orderService->getOrder($id);
         return view('orders.show', compact('order'));
     }
+
+    public function show($id)
+    {
+
+        $data = $this->orderService->getOrder($id);
+        return view('orders.show', [
+            'order' => $data['order'],
+            'orderDetails' => $data['orderDetails'],
+        ]);
+    }
+
 
     public function edit($id)
     {
