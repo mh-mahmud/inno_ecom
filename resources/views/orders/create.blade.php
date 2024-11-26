@@ -145,7 +145,7 @@
                         @csrf
 
                         <div class="row">
-                            <!-- Customer -->
+                            
                             <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Customer</label>
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
 
-                            <!-- Mobile Number -->
+                           
                             <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Mobile Number</label>
@@ -174,7 +174,7 @@
                                 </div>
                             </div>
 
-                            <!-- Area -->
+                          
                             <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Area</label>
@@ -190,10 +190,10 @@
                             </div>
                         </div>
 
-                        <!-- Products Section -->
+                        
                         <div id="products-section">
                             <div class="row mt-3 product-row">
-                                <!-- Product -->
+                                
                                 <div class="col-md-3">
                                     <div class="fv-row mb-3">
                                         <label class="form-label fw-bolder text-dark">Product</label>
@@ -211,7 +211,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- Quantity -->
+                                
                                 <div class="col-md-1">
                                     <div class="fv-row mb-3">
                                         <label class="form-label fw-bolder text-dark">Quantity</label>
@@ -222,8 +222,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Unit Price -->
-                                <!-- Unit Price -->
+                               
                                 <div class="col-md-2">
                                     <div class="fv-row mb-3">
                                         <label class="form-label fw-bolder text-dark">Unit Price</label>
@@ -234,7 +233,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Product Color -->
+                              
                                 <div class="col-md-2">
                                     <div class="fv-row mb-3">
                                         <label class="form-label fw-bolder text-dark">Product Color</label>
@@ -248,7 +247,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Product Size -->
+                               
                                 <div class="col-md-2">
                                     <div class="fv-row mb-3">
                                         <label class="form-label fw-bolder text-dark">Product Size</label>
@@ -268,7 +267,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Remove Button -->
+                             
                                 <div class="col-md-1">
                                     <div class="fv-row mb-3">
                                         <label class="form-label fw-bolder text-dark invisible"> action </label>
@@ -278,14 +277,14 @@
                             </div>
                         </div>
 
-                        <!-- Add More Products Button -->
+                      
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <button type="button" class="btn btn-sm btn-success" id="add-product-row">Add More Product</button>
                             </div>
                         </div>
 
-                        <!-- Subtotal, Shipping Charge, and Total Amount Section -->
+                      
                         <div class="row mt-3">
 
                             <div class="col-md-4">
@@ -294,7 +293,7 @@
                                     <input type="text" name="discount" id="discount-percentage" class="form-control form-control-sm form-control-solid" value="0">
                                 </div>
                             </div>
-                            <!-- Subtotal -->
+                          
                             <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Subtotal</label>
@@ -302,7 +301,7 @@
                                 </div>
                             </div>
 
-                            <!-- Shipping Charge -->
+                         
                             <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Shipping Charge</label>
@@ -310,7 +309,7 @@
                                 </div>
                             </div>
 
-                            <!-- Total Payable -->
+                           
                             <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Total Payable</label>

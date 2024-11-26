@@ -12,12 +12,12 @@ use Illuminate\Support\Str;
 class OrderService
 {
     public function getAllOrders()
-{
-    return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id') 
-                    ->select('order_info.*', 'customers.name as customer_name') 
-                    ->orderBy('order_info.order_date', 'desc')
-                    ->paginate(config('constants.ROW_PER_PAGE'));
-}
+    {
+        return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id')
+            ->select('order_info.*', 'customers.name as customer_name')
+            ->orderBy('order_info.order_date', 'desc')
+            ->paginate(config('constants.ROW_PER_PAGE'));
+    }
 
     public function createOrder_backup($request)
     {
