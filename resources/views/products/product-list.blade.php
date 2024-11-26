@@ -107,15 +107,13 @@
 
 
 			</div>
-			<!--end::Header-->
-			<!--begin::Body-->
+
 			 <div class="card-body p-1">
-				<!--begin::Table container-->
 				<div class="table-responsive">
 				@if($products->isNotEmpty())
 					<!--begin::Table-->
 					<table class="table table-sm table-condensed table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-						<!--begin::Table head-->
+
 						<thead>
 						<tr class="fw-bolder text-muted bg-light bd-cyan">
 						    <th class="ps-4 rounded-start min-w-40px">SL</th>

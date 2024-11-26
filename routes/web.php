@@ -27,6 +27,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceCustomFormController;
 use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FrontController;
 
 
 use App\Models\Promotion;
@@ -43,7 +44,7 @@ use App\Models\Promotion;
 */
 
 
-Route::get('/', [AuthController::class, 'index'])->name('login_index');
+Route::get('/', [FrontController::class, 'html'])->name('index');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/post_login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('send-pending-email', [EmailController::class, 'sendPendingEmail'])->name('send-pending-email');
