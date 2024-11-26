@@ -119,7 +119,7 @@
 						<thead>
 						<tr class="fw-bolder text-muted bg-light bd-cyan">
 						    <th class="ps-4 rounded-start min-w-40px">SL</th>
-							<th class="min-w-150px">Product Name</th>
+							<th class="min-w-110px">Product Name</th>
 							<th class="min-w-110px">Category Name</th>
 							<th class="min-w-110px">Brand</th>
 							<th class="min-w-110px">Code</th>
@@ -135,8 +135,8 @@
 						<tr>
 							<td class="ps-5 text-dark fs-6">{{($products->currentPage() - 1) * $products->perPage() + $loop->iteration}}</td>
 							<td class="text-dark fs-6">{{ $product->name }}</td>
-							<td class="text-dark fs-6">{{ $product->category_name }}</td>
-							<td class="text-dark fs-6">{{ $product->brand_name }}</td>
+							<td class="text-dark fs-6">{{ @$product->category->category_name }}</td>
+							<td class="text-dark fs-6">{{ @$product->brand->brand_name }}</td>
 							<td class="text-dark fs-6">{{ $product->product_code }}</td>
 							<td class="text-dark fs-6">{{ $product->product_type }}</td>
 							<td class="text-dark fs-6">{{ $product->product_value }}</td>

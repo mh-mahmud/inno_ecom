@@ -168,29 +168,13 @@
                                                 </div>
                                             </div>
 
-                                           <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Description<span class="text-danger">*</span></label>
-                                                    <textarea
-                                                        class="form-control form-control-sm  form-control-solid editor"
-                                                        id="description" name="description"
-                                                        rows="3">{{ old('description') }}</textarea>
-                                                    @if ($errors->has('description'))
-                                                        <span class="text-danger">{{ $errors->first('description') }}</span>
-                                                    @endif
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Specification</label>
-                                                    <textarea
-                                                        class="form-control form-control-sm  form-control-solid editor"
-                                                        id="product_specification" name="product_specification"
-                                                        rows="3">{{ old('product_specification') }}</textarea>
-                                                    @if ($errors->has('product_specification'))
-                                                        <span
-                                                            class="text-danger">{{ $errors->first('product_specification') }}</span>
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Club Points</label>
+                                                    <input class="form-control form-control-sm form-control-solid"
+                                                           type="text" name="club_point" autocomplete="off" value="{{ old('club_point') }}" />
+                                                    @if ($errors->has('club_point'))
+                                                        <span class="text-danger">{{ $errors->first('club_point') }}</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -310,6 +294,47 @@
                                                         <option value="0">Inactive</option>
 
                                                     </select>
+                                                </div>
+                                            </div>
+
+                                           <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Description<span class="text-danger">*</span></label>
+                                                    <textarea
+                                                        class="form-control form-control-sm  form-control-solid editor"
+                                                        id="description" name="description"
+                                                        rows="3">{{ old('description') }}</textarea>
+                                                    @if ($errors->has('description'))
+                                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Specification</label>
+                                                    <textarea
+                                                        class="form-control form-control-sm  form-control-solid editor"
+                                                        id="product_specification" name="product_specification"
+                                                        rows="3">{{ old('product_specification') }}</textarea>
+                                                    @if ($errors->has('product_specification'))
+                                                        <span
+                                                            class="text-danger">{{ $errors->first('product_specification') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">Key Features</label>
+                                                    <textarea
+                                                        class="form-control form-control-sm  form-control-solid editor"
+                                                        id="key_features" name="key_features"
+                                                        rows="3">{{ old('key_features') }}</textarea>
+                                                    @if ($errors->has('key_features'))
+                                                        <span
+                                                            class="text-danger">{{ $errors->first('key_features') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

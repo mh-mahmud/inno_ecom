@@ -170,29 +170,13 @@
                                 </div>
                             </div>
 
-                           <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Description<span class="text-danger">*</span></label>
-                                    <textarea
-                                        class="form-control form-control-sm  form-control-solid editor"
-                                        id="description" name="description"
-                                        rows="3">{{ $product->description }}</textarea>
-                                    @if ($errors->has('description'))
-                                        <span class="text-danger">{{ $errors->first('description') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Specification</label>
-                                    <textarea
-                                        class="form-control form-control-sm  form-control-solid editor"
-                                        id="product_specification" name="product_specification"
-                                        rows="3">{{ $product->product_specification }}</textarea>
-                                    @if ($errors->has('product_specification'))
-                                        <span
-                                            class="text-danger">{{ $errors->first('product_specification') }}</span>
+                                <div class="fv-row mb-3">
+                                    <label class="form-label fw-bolder text-dark">Club Points</label>
+                                    <input class="form-control form-control-sm form-control-solid"
+                                           type="text" name="club_point" autocomplete="off" value="{{ $product->club_point }}" />
+                                    @if ($errors->has('club_point'))
+                                        <span class="text-danger">{{ $errors->first('club_point') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -307,41 +291,41 @@
                                 </div>
                             </div>
 
-                                            <div class="col-md-6">
-                                                <div class="fv-row mb-3">
-                                                    <label class="form-label fw-bolder text-dark">Stock Status: {{ $product->stock_status }}</label>
-                                                    <select class=" form-control form-control-sm form-control-solid" name="stock_status" aria-label="Default select example">
+                            <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <label class="form-label fw-bolder text-dark">Stock Status</label>
+                                    <select class=" form-control form-control-sm form-control-solid" name="stock_status" aria-label="Default select example">
 
-                                                        <option value="">-- select one --</option>
-                                                        <option value="In Stock" {{ ($product->stock_status == 'In Stock') ? 'selected' : '' }}>In Stock</option>
-                                                        <option value="Out of Stock" {{ ($product->stock_status == 'Out of Stock') ? 'selected' : '' }}>Out of Stock</option>
-                                                        <option value="Limit Out" {{ ($product->stock_status == 'Limit Out') ? 'selected' : '' }}>Limit Out</option>
+                                        <option value="">-- select one --</option>
+                                        <option value="In Stock" {{ ($product->stock_status == 'In Stock') ? 'selected' : '' }}>In Stock</option>
+                                        <option value="Out of Stock" {{ ($product->stock_status == 'Out of Stock') ? 'selected' : '' }}>Out of Stock</option>
+                                        <option value="Limit Out" {{ ($product->stock_status == 'Limit Out') ? 'selected' : '' }}>Limit Out</option>
 
-                                                    </select>
-                                                </div>
-                                            </div>
+                                    </select>
+                                </div>
+                            </div>
 
-                                            <div class="col-md-6">
-                                                <div class="fv-row mb-3">
-                                                    <label class="form-label fw-bolder text-dark">Stock Quantity<span class="text-danger">*</span></label>
-                                                    <input class="form-control form-control-sm form-control-solid"
-                                                           type="number" name="stock_quantity" autocomplete="off" value="{{ $product->stock_quantity }}" />
-                                                    @if ($errors->has('stock_quantity'))
-                                                        <span class="text-danger">{{ $errors->first('stock_quantity') }}</span>
-                                                    @endif
-                                                </div>
-                                            </div>
+                            <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <label class="form-label fw-bolder text-dark">Stock Quantity<span class="text-danger">*</span></label>
+                                    <input class="form-control form-control-sm form-control-solid"
+                                           type="number" name="stock_quantity" autocomplete="off" value="{{ $product->stock_quantity }}" />
+                                    @if ($errors->has('stock_quantity'))
+                                        <span class="text-danger">{{ $errors->first('stock_quantity') }}</span>
+                                    @endif
+                                </div>
+                            </div>
 
-                                            <div class="col-md-6">
-                                                <div class="fv-row mb-3">
-                                                    <label class="form-label fw-bolder text-dark">Max Purchase Limit</label>
-                                                    <input class="form-control form-control-sm form-control-solid"
-                                                           type="number" name="max_purchase_limit" autocomplete="off" value="{{ $product->max_purchase_limit }}" />
-                                                    @if ($errors->has('max_purchase_limit'))
-                                                        <span class="text-danger">{{ $errors->first('max_purchase_limit') }}</span>
-                                                    @endif
-                                                </div>
-                                            </div>
+                            <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <label class="form-label fw-bolder text-dark">Max Purchase Limit</label>
+                                    <input class="form-control form-control-sm form-control-solid"
+                                           type="number" name="max_purchase_limit" autocomplete="off" value="{{ $product->max_purchase_limit }}" />
+                                    @if ($errors->has('max_purchase_limit'))
+                                        <span class="text-danger">{{ $errors->first('max_purchase_limit') }}</span>
+                                    @endif
+                                </div>
+                            </div>
 
 
                             <div class="col-md-6">
@@ -351,6 +335,47 @@
                                         <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Active</option>
                                         <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Inactive</option>
                                     </select>
+                                </div>
+                            </div>
+
+                           <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Description<span class="text-danger">*</span></label>
+                                    <textarea
+                                        class="form-control form-control-sm  form-control-solid editor"
+                                        id="description" name="description"
+                                        rows="3">{{ $product->description }}</textarea>
+                                    @if ($errors->has('description'))
+                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label fw-bolder text-dark" for="textarea">Product Specification</label>
+                                    <textarea
+                                        class="form-control form-control-sm  form-control-solid editor"
+                                        id="product_specification" name="product_specification"
+                                        rows="3">{{ $product->product_specification }}</textarea>
+                                    @if ($errors->has('product_specification'))
+                                        <span
+                                            class="text-danger">{{ $errors->first('product_specification') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label fw-bolder text-dark" for="textarea">Key Features</label>
+                                    <textarea
+                                        class="form-control form-control-sm  form-control-solid editor"
+                                        id="key_features" name="key_features"
+                                        rows="3">{{ $product->key_features }}</textarea>
+                                    @if ($errors->has('key_features'))
+                                        <span
+                                            class="text-danger">{{ $errors->first('key_features') }}</span>
+                                    @endif
                                 </div>
                             </div>
 

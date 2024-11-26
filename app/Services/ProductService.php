@@ -11,7 +11,7 @@ class ProductService
 {
     public function productList($request)
     {
-        $sql = Product::query();
+        /*$sql = Product::with('category')->query();
         $data = $request->all();
         if(!empty($data["search"])) {
             $sql->where('name','like', '%' . $data["search"] . '%');
@@ -23,7 +23,21 @@ class ProductService
         } else {
             return  $sql->orderBy('id', 'DESC')->paginate(config('constants.ROW_PER_PAGE'));
 
+        }*/
+
+        $sql = Product::with('category');
+        $data = $request->all();
+
+        if (!empty($data["search"])) {
+            $sql->where('name', 'like', '%' . $data["search"] . '%');
         }
+
+        if (isset($data['paginate']) && $data['paginate'] == false) {
+            return $sql->orderBy('id', 'DESC')->get();
+        } else {
+            return $sql->orderBy('id', 'DESC')->paginate(config('constants.ROW_PER_PAGE'));
+        }
+
     }
 
     public function productStore($request)
@@ -90,8 +104,10 @@ class ProductService
                 $dataObj->product_type          = $data['product_type'];
                 $dataObj->product_cost          = $data['product_cost'];
                 $dataObj->product_value         = $data['product_value'];
-                $dataObj->discount_price         = $data['discount_price'];
+                $dataObj->discount_price        = $data['discount_price'];
                 $dataObj->description           = $data['description'];
+                $dataObj->key_features          = $data['key_features'];
+                $dataObj->club_point            = $data['club_point'];
                 $dataObj->product_specification = $data['product_specification'];
                 $dataObj->img_path              = $fileNameToStore;
                 $dataObj->stock_status          = $data['stock_status'];
@@ -172,6 +188,8 @@ class ProductService
                 $dataObj->product_value         = $data['product_value'];
                 $dataObj->discount_price         = $data['discount_price'];
                 $dataObj->description           = $data['description'];
+                $dataObj->key_features          = $data['key_features'];
+                $dataObj->club_point            = $data['club_point'];
                 $dataObj->product_specification = $data['product_specification'];
                 $dataObj->img_path              = $request->hasFile('img_path') ? $fileNameToStore : $dataObj->img_path;
                 $dataObj->stock_status          = $data['stock_status'];

@@ -19,6 +19,7 @@ class ProductController extends Controller {
     public function productList(Request $request)
     {
         $products = $this->productService->productList($request);
+        // dd($products[0]->category->category_name);
         return view('products.product-list', compact('products'));
     }
 

@@ -92,6 +92,11 @@
                     </div>
 
                     <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-250px w-xxl-150px">Club Points</span>
+                        <span>{{ $product->club_point }}</span>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
                         <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-250px w-xxl-150px flex-shrink-0">Description</span>
                         <span>{!! $product->description !!}</span>
                     </div>
@@ -99,6 +104,11 @@
                     <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
                         <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-250px w-xxl-150px flex-shrink-0">Product Specification</span>
                         <span>{!! $product->product_specification !!}</span>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-250px w-xxl-150px flex-shrink-0">Key Features</span>
+                        <span>{!! $product->key_features !!}</span>
                     </div>
 
                     <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
