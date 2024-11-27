@@ -143,4 +143,14 @@ class OrderService
         ->paginate(config('constants.ROW_PER_PAGE'));
     }
 
+    public function updateOrderStatus($id, $status)
+    {
+        $order = OrderInfo::find($id);
+        if (!$order) {
+            return false;
+        }
+        $order->status = $status;
+        return $order->save();
+    }
+
 }

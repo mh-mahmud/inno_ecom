@@ -362,6 +362,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::put('/orders/{id?}', [OrderController::class, 'update'])->name('orders-update');
 	Route::post('/orders/search', [OrderController::class, 'search'])->name('orders-search');
 	Route::delete('/orders/{id?}', [OrderController::class, 'destroy'])->name('orders-destroy')->middleware(['check-permission']);
+	Route::post('/orders/order-status-update/{id?}', [OrderController::class, 'updateOrderStatus'])->name('order-status-update');
+	Route::get('/order-status/{id?}', [OrderController::class, 'getOrderStatus'])->name('order-status');
 
 
 

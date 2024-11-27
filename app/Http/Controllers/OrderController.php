@@ -9,6 +9,7 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\Helper;
+use App\Models\OrderInfo;
 
 class OrderController extends Controller
 {
@@ -119,6 +120,38 @@ class OrderController extends Controller
         }
         $orders = $this->orderService->searchOrders($request);
         return view('orders.index', compact('orders'));
+    }
+
+    public function updateOrderStatus(Request $request, $id)
+    {
+        // Validation
+        $request->validate([
+            'meeting_feedback' => 'string|max:255',
+        ]);
+
+        // Update the meeting via service
+        $result = $this->orderService->updateOrderStatus($id, $request->input('status'));
+
+        if ($result) {
+            Helper::storeLog("Order Status updated successfully", "Order", "updateOrderStatus", null);
+            return redirect()->route('orders-index')->with('success', 'Order Status updated successfully.');
+        } else {
+            Helper::storeLog("Failed to update the Order status", "Order", "updateOrderStatus", null);
+            return back()->withErrors(['error' => 'Failed to update Order.']);
+        }
+    }
+
+    public function getOrderStatus($id)
+    {
+        $meeting = OrderInfo::find($id);
+        if (!$meeting) {
+            return response()->json(['error' => 'Meeting not found'], 404);
+        }
+        //return the Orde JSON response
+        return response()->json([
+            'meeting_feedback' => $meeting->meeting_feedback,
+            'rating' => $meeting->rating,
+        ]);
     }
 
     

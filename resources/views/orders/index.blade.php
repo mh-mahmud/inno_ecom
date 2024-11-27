@@ -146,7 +146,7 @@ use Carbon\Carbon;
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: '{{ session('success')}}',
+            text: '{{session('success')}}',
             showConfirmButton: false,
             timer: 1500
         });
@@ -158,7 +158,7 @@ use Carbon\Carbon;
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: '{{ session('error')}}',
+            text: '{{session('error')}}',
             showConfirmButton: false,
             timer: 1500
         });
@@ -166,7 +166,69 @@ use Carbon\Carbon;
     @endif
 
     <!--End Table Alert Message-->
+    <div class="modal fade" id="add_order_status_modal" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog mw-600px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal header-->
+                <div class="modal-header pb-0 border-0 justify-content-end">
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--begin::Modal header-->
+                <!--begin::Modal body-->
 
+
+                <!-- Modal Body -->
+                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                    <form action="{{ url('/order-status-update/') }}" method="POST" name="star-rating-form">
+                        @csrf <!-- Token for form security -->
+
+                        <!-- Feedback Textarea -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="fv-row mb-3">
+                                    <label class="form-label fw-bolder text-dark">Order Status</label>
+                                    <select name="status" class="form-control form-control-sm form-control-solid">
+                                        <option value="">Select Order Status</option>
+                                        <option value="New">New</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Processing">Processing</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Submit Button -->
+                        <div class="card-footer d-flex justify-content-end py-0 px-0">
+                            <a href="{{ route('orders-index') }}" class="btn btn-light me-2 btn-sm">Back</a>
+                            <button type="submit" class="btn btn-primary btn-sm" id="submit_button">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <!--end::Modal body-->
+            </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
 
     <div class="row">
         <div class="col-xxl-12">
@@ -241,21 +303,31 @@ use Carbon\Carbon;
                                     <td class="text-dark fs-6">{{ number_format($order->payable_amount, 2) }}</td>
                                     <td class="text-dark fs-6">{{ \Carbon\Carbon::parse($order->order_date)->format('d-m-Y') }}</td>
                                     <td>
-                                    @if ($order->status == 'New')
-                                            <span class="badge badge-light-info">New</span>
+                                        @if ($order->status == 'New')
+                                        <span class="badge badge-light-info">New</span>
                                         @elseif ($order->status == 'Pending')
-                                            <span class="badge badge-light-warning">Pending</span>
+                                        <span class="badge badge-light-warning">Pending</span>
                                         @elseif ($order->status == 'Processing')
-                                            <span class="badge badge-light-primary">Processing</span>
+                                        <span class="badge badge-light-primary">Processing</span>
                                         @elseif ($order->status == 'Completed')
-                                            <span class="badge badge-light-success">Completed</span>
+                                        <span class="badge badge-light-success">Completed</span>
                                         @elseif ($order->status == 'Cancelled')
-                                            <span class="badge badge-light-danger">Cancelled</span>
-                                    @endif
+                                        <span class="badge badge-light-danger">Cancelled</span>
+                                        @endif
 
                                     </td>
                                     <td>
                                         <div class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
+
+                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#add_order_status_modal"
+                                                data-id="{{ $order->order_id }}"> <!-- Pass meeting ID here -->
+                                                <!-- Svg Icon -->
+                                                <span class="svg-icon svg-icon-3">
+                                                <svg fill="#000000" width="800px" height="800px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M7.536 8.657l2.828-2.83c.39-.39 1.024-.39 1.414 0 .39.392.39 1.025 0 1.416l-3.535 3.535c-.196.195-.452.293-.707.293-.256 0-.512-.097-.708-.292l-2.12-2.12c-.39-.392-.39-1.025 0-1.415s1.023-.39 1.413 0zM8 16c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6z"/></svg>
+                                                </span>
+                                            </a>
                                             <a href="{{ route('orders-show', $order->order_id) }}"
                                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                 <span class="svg-icon svg-icon-3">
@@ -320,6 +392,30 @@ use Carbon\Carbon;
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        //modal and load data
+        $('a[data-bs-target="#add_order_status_modal"]').on('click', function() {
+            var orderId = $(this).data('id');
+            //action meeting id using route
+            var formAction = "{{ route('order-status-update', ':id') }}";
+            formAction = formAction.replace(':id', orderId);
+            $('form[name="star-rating-form"]').attr('action', formAction);
+            //ajax call
+            var fetchUrl = "{{ route('order-status', ':id') }}";
+            fetchUrl = fetchUrl.replace(':id', orderId);
+            $.ajax({
+                url: fetchUrl,
+                type: 'GET',
+                success: function(data) {
+                    //modal fields with AJAX response
+                    $('textarea[name="meeting_feedback"]').val(data.meeting_feedback);
+
+                }
+            });
+        });
+    });
+</script>
 <script>
     function confirmDelete() {
         if (confirm("Are you sure you want to delete Orders?")) {
