@@ -7,6 +7,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BloggerCategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LeadsFormController;
 use App\Http\Controllers\PromotionController;
@@ -352,6 +353,17 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('category/search', [CategoryController::class, 'search'])->name('category-search');
 	Route::delete('category/{id?}', [CategoryController::class, 'destroy'])->name('category-destroy')->middleware(['check-permission']);
 	Route::put('category/{id}/update-category-image', [CategoryController::class, 'updatecategoryImage'])->name('update-category-image');
+
+	// blogger category routes
+	Route::get('blogger-categories', [BloggerCategoryController::class, 'index'])->name('blogger-category-list')->middleware(['check-permission']);
+	Route::get('blogger-category/create', [BloggerCategoryController::class, 'create'])->name('blogger-category-create')->middleware(['check-permission']);
+	Route::post('blogger-category', [BloggerCategoryController::class, 'store'])->name('blogger-category-store');
+	Route::get('blogger-category/{id?}', [BloggerCategoryController::class, 'show'])->name('blogger-category-show')->middleware(['check-permission']);
+	Route::get('blogger-category/{id?}/edit', [BloggerCategoryController::class, 'edit'])->name('blogger-category-edit')->middleware(['check-permission']);
+	Route::put('blogger-category/{id?}', [BloggerCategoryController::class, 'update'])->name('blogger-category-update');
+	Route::post('blogger-category/search', [BloggerCategoryController::class, 'search'])->name('blogger-category-search');
+	Route::delete('blogger-category/{id?}', [BloggerCategoryController::class, 'destroy'])->name('blogger-category-destroy')->middleware(['check-permission']);
+	Route::put('blogger-category/{id}/update-blogger-category-image', [BloggerCategoryController::class, 'updatebloggercategoryImage'])->name('update-blogger-category-image');
 
 
 	// Orders Routes
