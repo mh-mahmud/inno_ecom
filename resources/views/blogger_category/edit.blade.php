@@ -13,12 +13,12 @@
             data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
             class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
             <!--begin::Title-->
-            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Blogger Category Edit Forms
+            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Blog Category Edit Forms
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                 <!--end::Separator-->
                 <!--begin::Description-->
-                <small class="text-muted fs-7 fw-bold my-1 ms-1">Fill up the Blogger category edit form</small>
+                <small class="text-muted fs-7 fw-bold my-1 ms-1">Fill up the Blog category edit form</small>
                 <!--end::Description-->
             </h1>
             <!--end::Title-->
@@ -46,7 +46,7 @@
                 <div class="card-header bg-light bd-cyan">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bolder m-0">Blogger Category Edit</h3>
+                        <h3 class="fw-bolder m-0">Blog Category Edit</h3>
                     </div>
                     <!--end::Card title-->
                 </div>

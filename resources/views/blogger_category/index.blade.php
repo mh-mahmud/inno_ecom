@@ -14,12 +14,12 @@
                  data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                  class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Blogger Category 
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Blog Category 
                     <!--begin::Separator-->
                     <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                     <!--end::Separator-->
                     <!--begin::Description-->
-                    <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Blogger Category List</small>
+                    <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Blog Category List</small>
                     <!--end::Description-->
                 </h1>
                 <!--end::Title-->
@@ -164,7 +164,7 @@
                     <!--begin::Header-->
                     <div class="d-flex justify-content-between align-items-start card-header px-2 border-0 pt-1">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bolder fs-3 mb-1">Blogger Category List</span>
+                            <span class="card-label fw-bolder fs-3 mb-1">Blog Category List</span>
                             <!-- <span class="text-muted mt-1 fw-bold fs-7">Leads Form data here</span> -->
                         </h3>
 
@@ -220,7 +220,7 @@
                                         <th class="min-w-150px">Category Name</th>
                                         <th class="min-w-140px">Parent Name</th>
                                         <th class="min-w-150px">Description</th>
-                                        <th class="min-w-150px">Category Image</th>
+                                        <th class="min-w-100px">Category Image</th>
                                         <th class="min-w-120px">Status</th>
                                         <th class="min-w-100px text-end rounded-end text-end-new">Actions</th>
                                     </tr>
@@ -236,7 +236,13 @@
                                             <td class="text-dark fs-6">{{$cat->category_name }}</td>
                                             <td class="text-dark fs-6">{{$cat->parent_name }}</td>
                                             <td class="text-dark fs-6 ">{{ $cat->category_description }}</td>
-                                            <td class="text-dark fs-6">{{$cat->category_image }}</td>
+
+                                            <td style="width: 20%;" class="text-dark fs-6" style="border:1px solid red">
+                                                @if($cat->category_image != '')
+                                                    <img style="width: 35%;" src="{{ asset('uploads/blogger_categories/' . $cat->category_image) }}" alt="{{ $cat->category_name }}">
+                                                @endif
+                                            </td>
+
                                             <td>
                                                 @if ($cat->status == 1)
                                                     <span class="badge badge-light-success">Active</span>
@@ -245,9 +251,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <div
-                                                    class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
-                                                    
+                                                <div class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
                                                  
                                                     <a href="{{ route('blogger-category-show', $cat->id) }}"
                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">

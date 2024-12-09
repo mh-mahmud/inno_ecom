@@ -355,15 +355,25 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::put('category/{id}/update-category-image', [CategoryController::class, 'updatecategoryImage'])->name('update-category-image');
 
 	// blogger category routes
-	Route::get('blogger-categories', [BloggerCategoryController::class, 'index'])->name('blogger-category-list')->middleware(['check-permission']);
-	Route::get('blogger-category/create', [BloggerCategoryController::class, 'create'])->name('blogger-category-create')->middleware(['check-permission']);
+	Route::get('blog-category-list', [BloggerCategoryController::class, 'index'])->name('blogger-category-list')->middleware(['check-permission']);
+	Route::get('blog-category/create', [BloggerCategoryController::class, 'create'])->name('blogger-category-create')->middleware(['check-permission']);
 	Route::post('blogger-category', [BloggerCategoryController::class, 'store'])->name('blogger-category-store');
-	Route::get('blogger-category/{id?}', [BloggerCategoryController::class, 'show'])->name('blogger-category-show')->middleware(['check-permission']);
-	Route::get('blogger-category/{id?}/edit', [BloggerCategoryController::class, 'edit'])->name('blogger-category-edit')->middleware(['check-permission']);
+	Route::get('blog-category/{id?}', [BloggerCategoryController::class, 'show'])->name('blogger-category-show')->middleware(['check-permission']);
+	Route::get('blog-category/{id?}/edit', [BloggerCategoryController::class, 'edit'])->name('blogger-category-edit')->middleware(['check-permission']);
 	Route::put('blogger-category/{id?}', [BloggerCategoryController::class, 'update'])->name('blogger-category-update');
 	Route::post('blogger-category/search', [BloggerCategoryController::class, 'search'])->name('blogger-category-search');
 	Route::delete('blogger-category/{id?}', [BloggerCategoryController::class, 'destroy'])->name('blogger-category-destroy')->middleware(['check-permission']);
 	Route::put('blogger-category/{id}/update-blogger-category-image', [BloggerCategoryController::class, 'updatebloggercategoryImage'])->name('update-blogger-category-image');
+
+	Route::get('blog-list', [BlogController::class, 'index'])->name('blog-list')->middleware(['check-permission']);
+	Route::get('blog/create', [BlogController::class, 'create'])->name('create-blog')->middleware(['check-permission']);
+	Route::post('blog-create', [BlogController::class, 'store'])->name('blog-store');
+	Route::get('blog/{id?}', [BlogController::class, 'show'])->name('blog-show')->middleware(['check-permission']);
+	Route::get('blog/{id?}/edit', [BlogController::class, 'edit'])->name('blogger-category-edit')->middleware(['check-permission']);
+	Route::put('blog-update/{id?}', [BlogController::class, 'update'])->name('blog-update');
+	Route::post('blog/search', [BlogController::class, 'search'])->name('blog-search');
+	Route::delete('blog-delete/{id?}', [BlogController::class, 'destroy'])->name('blog-delete')->middleware(['check-permission']);
+	Route::put('blog/{id}/update-blog-image', [BlogController::class, 'update_blog_image'])->name('update-blog-image');
 
 
 	// Orders Routes
