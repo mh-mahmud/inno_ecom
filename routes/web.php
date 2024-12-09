@@ -369,7 +369,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('blog/create', [BlogController::class, 'create'])->name('create-blog')->middleware(['check-permission']);
 	Route::post('blog-create', [BlogController::class, 'store'])->name('blog-store');
 	Route::get('blog/{id?}', [BlogController::class, 'show'])->name('blog-show')->middleware(['check-permission']);
-	Route::get('blog/{id?}/edit', [BlogController::class, 'edit'])->name('blogger-category-edit')->middleware(['check-permission']);
+	Route::get('blog/{id?}/edit', [BlogController::class, 'edit'])->name('blog-edit')->middleware(['check-permission']);
 	Route::put('blog-update/{id?}', [BlogController::class, 'update'])->name('blog-update');
 	Route::post('blog/search', [BlogController::class, 'search'])->name('blog-search');
 	Route::delete('blog-delete/{id?}', [BlogController::class, 'destroy'])->name('blog-delete')->middleware(['check-permission']);
