@@ -29,6 +29,7 @@ use App\Http\Controllers\InvoiceCustomFormController;
 use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\BlogController;
 
 
 use App\Models\Promotion;
