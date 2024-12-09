@@ -241,6 +241,7 @@ CREATE TABLE `bloggers_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
+<<<<<<< HEAD
 CREATE TABLE career (
     id INT AUTO_INCREMENT PRIMARY KEY,
     job_title VARCHAR(255) NOT NULL,
@@ -256,3 +257,16 @@ CREATE TABLE career (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
+=======
+CREATE TABLE IF NOT EXISTS `blogs` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `blog_category_id` int DEFAULT NULL,
+  `blog_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `blog_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `blog_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+>>>>>>> 375e62df1b2203a0cdb5aa85697918a4593278e3

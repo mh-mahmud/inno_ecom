@@ -14,12 +14,12 @@
                  data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                  class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Blog Category 
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Blogs 
                     <!--begin::Separator-->
                     <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                     <!--end::Separator-->
                     <!--begin::Description-->
-                    <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Blog Category List</small>
+                    <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Blog List</small>
                     <!--end::Description-->
                 </h1>
                 <!--end::Title-->
@@ -29,7 +29,7 @@
             <div class="d-flex align-items-center py-1">
 
                 <!--begin::Button-->
-                <a href="{{ route('blogger-category-create') }}" class="btn btn-sm btn-success" id="kt_toolbar_primary_button">Create Category</a>
+                <a href="{{ route('create-blog') }}" class="btn btn-sm btn-success" id="kt_toolbar_primary_button">Create Blog</a>
                 &nbsp;&nbsp;
 
 
@@ -164,12 +164,12 @@
                     <!--begin::Header-->
                     <div class="d-flex justify-content-between align-items-start card-header px-2 border-0 pt-1">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bolder fs-3 mb-1">Blog Category List</span>
+                            <span class="card-label fw-bolder fs-3 mb-1">Blog List</span>
                             <!-- <span class="text-muted mt-1 fw-bold fs-7">Leads Form data here</span> -->
                         </h3>
 
                         <div class="d-flex align-items-center flex-wrap gap-2">
-                            <form action="{{ route('blogger-category-search') }}" method="POST" class="d-flex">
+                            <form action="{{ route('blog-search') }}" method="POST" class="d-flex">
                                 @csrf
                                 <!--begin::Input group-->
                                 <div class="d-flex align-items-center position-relative">
@@ -208,7 +208,7 @@
                     <div class="card-body px-2 pt-2">
                         <!--begin::Table container-->
                         <div class="table-responsive">
-                            @if($cats->isNotEmpty())
+                            @if($blogs->isNotEmpty())
                                 <!--begin::Table-->
                                 <table
                                     class="table table-sm table-condensed table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
@@ -217,10 +217,10 @@
                                     <tr class="fw-bolder text-muted bg-light bd-cyan">
                                         <th class="ps-4 rounded-start min-w-20px">SL</th>
                                         <!-- <th class="min-w-150px">Form ID</th> -->
-                                        <th class="min-w-150px">Category Name</th>
-                                        <th class="min-w-140px">Parent Name</th>
+                                        <th class="min-w-150px">Blog Name</th>
+                                        <th class="min-w-140px">Category Name</th>
                                         <th class="min-w-150px">Description</th>
-                                        <th class="min-w-100px">Category Image</th>
+                                        <th class="min-w-100px">Blog Image</th>
                                         <th class="min-w-120px">Status</th>
                                         <th class="min-w-100px text-end rounded-end text-end-new">Actions</th>
                                     </tr>
@@ -228,34 +228,33 @@
                                     <!--end::Table head-->
                                     <!--begin::Table body-->
                                     <tbody>
-                                    @foreach ($cats as $cat)
+                                    @foreach ($blogs as $blog)
                                         <tr>
 
-                                            <td class="ps-5 text-dark fs-6">{{($cats->currentPage() - 1) * $cats->perPage() + $loop->iteration}}</td>
+                                            <td class="ps-5 text-dark fs-6">{{($blogs->currentPage() - 1) * $blogs->perPage() + $loop->iteration}}</td>
 
-                                            <td class="text-dark fs-6">{{$cat->category_name }}</td>
-                                            <td class="text-dark fs-6">{{$cat->parent_name }}</td>
-                                            <td class="text-dark fs-6 ">{{ $cat->category_description }}</td>
+                                            <td class="text-dark fs-6">{{$blog->blog_name }}</td>
+                                            <td class="text-dark fs-6">{{$blog->blog_category_id }}</td>
+                                            <td class="text-dark fs-6 ">{{ $blog->blog_description }}</td>
 
                                             <td style="width: 20%;" class="text-dark fs-6" style="border:1px solid red">
-                                                @if($cat->category_image != '')
-                                                    <img style="width: 35%;" src="{{ asset('uploads/blogger_categories/' . $cat->category_image) }}" alt="{{ $cat->category_name }}">
+                                                @if($blog->blog_image != '')
+                                                    <img style="width: 35%;" src="{{ asset('uploads/blogs/' . $blog->blog_image) }}" alt="{{ $blog->blog_name }}">
                                                 @endif
                                             </td>
 
                                             <td>
-                                                @if ($cat->status == 1)
+                                                @if ($blog->status == 1)
                                                     <span class="badge badge-light-success">Active</span>
-                                                @elseif ($cat->status == 0)
+                                                @elseif ($blog->status == 0)
                                                     <span class="badge badge-light-danger">Inactive</span>
                                                 @endif
                                             </td>
                                             <td>
                                                 <div class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
                                                  
-                                                    <a href="{{ route('blogger-category-show', $cat->id) }}"
-                                                       class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                                                    <a href="{{ route('blog-show', $blog->id) }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+
                                                         <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
                                                          viewBox="0 0 24 24">
@@ -273,7 +272,7 @@
                                                 </span>
                                                         <!--end::Svg Icon-->
                                                     </a>
-                                                    <a href="{{ route('blogger-category-edit', $cat->id) }}"
+                                                    <a href="{{ route('blog-edit', $blog->id) }}"
                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                         <span class="svg-icon svg-icon-3">
@@ -289,7 +288,7 @@
                                                 </span>
                                                         <!--end::Svg Icon-->
                                                     </a>
-                                                    <form action="{{ route('blogger-category-destroy', $cat->id) }}"
+                                                    <form action="{{ route('blog-delete', $blog->id) }}"
                                                           method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
@@ -346,28 +345,28 @@
                         <li class="page-item next"><a class="page-link" href="#">Next</span></a></li>
                     </ul> -->
 
-                @include('components.pagination', ['paginator' => $cats])
+                @include('components.pagination', ['paginator' => $blogs])
 
                 {{-- <ul class="pagination mt-2">
                         <!-- Previous Page Link -->
-                        @if ($cats->onFirstPage())
+                        @if ($blogs->onFirstPage())
                             <li class="page-item previous disabled"><span class="page-link"><i class="previous"></i></span></li>
                         @else
-                            <li class="page-item previous"><a href="{{ $cats->previousPageUrl() }}" class="page-link"><i class="previous"></i></a></li>
+                            <li class="page-item previous"><a href="{{ $blogs->previousPageUrl() }}" class="page-link"><i class="previous"></i></a></li>
                 @endif
 
                 <!-- Pagination Elements -->
-                @for ($page = 1; $page <= $cats->lastPage(); $page++)
-                    @if ($page == $cats->currentPage())
+                @for ($page = 1; $page <= $blogs->lastPage(); $page++)
+                    @if ($page == $blogs->currentPage())
                     <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
                     @else
-                    <li class="page-item"><a href="{{ $cats->url($page) }}" class="page-link">{{ $page }}</a></li>
+                    <li class="page-item"><a href="{{ $blogs->url($page) }}" class="page-link">{{ $page }}</a></li>
                     @endif
                     @endfor
 
                     <!-- Next Page Link -->
-                    @if ($cats->hasMorePages())
-                    <li class="page-item next"><a href="{{ $cats->nextPageUrl() }}" class="page-link"><i class="next"></i></a></li>
+                    @if ($blogs->hasMorePages())
+                    <li class="page-item next"><a href="{{ $blogs->nextPageUrl() }}" class="page-link"><i class="next"></i></a></li>
                     @else
                     <li class="page-item next disabled"><span class="page-link"><i class="next"></i></span></li>
                     @endif
