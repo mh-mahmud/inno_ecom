@@ -22,6 +22,7 @@ class CareerService
             'salary_range' => $request->salary_range,
             'closing_date' => $request->closing_date,
             'contact_email' => $request->contact_email,
+            'status' => $request->status,
         ]);
 
         $career->save();
@@ -45,6 +46,7 @@ class CareerService
         $career->salary_range = $request->salary_range;
         $career->closing_date = $request->closing_date;
         $career->contact_email = $request->contact_email;
+        $career->status = $request->status;
 
         $career->save();
         return $career;

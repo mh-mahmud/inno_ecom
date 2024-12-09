@@ -37,6 +37,7 @@ class CareerController extends Controller
             'salary_range' => 'nullable|string',
             'closing_date' => 'required|date',
             'contact_email' => 'required|email',
+            'status' => 'required|in:Open,Closed',
         ]);
 
         if ($validator->fails()) {
@@ -70,6 +71,7 @@ class CareerController extends Controller
             'salary_range' => 'nullable|string',
             'closing_date' => 'required|date',
             'contact_email' => 'required|email',
+            'status' => 'required|in:Open,Closed',
         ]);
 
         $this->careerService->updateCareer($request, $id);
