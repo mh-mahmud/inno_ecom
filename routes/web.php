@@ -29,6 +29,7 @@ use App\Http\Controllers\InvoiceCustomFormController;
 use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\CareerController;
 
 
 use App\Models\Promotion;
@@ -377,6 +378,18 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::delete('/orders/{id?}', [OrderController::class, 'destroy'])->name('orders-destroy')->middleware(['check-permission']);
 	Route::post('/orders/order-status-update/{id?}', [OrderController::class, 'updateOrderStatus'])->name('order-status-update');
 	Route::get('/order-status/{id?}', [OrderController::class, 'getOrderStatus'])->name('order-status');
+
+
+	// Careers Routes
+	Route::get('/careers', [CareerController::class, 'index'])->name('careers-index')->middleware(['check-permission']);
+	Route::get('/careers/create', [CareerController::class, 'create'])->name('careers-create')->middleware(['check-permission']);
+	Route::post('/careers', [CareerController::class, 'store'])->name('careers-store');
+	Route::get('/careers/{id?}', [CareerController::class, 'show'])->name('careers-show')->middleware(['check-permission']);
+	Route::get('/careers/{id?}/edit', [CareerController::class, 'edit'])->name('careers-edit')->middleware(['check-permission']);
+	Route::put('/careers/{id?}', [CareerController::class, 'update'])->name('careers-update');
+	Route::post('/careers/search', [CareerController::class, 'search'])->name('careers-search');
+    Route::delete('/careers/{id?}', [CareerController::class, 'destroy'])->name('careers-destroy')->middleware(['check-permission']);
+
 
 
 

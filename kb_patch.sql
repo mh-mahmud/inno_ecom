@@ -239,3 +239,20 @@ CREATE TABLE `bloggers_category` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE career (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    job_title VARCHAR(255) NOT NULL,
+    job_description TEXT NOT NULL,
+    requirements TEXT,             
+    location VARCHAR(255),            
+    employment_type ENUM('Full-Time', 'Part-Time', 'Contract', 'Internship') DEFAULT 'Full-Time',
+    salary_range VARCHAR(255),       
+    posted_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    closing_date DATE,                
+    contact_email VARCHAR(255),      
+    status ENUM('Open', 'Closed') DEFAULT 'Open',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
