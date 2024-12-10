@@ -37,7 +37,7 @@
 
                 <!--**********************************
                                 Forms
-                  ***********************************-->
+                ***********************************-->
                 <div class="container-xxl">
                     <div class="row">
                         <div class="col-xxl-12">
@@ -80,8 +80,10 @@
                                                             @foreach($parents as $id => $name)
                                                                 <option value="{{ $id }}">{{$name}}</option>
                                                             @endforeach
-
                                                     </select>
+                                                    @if ($errors->has('blog_category_id'))
+                                                        <span class="text-danger">{{ $errors->first('blog_category_id') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -95,13 +97,6 @@
                                                 </div>
                                             </div>
 
-                                           <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label fw-bolder text-dark" for="textarea">Blog Description</label>
-                                                    <textarea class="form-control form-control-sm  form-control-solid" name="blog_description" rows="3"></textarea>
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <label class="form-label fw-bolder text-dark">Status</label>
@@ -111,6 +106,16 @@
                                                         <option value="0">Inactive</option>
 
                                                     </select>
+                                                </div>
+                                            </div>
+
+                                           <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">Blog Description</label>
+                                                    <textarea class="form-control form-control-sm editor form-control-solid" name="blog_description" rows="3"></textarea>
+                                                    @if ($errors->has('blog_description'))
+                                                        <span class="text-danger">{{ $errors->first('blog_description') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -143,4 +148,15 @@
             <!--end::Content-->
 
 
+@endsection
+@section('endScript')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var summernoteElement = document.querySelectorAll('.editor');         
+            document.getElementById('resetButton').addEventListener('click', function() {
+                $(summernoteElement).summernote('code', ''); // Clear the content of Summernote
+            });
+        });
+    </script>
 @endsection

@@ -79,11 +79,13 @@
                                     <select class=" form-control form-control-sm form-control-solid" name="blog_category_id"
                                             aria-label="Default select example">
                                             <option value="">Select Category</option>
-                                                @foreach($parents as $id => $name)
-                                                    <option value="{{ $id }}" {{ $blog->blog_category_id == $id ? 'selected' : '' }}>{{$name}}</option>
-                                                @endforeach
-
+                                            @foreach($parents as $id => $name)
+                                                <option value="{{ $id }}" {{ $blog->blog_category_id == $id ? 'selected' : '' }}>{{ $name }}</option>
+                                            @endforeach
                                     </select>
+                                    @if ($errors->has('blog_category_id'))
+                                        <span class="text-danger">{{ $errors->first('blog_category_id') }}</span>
+                                    @endif
                                 </div>
                             </div>
 
@@ -97,7 +99,7 @@
 
                                     @if ($blog->blog_image)
                                     <div class="mt-3" id="profile-image-container">
-                                        <img src="{{ asset('uploads/blogger_categories/' . $blog->blog_image) }}" alt="Blog Image" width="100px">
+                                        <img src="{{ asset('uploads/blogs/' . $blog->blog_image) }}" alt="Blog Image" width="100px">
                                         <button type="button" class="btn btn-danger btn-sm p-2" id="delete-profile-image">
                                             <i class="fas fa-trash-alt pe-0"></i>
                                         </button>
@@ -111,7 +113,6 @@
                                 </div>
                             </div>
 
-
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Status</label>
@@ -122,10 +123,13 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label fw-bolder text-dark" for="textarea">Blog Description</label>
-                                    <textarea class="form-control form-control-sm  form-control-solid" name="blog_description" rows="3">{{ $blog->blog_description }}</textarea>
+                                    <textarea class="form-control form-control-sm editor form-control-solid" name="blog_description" rows="3">{{ $blog->blog_description }}</textarea>
+                                    @if ($errors->has('blog_description'))
+                                        <span class="text-danger">{{ $errors->first('blog_description') }}</span>
+                                    @endif
                                 </div>
                             </div>
 
@@ -161,7 +165,7 @@
     <script>
     $(document).ready(function() {
         $('#delete-profile-image').click(function() {
-            if (confirm('Are you sure you want to delete your Blogger image?')) {
+            if (confirm('Are you sure you want to delete your Blog image?')) {
                 $.ajax({
                     url: '{{ route('update-blog-image', $blog->id) }}', // Using the correct route
                     type: 'PUT', // Correct HTTP method
@@ -182,6 +186,16 @@
             }
         });
     });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var summernoteElement = document.querySelectorAll('.editor');         
+            document.getElementById('resetButton').addEventListener('click', function() {
+                $(summernoteElement).summernote('code', ''); // Clear the content of Summernote
+            });
+        });
     </script>
 
 @endsection
