@@ -219,7 +219,7 @@
                                         <!-- <th class="min-w-150px">Form ID</th> -->
                                         <th class="min-w-150px">Blog Name</th>
                                         <th class="min-w-140px">Category Name</th>
-                                        <th class="min-w-150px">Description</th>
+                                        <!-- <th class="min-w-150px">Description</th> -->
                                         <th class="min-w-100px">Blog Image</th>
                                         <th class="min-w-120px">Status</th>
                                         <th class="min-w-100px text-end rounded-end text-end-new">Actions</th>
@@ -234,8 +234,8 @@
                                             <td class="ps-5 text-dark fs-6">{{($blogs->currentPage() - 1) * $blogs->perPage() + $loop->iteration}}</td>
 
                                             <td class="text-dark fs-6">{{$blog->blog_name }}</td>
-                                            <td class="text-dark fs-6">{{$blog->blog_category_id }}</td>
-                                            <td class="text-dark fs-6 ">{{ $blog->blog_description }}</td>
+                                            <td class="text-dark fs-6">{{ $blog->blog_category->category_name }}</td>
+                                            <!-- <td class="text-dark fs-6 ">{{ $blog->blog_description }}</td> -->
 
                                             <td style="width: 20%;" class="text-dark fs-6" style="border:1px solid red">
                                                 @if($blog->blog_image != '')

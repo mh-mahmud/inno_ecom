@@ -21,4 +21,8 @@ class BloggerCategory extends Model
     {
         return $this->hasOne(Product::class);
     }
+
+    // public function blog() {
+    //     return $this->hasOne(Blog::class);
+    // }
 }

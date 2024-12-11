@@ -58,7 +58,7 @@
                             <div class="me-7 mb-4">
                                 <div class="position-relative">
                                     @if($blog->blog_image != '')
-                                        <img style="width: 100%;" src="{{ asset('uploads/bolgs/' . $blog->blog_image) }}" alt="{{ $blog->blog_name }}">
+                                        <img style="width: 40%;" src="{{ asset('uploads/blogs/' . $blog->blog_image) }}" alt="{{ $blog->blog_name }}">
                                     @else
                                         <img alt="Logo" src="{{ asset('uploads/noimage.jpg') }}"/>
                                     @endif
@@ -73,12 +73,12 @@
 
                         <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
                             <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Category Name</span>
-                            <span>{{ $blog->blog_category_id }}</span>
+                            <span>{{ $blog->blog_category->category_name }}</span>
                         </div>
 
                         <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
                             <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Description</span>
-                            <span>{{ $blog->blog_description }}</span>
+                            <span>{!! $blog->blog_description !!}</span>
                         </div>
 
                         <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">

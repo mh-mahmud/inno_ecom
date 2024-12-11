@@ -41,7 +41,7 @@ class BlogController extends Controller {
         $request->validate([
             'blog_name' => 'required|string|max:191',
             'blog_category_id' => 'required',
-            'blog_description' => 'nullable|string',
+            'blog_description' => 'required',
             'blog_image' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:2048',
         ]);
         $this->blog_service->createBlog($request);
@@ -58,7 +58,7 @@ class BlogController extends Controller {
     public function edit($id)
     {
         $blog = $this->blog_service->get_blog_details($id);
-        $parents = Blog::whereNull('blog_category_id')->pluck('blog_name', 'id');
+        $parents = BloggerCategory::whereNull('parent_id')->pluck('category_name', 'id');
         return view('blogs.edit', compact('blog', 'parents'));
     }
 
@@ -67,7 +67,7 @@ class BlogController extends Controller {
         $request->validate([
             'blog_name' => 'required|string|max:191',
             'blog_category_id' => 'required',
-            'blog_description' => 'nullable|string',
+            'blog_description' => 'required',
             'blog_image' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
@@ -78,20 +78,17 @@ class BlogController extends Controller {
     public function search(Request $request)
     {
         $searchTerm = trim($request->input('search'));
-        $formName = LeadsForm::whereNull('blog_category_id')->pluck('form_name', 'form_id');
-
-
         if (empty($searchTerm)) {
-            return redirect()->route('leadsform-index')->with('error', 'Search Field cannot be blank.');
+            return redirect()->route('blog-list')->with('error', 'Search Field cannot be blank.');
         }
 
         $request->validate([
             'search' => 'required|string',
         ]);
 
-        $leadsForms = $this->blog_service->searchLeadForm($request);
-        $totalLeadsCounts = $this->getTotalLeadsCountsForForms($leadsForms);
-        return view('blogs.index', compact('leadsForms', 'formName', 'totalLeadsCounts'));
+        $blogs = Blog::with('blog_category')->where('blog_name', $searchTerm)->orderBy('id', 'desc')
+            ->paginate(config('constants.ROW_PER_PAGE'));
+        return view('blogs.index', compact('blogs'));
     }
 
 
@@ -101,7 +98,7 @@ class BlogController extends Controller {
         return redirect()->route('blog-list')->with('success', 'Blog deleted successfully.');
     }
 
-    public function updateBlogImage($id)
+    public function update_blog_image($id)
     {
         $blog = Blog::findOrFail($id);
         if ($blog->blog_image) {

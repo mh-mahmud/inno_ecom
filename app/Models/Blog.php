@@ -19,6 +19,6 @@ class Blog extends Model
 
     public function blog_category()
     {
-        return $this->hasOne(BloggerCategory::class);
+        return $this->belongsTo(BloggerCategory::class, 'blog_category_id');
     }
 }

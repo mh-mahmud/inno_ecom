@@ -43,8 +43,7 @@ class BlogService
 
     public function getAllblog()
     {
-        return Blog::where('status', '!=', 0)
-            ->orderBy('id', 'desc')
+        return Blog::with('blog_category')->orderBy('id', 'desc')
             ->paginate(config('constants.ROW_PER_PAGE'));
     }
     
