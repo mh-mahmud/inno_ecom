@@ -29,6 +29,7 @@ use App\Http\Controllers\InvoiceCustomFormController;
 use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\BlogController;
 
@@ -47,7 +48,8 @@ use App\Models\Promotion;
 */
 
 
-Route::get('/', [FrontController::class, 'html'])->name('index');
+//Route::get('/', [FrontController::class, 'html'])->name('index');
+Route::get('/index', [FrontendController::class, 'index'])->name('index');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/post_login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('send-pending-email', [EmailController::class, 'sendPendingEmail'])->name('send-pending-email');
