@@ -408,7 +408,7 @@ use Carbon\Carbon;
                 url: fetchUrl,
                 type: 'GET',
                 success: function(data) {
-                    //modal fields with AJAX response
+                    //modal fields with ajax response
                     $('textarea[name="meeting_feedback"]').val(data.meeting_feedback);
 
                 }
