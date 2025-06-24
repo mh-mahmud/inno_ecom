@@ -25,10 +25,12 @@ class SliderController extends Controller
     {
         
         $sliders = $this->sliderService->getAllSliders();
+        //dd($sliders);die();
         return view('sliders.index', compact('sliders'));
     }
 
     function create() {
+       // dd('aadad');die();
         return view('sliders.create');
     }
 
