@@ -383,6 +383,7 @@
                             <div class="fv-row mb-3">
                                 <label class="form-label fw-bolder text-dark">Product Tag</label>
                                 <select class="form-control form-control-sm form-control-solid" name="product_tag">
+                                    <option value="">Select Product Tag</option>
                                     <option value="New Arrival" {{ $product->product_tag == 'New Arrival' ? 'selected' : '' }}>
                                         New Arrival Products
                                     </option>

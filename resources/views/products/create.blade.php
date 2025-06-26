@@ -343,7 +343,7 @@
                                                     <label class="form-label fw-bolder text-dark">Product Tag</label>
                                                     <select class=" form-control form-control-sm form-control-solid" name="product_tag"
                                                             aria-label="Default select example">
-
+                                                        <option value="">Select Product Tag</option>
                                                         <option value="New Arrival" selected>New Arrival Products</option>
                                                         <option value="Top Selling">Top Selling Products</option>
 
