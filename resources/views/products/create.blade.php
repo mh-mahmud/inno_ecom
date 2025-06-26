@@ -337,6 +337,19 @@
                                                     @endif
                                                 </div>
                                             </div>
+
+                                             <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Product Tag</label>
+                                                    <select class=" form-control form-control-sm form-control-solid" name="product_tag"
+                                                            aria-label="Default select example">
+
+                                                        <option value="New Arrival" selected>New Arrival Products</option>
+                                                        <option value="Top Selling">Top Selling Products</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
 
                                       <div class="card-footer d-flex justify-content-end py-6 px-9">

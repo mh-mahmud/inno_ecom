@@ -379,6 +379,21 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6">
+                            <div class="fv-row mb-3">
+                                <label class="form-label fw-bolder text-dark">Product Tag</label>
+                                <select class="form-control form-control-sm form-control-solid" name="product_tag">
+                                    <option value="New Arrival" {{ $product->product_tag == 'New Arrival' ? 'selected' : '' }}>
+                                        New Arrival Products
+                                    </option>
+                                    <option value="Top Selling" {{ $product->product_tag == 'Top Selling' ? 'selected' : '' }}>
+                                        Top Selling Products
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+
 
                         </div>
                         <!--End Row-->

@@ -114,6 +114,7 @@ class ProductService
                 $dataObj->stock_quantity        = $data['stock_quantity'];
                 $dataObj->max_purchase_limit    = $data['max_purchase_limit'];
                 $dataObj->status                = $data['status'];
+                $dataObj->product_tag           = $data['product_tag'];
                 $dataObj->created_by            = Auth::id();
                 $dataObj->save();
 
@@ -196,6 +197,7 @@ class ProductService
                 $dataObj->stock_quantity        = $data['stock_quantity'];
                 $dataObj->max_purchase_limit    = $data['max_purchase_limit'];
                 $dataObj->status                = $data['status'];
+                $dataObj->product_tag           = $data['product_tag'];
                 $dataObj->updated_by            = Auth::id();
                 $dataObj->save();
                 Helper::storeLog($data['name'], "Products", "Update Product", "Updated");

@@ -267,3 +267,7 @@ CREATE TABLE IF NOT EXISTS `blogs` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+ALTER TABLE `products` ADD COLUMN `product_tag` VARCHAR(100) NULL AFTER `status`;
