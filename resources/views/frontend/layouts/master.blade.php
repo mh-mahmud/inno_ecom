@@ -3,8 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Home  || Ecommerce</title>
-        <meta name="description" content="">
+        <title>SAMI Export Collection || Premium Garments and Apparel</title>
+        <meta name="description" content="SAMI Export Collection offers premium quality garments and apparel for global markets. Explore our curated collection of fashion-forward exports.">
+        <meta name="keywords" content="SAMI Export, Garments, Apparel, Export House, Fashion, Clothing, Bangladesh">
+        <meta name="author" content="SAMI Export Collection">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Fonts -->
@@ -12,7 +14,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800i" rel="stylesheet">
 
         <!-- favicon icon -->
-        <link rel="shortcut icon" type="images/png" href="{{url('/')}}/assets/frontend/images/images/favicon.ico">
+        <link rel="shortcut icon" type="images/png" href="{{url('/')}}/assets/frontend/images/favicon.ico">
 
 		<!-- all css here -->
 		<link rel="stylesheet" href="{{url('/')}}/assets/frontend/style.css">
