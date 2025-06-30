@@ -24,7 +24,7 @@ class ProductController extends Controller {
 
     public function productCreate()
     {
-        $categories = Category::where('status', 1)->get(['id', 'category_name']);
+        $categories = Category::where('status', 1)->whereNotNull('parent_id')->get(['id', 'category_name']);
         $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
         return view('products.create', compact('categories', 'brands'));
     }
@@ -49,7 +49,7 @@ class ProductController extends Controller {
 
     public function productEdit($id)
     {
-        $categories = Category::where('status', 1)->get(['id', 'category_name']);
+        $categories = Category::where('status', 1)->whereNotNull('parent_id')->get(['id', 'category_name']);
         $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
         $product = $this->productService->getProductById($id);
         return view('products.edit', compact('product', 'categories', 'brands'));

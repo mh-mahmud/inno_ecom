@@ -188,12 +188,12 @@
                                                 @foreach($categories as $parent)
                                                 @if($parent->children->count())
                                             <li class="angle-down">
-                                                <a href="{{ url('shop-grid/' . $parent->id) }}">{{ $parent->category_name }}</a>
+                                                <a href="{{ url('category-products/' . $parent->id) }}">{{ $parent->category_name }}</a>
                                                 <div class="megamenu">
                                                     <div class="megamenu-list">
                                                         <span class="mega-single">
                                                             @foreach($parent->children as $child)
-                                                            <a href="{{ url('shop-grid/' . $child->id) }}">{{ $child->category_name }}</a>
+                                                            <a href="{{ url('category-products/' . $child->id) }}">{{ $child->category_name }}</a>
                                                             @endforeach
                                                         </span>
                                                     </div>
@@ -201,7 +201,7 @@
                                             </li>
                                             @else
                                             <li>
-                                                <a href="{{ url('shop-grid/' . $parent->id) }}">{{ $parent->category_name }}</a>
+                                                <a href="{{ url('category-products/' . $parent->id) }}">{{ $parent->category_name }}</a>
                                             </li>
                                             @endif
                                             @endforeach
