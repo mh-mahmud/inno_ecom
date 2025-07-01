@@ -44,23 +44,10 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="header-top-left">
                                 <!--Start-Header-language dd-->
-                                <div class="dropdown top-language-wrap"> <a role="button" data-toggle="dropdown" data-target="#" class="top-language dropdown-toggle" href="#"> <img src="{{url('/')}}/assets/frontend/images/flag/e.png" alt="language"> English <span class="caret"></span> </a>
-
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li role="presentation"><a role="menuitem" href="#"><img src="{{url('/')}}/assets/frontend/images/flag/e.png" alt="language"> English </a></li>
-                                        <li role="presentation"><a role="menuitem" href="#"><img src="{{url('/')}}/assets/frontend/images/flag/f.png" alt="language"> French </a></li>
-                                        <li role="presentation"><a role="menuitem" href="#"><img src="{{url('/')}}/assets/frontend/images/flag/g.png" alt="language"> German </a></li>
-                                    </ul>
-                                </div>
+                            
                                 <!--End-Header-language-->
                                 <!--Start-Header-currency-->
-                                <div class="dropdown top-currency-wrap"> <a role="button" data-toggle="dropdown" data-target="#" class="top-currency dropdown-toggle" href="#"><span class="usd-icon"><i class="fa fa-usd"></i></span> USD <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li role="presentation"><a role="menuitem" href="#"> $ - Dollar </a></li>
-                                        <li role="presentation"><a role="menuitem" href="#"> £ - Pound </a></li>
-                                        <li role="presentation"><a role="menuitem" href="#"> € - Euro </a></li>
-                                    </ul>
-                                </div>
+                             
                                 <!--End-Header-currency-->
                                 <!--Start-welcome-message-->
                                 <div class="welcome-mg hidden-xs"><span>Default Welcome Message!</span></div>

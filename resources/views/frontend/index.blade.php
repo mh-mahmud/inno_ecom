@@ -121,325 +121,63 @@
                     <div class="row">
                         <div class="featured-carousel indicator">
                             <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product sold-out">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/10.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="sold-text">
-                                            <span>Sold <br> Out</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <!-- End-single-product -->
                             <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="new">new</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/1.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
+                            @foreach($newArrivals as $product)
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="single-product">
+                                        @if($product->discount_price)
+                                            <div class="sale">Sale</div>
+                                        @endif
+                                        @if(strtolower($product->product_tag) == 'new arrival')
+                                            <div class="new">new</div>
+                                        @endif
+                                        <div class="sale-border"></div>
+                                        <div class="product-img-wrap">
+                                            <a class="product-img" href="#">
+                                                <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
+                                            <div class="add-to-link">
+                                                <a href="#"><div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div></a>
+                                                <a data-toggle="modal" data-target="#productModal" href="#"><div><i class="fa fa-eye"></i><span>Quick view</span></div></a>
+                                                <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
                                             </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
+                                            <div class="add-to-cart">
+                                                <a href="#" title="add to cart">
+                                                    <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-info text-center">
+                                            <div class="product-content">
+                                                <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
+                                                <div class="pro-rating">
+                                                    <ul>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li class="r-grey"><i class="fa fa-star"></i></li>
+                                                        <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="pro-price">
+                                                    <span class="price-text">Price:</span>
+                                                    <span class="normal-price">${{ $product->price }}</span>
+                                                    @if($product->old_price)
+                                                        <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
+
+                            
                             <!-- End-single-product -->
                             <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/9.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$170.00</span>
-                                                <span class="old-price"><del>$200.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="new">new</div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/8.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/6.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="new">new</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/5.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$280.00</span>
-                                                <span class="old-price"><del>$300.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/2.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <!-- End-single-product -->
 
                         </div>
@@ -459,327 +197,56 @@
                     </div>
                     <div class="row">
                         <div class="featured-carousel indicator">
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product sold-out">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/10.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
+                            @foreach($topSelling as $product)
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="single-product">
+                                        @if($product->discount_price)
+                                            <div class="sale">Sale</div>
+                                        @endif
+                                        @if(strtolower($product->product_tag) == 'new arrival')
+                                            <div class="new">new</div>
+                                        @endif
+                                        <div class="sale-border"></div>
+                                        <div class="product-img-wrap">
+                                            <a class="product-img" href="#">
+                                                <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="sold-text">
-                                            <span>Sold <br> Out</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
+                                            <div class="add-to-link">
+                                                <a href="#"><div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div></a>
+                                                <a data-toggle="modal" data-target="#productModal" href="#"><div><i class="fa fa-eye"></i><span>Quick view</span></div></a>
+                                                <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
                                             </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
+                                            <div class="add-to-cart">
+                                                <a href="#" title="add to cart">
+                                                    <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
+                                                </a>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="new">new</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/1.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
+                                        <div class="product-info text-center">
+                                            <div class="product-content">
+                                                <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
+                                                <div class="pro-rating">
+                                                    <ul>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li class="r-grey"><i class="fa fa-star"></i></li>
+                                                        <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="pro-price">
+                                                    <span class="price-text">Price:</span>
+                                                    <span class="normal-price">${{ $product->price }}</span>
+                                                    @if($product->old_price)
+                                                        <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/9.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$170.00</span>
-                                                <span class="old-price"><del>$200.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="new">new</div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/8.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/6.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="new">new</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/5.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$280.00</span>
-                                                <span class="old-price"><del>$300.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/2.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
+                            @endforeach
+                           
 
                         </div>
                     </div>
@@ -788,336 +255,129 @@
 
 
 
-                      <div class="latest-products-wrap padding-t">
+            <div class="latest-products-wrap padding-t">
                 <div class="container">
                     <div class="latest-content text-center">
                         <div class="section-heading">
-                            <h3><span class="h-color">Polo</span></h3>
+                            <h3><span class="h-color">TShirt</span></h3>
                         </div>
                     </div>
                     <div class="row">
                         <div class="featured-carousel indicator">
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product sold-out">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/10.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
+                            @foreach($tShirts as $product)
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="single-product">
+                                        @if($product->discount_price)
+                                            <div class="sale">Sale</div>
+                                        @endif
+                                        @if(strtolower($product->product_tag) == 'new arrival')
+                                            <div class="new">new</div>
+                                        @endif
+                                        <div class="sale-border"></div>
+                                        <div class="product-img-wrap">
+                                            <a class="product-img" href="#">
+                                                <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="sold-text">
-                                            <span>Sold <br> Out</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
+                                            <div class="add-to-link">
+                                                <a href="#"><div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div></a>
+                                                <a data-toggle="modal" data-target="#productModal" href="#"><div><i class="fa fa-eye"></i><span>Quick view</span></div></a>
+                                                <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
                                             </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
+                                            <div class="add-to-cart">
+                                                <a href="#" title="add to cart">
+                                                    <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
+                                                </a>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="new">new</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/1.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
+                                        <div class="product-info text-center">
+                                            <div class="product-content">
+                                                <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
+                                                <div class="pro-rating">
+                                                    <ul>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li class="r-grey"><i class="fa fa-star"></i></li>
+                                                        <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="pro-price">
+                                                    <span class="price-text">Price:</span>
+                                                    <span class="normal-price">${{ $product->price }}</span>
+                                                    @if($product->old_price)
+                                                        <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/9.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+              <div class="latest-products-wrap padding-t">
+                <div class="container">
+                    <div class="latest-content text-center">
+                        <div class="section-heading">
+                            <h3><span class="h-color">Denim pant</span></h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="featured-carousel indicator">
+                            @foreach($denimPant as $product)
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="single-product">
+                                        @if($product->discount_price)
+                                            <div class="sale">Sale</div>
+                                        @endif
+                                        @if(strtolower($product->product_tag) == 'new arrival')
+                                            <div class="new">new</div>
+                                        @endif
+                                        <div class="sale-border"></div>
+                                        <div class="product-img-wrap">
+                                            <a class="product-img" href="#">
+                                                <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
+                                            <div class="add-to-link">
+                                                <a href="#"><div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div></a>
+                                                <a data-toggle="modal" data-target="#productModal" href="#"><div><i class="fa fa-eye"></i><span>Quick view</span></div></a>
+                                                <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
                                             </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$170.00</span>
-                                                <span class="old-price"><del>$200.00</del></span>
+                                            <div class="add-to-cart">
+                                                <a href="#" title="add to cart">
+                                                    <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
+                                                </a>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="new">new</div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/8.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
+                                        <div class="product-info text-center">
+                                            <div class="product-content">
+                                                <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
+                                                <div class="pro-rating">
+                                                    <ul>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li class="r-grey"><i class="fa fa-star"></i></li>
+                                                        <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="pro-price">
+                                                    <span class="price-text">Price:</span>
+                                                    <span class="normal-price">${{ $product->price }}</span>
+                                                    @if($product->old_price)
+                                                        <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/6.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="new">new</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/5.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$280.00</span>
-                                                <span class="old-price"><del>$300.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
-                            <!-- Start-single-product -->
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <div class="single-product">
-                                <div class="sale">Sale</div>
-                                <div class="sale-border"></div>
-                                    <div class="product-img-wrap">
-                                        <a class="product-img" href="#"> <img src="{{url('/')}}/assets/frontend/images/product/2.jpg" alt="product-image" /></a>
-                                        <div class="add-to-link">
-                                            <a href="#">
-                                                <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
-                                            </a>
-                                            <a data-toggle="modal" data-target="#productModal" href="#">
-                                                <div><i class="fa fa-eye"></i><span>Quick view</span></div>
-                                            </a>
-                                            <a href="#">
-                                                <div><i class="fa fa-random"></i><span>Add to compare</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" title="add to cart">
-                                                <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-info text-center">
-                                        <div class="product-content">
-                                            <a href="#"><h3 class="pro-name">Sample Product</h3></a>
-                                            <div class="pro-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star"></i></li>
-                                                    <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pro-price">
-                                                <span class="price-text">Price:</span>
-                                                <span class="normal-price">$200.00</span>
-                                                <span class="old-price"><del>$220.00</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End-single-product -->
+                            @endforeach
 
                         </div>
                     </div>
