@@ -45,6 +45,18 @@ class FrontendController extends Controller
         return view('frontend.category_product', compact('products', 'category'));
     }
 
+    public function productDetails($id)
+    {
+        $product = Product::where('status', 1)->findOrFail($id);
+        $newArrivals = Product::where('status', 1)
+            ->where('product_tag', 'New Arrival')
+            ->latest()
+            ->limit(10)
+            ->get();
+        return view('frontend.product_details', compact('product','newArrivals'));
+    }
+
+
     public function about()
     {
         return view('frontend.about');

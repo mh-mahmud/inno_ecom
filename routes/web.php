@@ -51,6 +51,7 @@ use App\Models\Promotion;
 //Route::get('/', [FrontController::class, 'html'])->name('index');
 Route::get('/index', [FrontendController::class, 'index'])->name('index');
 Route::get('category-products/{category_id}', [FrontendController::class, 'categoryProduct'])->name('category-products');
+Route::get('/product-details/{id}', [FrontendController::class, 'productDetails'])->name('product-details');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/post_login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('send-pending-email', [EmailController::class, 'sendPendingEmail'])->name('send-pending-email');

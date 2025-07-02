@@ -63,7 +63,7 @@
                                                                 <div class="sale-border"></div>
                                                                 <div class="new">new</div>
                                                                 <div class="product-img-wrap">
-                                                                    <a class="product-img" href="#">
+                                                                    <a class="product-img" href="{{ route('product-details', $product->id) }}">
                                                                         <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="product-image" />
                                                                     </a>
                                                                     <div class="add-to-link">
@@ -77,7 +77,7 @@
                                                                 </div>
                                                                 <div class="product-info text-center">
                                                                     <div class="product-content">
-                                                                        <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
+                                                                        <a href="{{ route('product-details', $product->id) }}"><h3 class="pro-name">{{ $product->name }}</h3></a>
                                                                         <div class="pro-rating">
                                                                             <ul>
                                                                                 <li><i class="fa fa-star"></i></li>

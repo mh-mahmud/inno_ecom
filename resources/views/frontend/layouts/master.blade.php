@@ -517,7 +517,7 @@
     </div>
     <!-- End-quickview-product -->
     <!--Start-Newsletter-Popup-->
-    <div id="newsletter-popup-conatiner">
+    <!-- <div id="newsletter-popup-conatiner">
         <div id="newsletter-popup">
             <span class="hide-popup">Close</span>
             <div class="subscribe-popup">
@@ -543,7 +543,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--End-Newsletter-Popup-->
 
 
