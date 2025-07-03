@@ -25,7 +25,7 @@ use Carbon\Carbon;
             <div class="col-lg-12">
                 <div class="shop-head-menu">
                     <ul>
-                        <li><i class="fa fa-home"></i><a class="shop-home" href="{{ url('/') }}"><span>Home</span></a><span><i class="fa fa-angle-right"></i></span></li>
+                        <li><i class="fa fa-home"></i><a class="shop-home" href="{{ route('index') }}"><span>Home</span></a><span><i class="fa fa-angle-right"></i></span></li>
                         <li class="shop-pro">{{ $product->name }}</li>
                     </ul>
                 </div>
@@ -114,7 +114,7 @@ use Carbon\Carbon;
                         <div class="product-details">
                             <div class="product-content">
                                 <!-- Ratings -->
-                                <div class="pro-rating single-p">
+                                <!-- <div class="pro-rating single-p">
                                     <ul class="single-pro-rating">
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
@@ -127,7 +127,8 @@ use Carbon\Carbon;
                                         <span class="separator">|</span>
                                         <a href="#" class="add-to-review">Add Your Review</a>
                                     </div>
-                                </div><br>
+                                </div> -->
+                              
 
                                 <!-- Price -->
                                 <div class="pro-price single-p">
@@ -207,9 +208,9 @@ use Carbon\Carbon;
                                 </div>
                             </div>
 
-                            <!-- Social Icons -->
+                          
                             <div class="clear"></div>
-                            <div class="single-pro-cart">
+                            <!-- <div class="single-pro-cart">
                                 <div class="add-to-link single-p">
                                     <a href="#" title="Wishlist">
                                         <div><i class="fa fa-heart"></i></div>
@@ -221,13 +222,13 @@ use Carbon\Carbon;
                                         <div><i class="fa fa-random"></i></div>
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="clear"></div>
 
-                            <div class="social-icon-img">
+                            <!-- <div class="social-icon-img">
                                 <div class="sharethis-inline-share-buttons"></div>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
@@ -248,8 +249,8 @@ use Carbon\Carbon;
                 <div class="product-description-tab custom-tab">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#product-des" data-toggle="tab">Product Description</a></li>
-                        <li><a href="#product-rev" data-toggle="tab">Reviews</a></li>
-                        <li><a href="#product-tag" data-toggle="tab">Product Tags</a></li>
+                        <li><a href="#product-rev" data-toggle="tab">How to order</a></li>
+                        <li><a href="#product-tag" data-toggle="tab">Return Policy</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="product-des">
@@ -317,7 +318,7 @@ use Carbon\Carbon;
                                 <a href="#">
                                     <h3 class="pro-name">{{ $product->name }}</h3>
                                 </a>
-                                <div class="pro-rating">
+                                <!-- <div class="pro-rating">
                                     <ul>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
@@ -325,7 +326,7 @@ use Carbon\Carbon;
                                         <li class="r-grey"><i class="fa fa-star"></i></li>
                                         <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <div class="pro-price">
                                     <span class="price-text">Price:</span>
                                     <span class="normal-price">${{ $product->price }}</span>

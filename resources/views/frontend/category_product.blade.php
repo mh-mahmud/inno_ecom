@@ -78,7 +78,7 @@
                                                                 <div class="product-info text-center">
                                                                     <div class="product-content">
                                                                         <a href="{{ route('product-details', $product->id) }}"><h3 class="pro-name">{{ $product->name }}</h3></a>
-                                                                        <div class="pro-rating">
+                                                                        <!-- <div class="pro-rating">
                                                                             <ul>
                                                                                 <li><i class="fa fa-star"></i></li>
                                                                                 <li><i class="fa fa-star"></i></li>
@@ -86,7 +86,7 @@
                                                                                 <li><i class="fa fa-star"></i></li>
                                                                                 <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
                                                                             </ul>
-                                                                        </div>
+                                                                        </div> -->
                                                                         <div class="pro-price">
                                                                             <span class="price-text">Price:</span>
                                                                             <span class="normal-price">${{ $product->price }}</span>

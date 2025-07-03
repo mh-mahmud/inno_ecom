@@ -44,7 +44,8 @@ class ProductService
     {
 
         $request->validate([
-            'name' => 'required|unique:products|max:191',
+            //'name' => 'required|unique:products|max:191',
+            'name' => 'required|max:191',
             'product_code' => 'required|max:20',
             'product_type' => 'required',
             'category_id' => 'required',
@@ -138,7 +139,8 @@ class ProductService
     {
 
         $request->validate([
-            'name' => 'required|unique:products,name,' . $request->id,
+            //'name' => 'required|unique:products,name,' . $request->id,
+            'name' => 'required|max:191',
             'product_code' => 'required|max:20',
             'product_type' => 'required',
             'category_id' => 'required',

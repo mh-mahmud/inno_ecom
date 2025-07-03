@@ -26,14 +26,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 {{ $loop->even ? 'text-left' : 'text-right' }}">
-                            <div class="slider-content">
-                                <!-- Title -->
+                            <!-- <div class="slider-content">
+                               
                                 <div class="layer-1-1">
                                     <h2 class="title1 wow bounceIn{{ $loop->even ? 'Right' : 'Left' }}" data-wow-duration="0.5s" data-wow-delay=".8s">
                                         {{ $slider->slider_title }}
                                     </h2>
                                 </div>
-                                <!-- Icon -->
+                              
                                 <div class="layer-1-2">
                                     <p class="title2">
                                         <span class="fashion-1 {{ $loop->even ? 'fashion-2' : '' }} wow bounceIn{{ $loop->even ? 'Right' : 'Left' }}" data-wow-duration="0.5s" data-wow-delay="1s">
@@ -41,19 +41,19 @@
                                         </span>
                                     </p>
                                 </div>
-                                <!-- Description -->
+                            
                                 <div class="layer-1-3 {{ $loop->even ? 'layer-2-3' : '' }} hidden-xs">
                                     <p class="title3 wow bounceIn{{ $loop->even ? 'Right' : 'Left' }}" data-wow-duration="0.5s" data-wow-delay="1.5s">
                                         {{ $slider->slider_description }}
                                     </p>
                                 </div>
-                                <!-- Button -->
+                            
                                 <div class="{{ $loop->even ? 'layer-2-4' : 'layer-1-4' }}">
                                     <a class="shop-n wow zoomInUp" data-wow-duration="0.5s" data-wow-delay="2s" href="#">
                                         Shop Now
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                                         <div class="product-info text-center">
                                             <div class="product-content">
                                                 <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
-                                                <div class="pro-rating">
+                                                <!-- <div class="pro-rating">
                                                     <ul>
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -160,7 +160,7 @@
                                                         <li class="r-grey"><i class="fa fa-star"></i></li>
                                                         <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                                 <div class="pro-price">
                                                     <span class="price-text">Price:</span>
                                                     <span class="normal-price">${{ $product->price }}</span>
@@ -225,7 +225,7 @@
                                         <div class="product-info text-center">
                                             <div class="product-content">
                                                 <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
-                                                <div class="pro-rating">
+                                                <!-- <div class="pro-rating">
                                                     <ul>
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -233,7 +233,7 @@
                                                         <li class="r-grey"><i class="fa fa-star"></i></li>
                                                         <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                                 <div class="pro-price">
                                                     <span class="price-text">Price:</span>
                                                     <span class="normal-price">${{ $product->price }}</span>
@@ -292,7 +292,7 @@
                                         <div class="product-info text-center">
                                             <div class="product-content">
                                                 <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
-                                                <div class="pro-rating">
+                                                <!-- <div class="pro-rating">
                                                     <ul>
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -300,7 +300,7 @@
                                                         <li class="r-grey"><i class="fa fa-star"></i></li>
                                                         <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                                 <div class="pro-price">
                                                     <span class="price-text">Price:</span>
                                                     <span class="normal-price">${{ $product->price }}</span>
@@ -357,7 +357,7 @@
                                         <div class="product-info text-center">
                                             <div class="product-content">
                                                 <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
-                                                <div class="pro-rating">
+                                                <!-- <div class="pro-rating">
                                                     <ul>
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -365,7 +365,7 @@
                                                         <li class="r-grey"><i class="fa fa-star"></i></li>
                                                         <li class="r-grey"><i class="fa fa-star-half-o"></i></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                                 <div class="pro-price">
                                                     <span class="price-text">Price:</span>
                                                     <span class="normal-price">${{ $product->price }}</span>
@@ -395,7 +395,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><br>
             <!-- End-banner-area-->
             <!--Start-latest-testimonials-->
    
@@ -404,7 +404,7 @@
       
             <!--End-blog-area-->
             <!--Start-brand-area-->
-            <div class="brands-area brand-dis1">
+            {{--<div class="brands-area brand-dis1">
                 <div class="container">
                     <!--barand-heading-->
                     <div class="brand-heading text-center">
@@ -453,7 +453,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--End-brand-area-->
             <!--Start-variety-products-wrap-->
     
