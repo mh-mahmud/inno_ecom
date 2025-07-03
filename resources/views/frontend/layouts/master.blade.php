@@ -171,7 +171,7 @@
 
 
                                         <ul id="nav">
-                                            <li><a href="index.html">Home</a>
+                                            <li><a href="{{ route('index') }}">Home</a>
                                                 @foreach($categories as $parent)
                                                 @if($parent->children->count())
                                             <li class="angle-down">
