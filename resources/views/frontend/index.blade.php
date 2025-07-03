@@ -163,9 +163,9 @@
                                                 </div> -->
                                                 <div class="pro-price">
                                                     <span class="price-text">Price:</span>
-                                                    <span class="normal-price">${{ $product->price }}</span>
+                                                    <span class="normal-price">TK {{ $product->product_value }}</span>
                                                     @if($product->old_price)
-                                                        <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                                        <span class="old-price"><del>TK {{ $product->old_price }}</del></span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -236,9 +236,9 @@
                                                 </div> -->
                                                 <div class="pro-price">
                                                     <span class="price-text">Price:</span>
-                                                    <span class="normal-price">${{ $product->price }}</span>
+                                                    <span class="normal-price">TK {{ $product->product_value }}</span>
                                                     @if($product->old_price)
-                                                        <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                                        <span class="old-price"><del>TK {{ $product->old_price }}</del></span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -303,9 +303,9 @@
                                                 </div> -->
                                                 <div class="pro-price">
                                                     <span class="price-text">Price:</span>
-                                                    <span class="normal-price">${{ $product->price }}</span>
+                                                    <span class="normal-price">TK {{ $product->product_value }}</span>
                                                     @if($product->old_price)
-                                                        <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                                        <span class="old-price"><del>TK {{ $product->old_price }}</del></span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -368,9 +368,9 @@
                                                 </div> -->
                                                 <div class="pro-price">
                                                     <span class="price-text">Price:</span>
-                                                    <span class="normal-price">${{ $product->price }}</span>
+                                                    <span class="normal-price">TK {{ $product->product_value }}</span>
                                                     @if($product->old_price)
-                                                        <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                                        <span class="old-price"><del>TK {{ $product->old_price }}</del></span>
                                                     @endif
                                                 </div>
                                             </div>

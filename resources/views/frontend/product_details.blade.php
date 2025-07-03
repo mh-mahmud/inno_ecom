@@ -133,9 +133,9 @@ use Carbon\Carbon;
                                 <!-- Price -->
                                 <div class="pro-price single-p">
                                     <span class="price-text">Price:</span>
-                                    <span class="normal-price">${{ number_format($product->product_value, 2) }}</span>
+                                    <span class="normal-price">TK {{ number_format($product->product_value, 2) }}</span>
                                     @if ($product->discount_price)
-                                    <span class="old-price"><del>${{ number_format($product->discount_price, 2) }}</del></span>
+                                    <span class="old-price"><del>TK {{ number_format($product->discount_price, 2) }}</del></span>
                                     @endif
                                 </div>
                             </div>
@@ -329,9 +329,9 @@ use Carbon\Carbon;
                                 </div> -->
                                 <div class="pro-price">
                                     <span class="price-text">Price:</span>
-                                    <span class="normal-price">${{ $product->price }}</span>
+                                    <span class="normal-price">TK {{ $product->product_value }}</span>
                                     @if($product->old_price)
-                                    <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                    <span class="old-price"><del>TK {{ $product->old_price }}</del></span>
                                     @endif
                                 </div>
                             </div>

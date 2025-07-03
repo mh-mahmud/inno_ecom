@@ -41,7 +41,7 @@ class FrontendController extends Controller
         $category = Category::findOrFail($category_id);
         $products = Product::where('category_id', $category_id)
                     ->where('status', 1)
-                    ->paginate(1); 
+                    ->paginate(10); 
         return view('frontend.category_product', compact('products', 'category'));
     }
 

@@ -89,9 +89,9 @@
                                                                         </div> -->
                                                                         <div class="pro-price">
                                                                             <span class="price-text">Price:</span>
-                                                                            <span class="normal-price">${{ $product->price }}</span>
+                                                                            <span class="normal-price">TK {{ $product->product_value }}</span>
                                                                             @if($product->old_price)
-                                                                                <span class="old-price"><del>${{ $product->old_price }}</del></span>
+                                                                                <span class="old-price"><del>TK {{ $product->old_price }}</del></span>
                                                                             @endif
                                                                         </div>
                                                                     </div>
@@ -115,21 +115,21 @@
                                     <!-- End Tab Content -->
                                     <!-- Tab Bar -->
                                     <div class="tab-bar tab-bar-bottom">
-                                        <div class="tab-bar-inner">
+                                        <!-- <div class="tab-bar-inner">
                                             <ul role="tablist" class="nav nav-tabs">
                                                 <li class="active"><a title="Grid" data-toggle="tab" href="#shop"><i class="fa fa-th-large"></i><span class="grid" title="Grid">Grid</span></a></li>
                                                 <li><a title="List" data-toggle="tab" href="#shop-list"><i class="fa fa-list"></i><span class="list">List</span></a></li>
                                             </ul>
-                                        </div>
+                                        </div> -->
                                         <div class="toolbar">
                                             <div class="sorter">
                                                 <div class="sort-by">
-                                                    <label class="sort-none">Sort By</label>
-                                                    <select>
+                                                    <label class="sort-none">&nbsp;</label>
+                                                    <!-- <select>
                                                         <option value="position">Position</option>
                                                         <option value="name">Name</option>
                                                         <option value="price">Price</option>
-                                                    </select>
+                                                    </select> -->
                                                     <a class="up-arrow" href="#"><i class="fa fa-long-arrow-up"></i></a>
                                                 </div>
                                             </div>
