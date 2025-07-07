@@ -159,6 +159,17 @@
 
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
+                                                    <label class="form-label fw-bolder text-dark">Product Old Price<span class="text-danger">*</span></label>
+                                                    <input class="form-control form-control-sm form-control-solid"
+                                                           type="text" name="old_price" autocomplete="off" value="{{ old('old_price') }}" />
+                                                    @if ($errors->has('old_price'))
+                                                        <span class="text-danger">{{ $errors->first('old_price') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
                                                     <label class="form-label fw-bolder text-dark">Discount Price</label>
                                                     <input class="form-control form-control-sm form-control-solid"
                                                            type="text" name="discount_price" autocomplete="off" value="{{ old('discount_price') }}" />
@@ -334,6 +345,34 @@
                                                     @if ($errors->has('key_features'))
                                                         <span
                                                             class="text-danger">{{ $errors->first('key_features') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">How to order</label>
+                                                    <textarea
+                                                        class="form-control form-control-sm  form-control-solid editor"
+                                                        id="how_to_order" name="how_to_order"
+                                                        rows="3">{{ old('how_to_order') }}</textarea>
+                                                    @if ($errors->has('how_to_order'))
+                                                        <span
+                                                            class="text-danger">{{ $errors->first('how_to_order') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label fw-bolder text-dark" for="textarea">Return Policy</label>
+                                                    <textarea
+                                                        class="form-control form-control-sm  form-control-solid editor"
+                                                        id="return_policy" name="return_policy"
+                                                        rows="3">{{ old('return_policy') }}</textarea>
+                                                    @if ($errors->has('return_policy'))
+                                                        <span
+                                                            class="text-danger">{{ $errors->first('return_policy') }}</span>
                                                     @endif
                                                 </div>
                                             </div>

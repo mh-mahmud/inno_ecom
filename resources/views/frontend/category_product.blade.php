@@ -66,11 +66,11 @@
                                                                     <a class="product-img" href="{{ route('product-details', $product->id) }}">
                                                                         <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="product-image" />
                                                                     </a>
-                                                                    <div class="add-to-link">
+                                                                    <!-- <div class="add-to-link">
                                                                         <a href="#"><div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div></a>
                                                                         <a data-toggle="modal" data-target="#productModal" href="#"><div><i class="fa fa-eye"></i><span>Quick view</span></div></a>
                                                                         <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
-                                                                    </div>
+                                                                    </div> -->
                                                                     <div class="add-to-cart">
                                                                         <a href="#" title="add to cart"><div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div></a>
                                                                     </div>

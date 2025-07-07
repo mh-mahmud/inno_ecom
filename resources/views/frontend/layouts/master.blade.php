@@ -79,7 +79,7 @@
                             <!--Start-logo-area-->
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                 <div class="header-logo">
-                                    <a href="index.html"><img src="{{url('/')}}/assets/frontend/images/logo/1.png" alt="Mt-Shop"></a>
+                                    <a href="{{ route('index') }}"><img src="{{url('/')}}/assets/frontend/images/logo/1.png" alt="Mt-Shop"></a>
                                 </div>
                             </div>
                             <!--End-logo-area-->
@@ -164,7 +164,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 hidden-sm hidden-xs">
-                                <div class="log-small"><a class="logo" href="index.html"><img alt="OurStore" src="{{url('/')}}/assets/frontend/images/logo/s.png"></a></div>
+                                <div class="log-small"><a class="logo" href="{{ route('index') }}"><img alt="OurStore" src="{{url('/')}}/assets/frontend/images/logo/s.png"></a></div>
                                 <div class="mainmenu">
                                     <nav>
 

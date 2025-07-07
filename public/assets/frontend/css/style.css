@@ -1384,7 +1384,9 @@ a.shop-n.saleup-button:hover,.home-1 .layer-2-4 a.shop-n:hover, .home-1 .layer-1
   font-weight: 500;
   text-transform: capitalize;
 }
-.single-product:hover .add-to-cart { top: 68%;
+.single-product:hover .add-to-cart { 
+  /* top: 68%; */
+  top: 83%;
   opacity: 1;
 }
 .add-to-cart:hover { color: #000;

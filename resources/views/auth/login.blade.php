@@ -4,8 +4,8 @@
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>gplex</title>
-        <link type="image/x-icon" rel="shortcut icon" href="assets/login/img/gplex-crm-logo.svg"/>
+        <title>Sami Export Collection</title>
+        <link rel="shortcut icon" type="images/png" href="{{url('/')}}/assets/frontend/images/favicon.ico">
         <!-- <link rel="preload" href="/web/static/src/libs/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" crossorigin=""/> -->
         <!-- <link type="text/css" rel="stylesheet" href="web.assets_frontend.min.css"/> -->
         <link type="text/css" rel="stylesheet" href="{{url('/')}}/assets/login/web.assets_frontend.min.css"/>
@@ -58,10 +58,10 @@
                             @endif
 
                             <div class="card-body">
-                                <div class="text-center pb-3 border-bottom mb-4">
-                                    <img alt="Logo" style="max-height:120px; max-width: 40%; width:auto" src="assets/login/img/gplex-crm-logo.svg"/>
+                                <div class="pb-3 border-bottom mb-4 d-flex justify-content-center">
+                                    <img alt="Logo" src="assets/media/logos/1.png" style="max-width: 100%; height: auto;">
                                 </div>
-                                
+                                                                
                                 <form class="oe_login_form" role="form" method="post" action="{{ route('login.post') }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

@@ -138,11 +138,11 @@
                                             <a class="product-img" href="#">
                                                 <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
-                                            <div class="add-to-link">
+                                            <!-- <div class="add-to-link">
                                                 <a href="#"><div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div></a>
                                                 <a data-toggle="modal" data-target="#productModal" href="#"><div><i class="fa fa-eye"></i><span>Quick view</span></div></a>
                                                 <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
-                                            </div>
+                                            </div> -->
                                             <div class="add-to-cart">
                                                 <a href="#" title="add to cart">
                                                     <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
@@ -151,7 +151,7 @@
                                         </div>
                                         <div class="product-info text-center">
                                             <div class="product-content">
-                                                <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
+                                                <a href="{{ route('product-details', $product->id) }}"><h3 class="pro-name">{{ $product->name }}</h3></a>
                                                 <!-- <div class="pro-rating">
                                                     <ul>
                                                         <li><i class="fa fa-star"></i></li>
@@ -211,11 +211,11 @@
                                             <a class="product-img" href="#">
                                                 <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
-                                            <div class="add-to-link">
+                                            <!-- <div class="add-to-link">
                                                 <a href="#"><div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div></a>
                                                 <a data-toggle="modal" data-target="#productModal" href="#"><div><i class="fa fa-eye"></i><span>Quick view</span></div></a>
                                                 <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
-                                            </div>
+                                            </div> -->
                                             <div class="add-to-cart">
                                                 <a href="#" title="add to cart">
                                                     <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
@@ -224,7 +224,7 @@
                                         </div>
                                         <div class="product-info text-center">
                                             <div class="product-content">
-                                                <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
+                                                <a href="{{ route('product-details', $product->id) }}"><h3 class="pro-name">{{ $product->name }}</h3></a>
                                                 <!-- <div class="pro-rating">
                                                     <ul>
                                                         <li><i class="fa fa-star"></i></li>
@@ -278,11 +278,11 @@
                                             <a class="product-img" href="#">
                                                 <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
-                                            <div class="add-to-link">
+                                            <!-- <div class="add-to-link">
                                                 <a href="#"><div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div></a>
                                                 <a data-toggle="modal" data-target="#productModal" href="#"><div><i class="fa fa-eye"></i><span>Quick view</span></div></a>
                                                 <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
-                                            </div>
+                                            </div> -->
                                             <div class="add-to-cart">
                                                 <a href="#" title="add to cart">
                                                     <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
@@ -291,7 +291,7 @@
                                         </div>
                                         <div class="product-info text-center">
                                             <div class="product-content">
-                                                <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
+                                                <a href="{{ route('product-details', $product->id) }}"><h3 class="pro-name">{{ $product->name }}</h3></a>
                                                 <!-- <div class="pro-rating">
                                                     <ul>
                                                         <li><i class="fa fa-star"></i></li>
@@ -343,11 +343,11 @@
                                             <a class="product-img" href="#">
                                                 <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
-                                            <div class="add-to-link">
+                                            <!-- <div class="add-to-link">
                                                 <a href="#"><div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div></a>
                                                 <a data-toggle="modal" data-target="#productModal" href="#"><div><i class="fa fa-eye"></i><span>Quick view</span></div></a>
                                                 <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
-                                            </div>
+                                            </div> -->
                                             <div class="add-to-cart">
                                                 <a href="#" title="add to cart">
                                                     <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
@@ -356,7 +356,7 @@
                                         </div>
                                         <div class="product-info text-center">
                                             <div class="product-content">
-                                                <a href="#"><h3 class="pro-name">{{ $product->name }}</h3></a>
+                                                <a href="{{ route('product-details', $product->id) }}"><h3 class="pro-name">{{ $product->name }}</h3></a>
                                                 <!-- <div class="pro-rating">
                                                     <ul>
                                                         <li><i class="fa fa-star"></i></li>
@@ -390,7 +390,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="single-banner fullwide-ban">
-                                <a href="#"><img alt="Hi Guys" src="{{url('/')}}/assets/frontend/images/banner/23.jpg" /></a>
+                                <a href="#"><img alt="Hi Guys" src="{{url('/')}}/assets/frontend/images/banner/banner.jpg" /></a>
                             </div>
                         </div>
                     </div>

@@ -257,10 +257,10 @@ use Carbon\Carbon;
                             {!! $product->product_specification !!}
                         </div>
                         <div class="tab-pane" id="product-rev">
-                            <p>No reviews yet.</p>
+                           {!! $product->how_to_order !!}
                         </div>
                         <div class="tab-pane" id="product-tag">
-                            <p>Tags: {{ $product->product_tag }}</p>
+                            {!! $product->return_policy !!}
                         </div>
                     </div>
                 </div>
@@ -296,7 +296,7 @@ use Carbon\Carbon;
                             <a class="product-img" href="#">
                                 <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                             </a>
-                            <div class="add-to-link">
+                            <!-- <div class="add-to-link">
                                 <a href="#">
                                     <div><i class="fa fa-heart"></i><span>Add to Wishlist</span></div>
                                 </a>
@@ -306,7 +306,7 @@ use Carbon\Carbon;
                                 <a href="#">
                                     <div><i class="fa fa-random"></i><span>Add to compare</span></div>
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="add-to-cart">
                                 <a href="#" title="add to cart">
                                     <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
@@ -315,7 +315,7 @@ use Carbon\Carbon;
                         </div>
                         <div class="product-info text-center">
                             <div class="product-content">
-                                <a href="#">
+                                <a href="{{ route('product-details', $product->id) }}">
                                     <h3 class="pro-name">{{ $product->name }}</h3>
                                 </a>
                                 <!-- <div class="pro-rating">
