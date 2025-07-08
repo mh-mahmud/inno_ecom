@@ -573,11 +573,11 @@
 									$profile_image = $user ? $user->profile_image : null;
 									$id = $user ? $user->id : '';
 
-									if ($id) {
+									//if ($id) {
 										// Get agent data
-										$agent = \App\Models\Agent::where('user_id', $id)->first();
-										$profile_image = $profile_image ? $profile_image : null;
-									}
+										//$agent = \App\Models\Agent::where('user_id', $id)->first();
+										//$profile_image = $profile_image ? $profile_image : null;
+									//}
 									?>
 									<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 										<!--begin::Menu wrapper-->

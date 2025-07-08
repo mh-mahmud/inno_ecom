@@ -96,7 +96,7 @@
                                 </form>
                 
                                 <div class="text-center small mt-4 pt-3 border-top">
-                                    <a href="https://www.gplex.com/" target="_blank">Powered by <span>gPlex</span></a>
+                                    <a href="https://www.gplex.com/" target="_blank">Powered by <span>Sami Export Collection</span></a>
                                 </div>
                             </div>
                         </div>

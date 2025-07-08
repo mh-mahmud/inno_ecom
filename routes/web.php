@@ -3,38 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AgentController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BloggerCategoryController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LeadsFormController;
-use App\Http\Controllers\PromotionController;
-use App\Http\Controllers\CampaignController;
-use App\Http\Controllers\MeetingController;
-use App\Http\Controllers\DynamicTableController;
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\SmsController;
-use App\Http\Controllers\LeadController;
-use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LogController;
-use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CurrencyController;
-use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\InvoiceCustomFormController;
-use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\CareerController;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CountryController;
 
-
-use App\Models\Promotion;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,132 +35,12 @@ Route::get('category-products/{category_id}', [FrontendController::class, 'categ
 Route::get('/product-details/{id}', [FrontendController::class, 'productDetails'])->name('product-details');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/post_login', [AuthController::class, 'postLogin'])->name('login.post');
-Route::get('send-pending-email', [EmailController::class, 'sendPendingEmail'])->name('send-pending-email');
+
 
 Route::group(['middleware' => ['auth']], function () {
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 	Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 	Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
-
-	// agents route
-	Route::get('/agents', [AgentController::class, 'index'])->name('agents-index')->middleware(['check-permission']);
-    Route::get('/agents/create', [AgentController::class, 'create'])->name('agents-create')->middleware(['check-permission']);
-	Route::post('/agents', [AgentController::class, 'store'])->name('agents-store');
-	Route::get('/agents/{id?}', [AgentController::class, 'show'])->name('agents-show')->middleware(['check-permission']);
-	Route::get('/agents/{id?}/edit', [AgentController::class, 'edit'])->name('agents-edit')->middleware(['check-permission']);
-	Route::put('/agents/{id?}', [AgentController::class, 'update'])->name('agents-update');
-	Route::post('/agents/search', [AgentController::class, 'search'])->name('agents-search');
-	Route::delete('/agents/{id?}', [AgentController::class, 'destroy'])->name('agents-destroy')->middleware(['check-permission']);
-	// end agents
-
-	// Lead routes
-	//Route::get('/lead', [LeadController::class, 'index'])->name('lead-index');
-	Route::get('/leads/{form_id?}', [LeadController::class, 'index'])->name('lead-index')->middleware(['check-permission']);
-	Route::get('/lead/create', [LeadController::class, 'create'])->name('lead-create')->middleware(['check-permission']);
-	Route::get('/lead/leads-upload', [LeadController::class, 'leads_upload'])->name('leads-upload')->middleware(['check-permission']);
-	Route::get('/lead/sample-file', [LeadController::class, 'downloadSampleFile'])->name('sample-file');
-	Route::post('/lead/upload', [LeadController::class, 'upload_file'])->name('lead-upload-file');
-    Route::post('/lead', [LeadController::class, 'store'])->name('lead-store');
-	Route::get('/lead/{id?}', [LeadController::class, 'show'])->name('lead-show')->middleware(['check-permission']);
-	Route::get('/lead/{id?}/edit', [LeadController::class, 'edit'])->name('lead-edit')->middleware(['check-permission']);
-	Route::put('/lead/{id}', [LeadController::class, 'update'])->name('lead-update');
-	Route::delete('/lead/{id?}', [LeadController::class, 'destroy'])->name('lead-destroy')->middleware(['check-permission']);
-	Route::post('/lead/search', [LeadController::class, 'search'])->name('lead-search');
-	//Route::get('/leads/add/{tableName}', [LeadController::class, 'add'])->name('leads.add');
-	Route::get('/leads/add/{tableName?}/{leadId?}', [LeadController::class, 'add'])->name('leads-add')->middleware(['check-permission']);
-	Route::post('/leads/store-tabledata', [LeadController::class, 'storeTableData'])->name('store-tabledata');
-    Route::delete('/leads/delete-tabledata/{tableName?}/{id?}/{leadId?}', [LeadController::class, 'deleteTableData'])->name('delete-tabledata')->middleware(['check-permission']);
-	Route::get('/lead/edit-tabledata/{tableName?}/{leadId?}/edit', [LeadController::class, 'editTableData'])->name('lead-edit-tabledata')->middleware(['check-permission']);
-	Route::post('/lead/update-table-data', [LeadController::class, 'updateTableData'])->name('update-tabledata');
-	Route::post('/lead/update-table-data-show', [LeadController::class, 'updateTableDatashow'])->name('update-tabledata-show');
-	// search lead on url
-	Route::get('/leads/phone/{phone?}', [LeadController::class, 'search_phone'])->name('search-by-phone');
-	Route::put('/leads/{id}/update-lead-profile-image', [LeadController::class, 'updateLeadProfileImage'])->name('update-lead-profile-image');
-
-	//Route::get('/leads/add', 'LeadController@add')->name('leads.add');
-	
-    //Lead Form route
-	Route::get('/leads-forms', [LeadsFormController::class, 'index'])->name('leadsform-index')->middleware(['check-permission']);
-	Route::get('/leads-forms/create', [LeadsFormController::class, 'create'])->name('leadsform-create')->middleware(['check-permission']);
-	Route::post('/leads-forms', [LeadsFormController::class, 'store'])->name('leadsform-store');
-	Route::get('/leads-forms/{id?}', [LeadsFormController::class, 'show'])->name('leadsform-show')->middleware(['check-permission']);
-	Route::get('/leads-forms/{id?}/edit', [LeadsFormController::class, 'edit'])->name('leadsform-edit')->middleware(['check-permission']);
-	Route::put('/leads-forms/{id}', [LeadsFormController::class, 'update'])->name('leadsform-update');
-	Route::delete('/leads-forms/{id?}', [LeadsFormController::class, 'destroy'])->name('leadsform-destroy')->middleware(['check-permission']);
-	Route::post('/leads-forms/search', [LeadsFormController::class, 'search'])->name('leadsform-search');
-	
-
-	//Lead dynamic table route
-	Route::get('/dynamic-table', [DynamicTableController::class, 'index'])->name('dynamictable-index')->middleware(['check-permission']);
-	Route::get('/dynamic-table/create', [DynamicTableController::class, 'create'])->name('dynamictable-create')->middleware(['check-permission']);
-	Route::get('/dynamic-table/{id?}/edit', [DynamicTableController::class, 'edit'])->name('dynamictable-edit')->middleware(['check-permission']);
-    Route::put('/dynamic-table/{id}', [DynamicTableController::class, 'update'])->name('dynamictable-update');
-	Route::post('dynamic-table/create', [DynamicTableController::class, 'createTable'])->name('dynamictable-store');
-	Route::get('/dynamic-table/{tableName?}', [DynamicTableController::class, 'show'])->name('dynamictable-show')->middleware(['check-permission']);
-	Route::delete('/dynamic-table/{id?}', [DynamicTableController::class, 'destroy'])->name('dynamictable-destroy')->middleware(['check-permission']);
-	Route::post('/dynamic-table/search', [DynamicTableController::class, 'search'])->name('dynamictable-search');
-
-    //promotion route
-	Route::get('/promotion', [PromotionController::class, 'index'])->name('promotion-index')->middleware(['check-permission']);
-	Route::get('/promotion/create', [PromotionController::class, 'create'])->name('promotion-create')->middleware(['check-permission']);
-	Route::post('/promotion', [PromotionController::class, 'store'])->name('promotion-store');
-	Route::get('/promotion/{id?}', [PromotionController::class, 'show'])->name('promotion-show')->middleware(['check-permission']);
-	Route::get('/promotion/{id?}/edit', [PromotionController::class, 'edit'])->name('promotion-edit')->middleware(['check-permission']);
-	Route::put('/promotion/{id}', [PromotionController::class, 'update'])->name('promotion-update');
-	Route::delete('/promotion/{id?}', [PromotionController::class, 'destroy'])->name('promotion-destroy');
-	Route::post('/promotion/search', [PromotionController::class, 'search'])->name('promotion-search');
-
-	//Campaign route
-	Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign-index')->middleware(['check-permission']);
-	Route::get('/campaign/create', [CampaignController::class, 'create'])->name('campaign-create')->middleware(['check-permission']);
-	Route::get('/campaign/campaign-sample-file', [CampaignController::class, 'downloadCampaignSampleFile'])->name('campaign-sample-file');
-	Route::post('/campaign/campaign-lead-file-upload', [CampaignController::class, 'campaign_lead_upload_file'])->name('campaign-lead-upload-file');
-	Route::post('/campaign', [CampaignController::class, 'store'])->name('campaign-store');
-	Route::get('/campaign/{id?}', [CampaignController::class, 'show'])->name('campaign-show')->middleware(['check-permission']);
-	Route::get('/campaign/{id?}/edit', [CampaignController::class, 'edit'])->name('campaign-edit')->middleware(['check-permission']);
-	Route::put('/campaign/{id}', [CampaignController::class, 'update'])->name('campaign-update');
-	Route::delete('/campaign/{id?}', [CampaignController::class, 'destroy'])->name('campaign-destroy')->middleware(['check-permission']);
-	Route::post('/campaign/search', [CampaignController::class, 'search'])->name('campaign-search');
-	Route::post('/clear-session', [CampaignController::class, 'clearSession'])->name('clear.session');
-	Route::get('/campaign/campaign-lead-upload/{id?}', [CampaignController::class, 'campaign_leads_upload'])->name('campaign-lead-upload')->middleware(['check-permission']);
-	Route::get('/campaign/campaign-data/{id?}', [CampaignController::class, 'campaign_data'])->name('campaign-data')->middleware(['check-permission']);
-	Route::get('/campaign/start/{id?}', [CampaignController::class, 'startCampaign'])->name('campaign-start');
-    Route::get('/campaign/stop/{id?}', [CampaignController::class, 'stopCampaign'])->name('campaign-stop');
-
-	Route::get('/meeting', [MeetingController::class, 'index'])->name('meeting-index')->middleware(['check-permission']);
-    Route::get('/meeting/create', [MeetingController::class, 'create'])->name('meeting-create')->middleware(['check-permission']);
-    Route::post('/meeting', [MeetingController::class, 'store'])->name('meeting-store');
-    Route::get('/meeting/{id?}', [MeetingController::class, 'show'])->name('meeting-show')->middleware(['check-permission']);
-    Route::get('/meeting/{id?}/edit', [MeetingController::class, 'edit'])->name('meeting-edit')->middleware(['check-permission']);
-    Route::put('/meeting/{id}', [MeetingController::class, 'update'])->name('meeting-update');
-    Route::delete('/meeting/{id?}', [MeetingController::class, 'destroy'])->name('meeting-destroy')->middleware(['check-permission']);
-    Route::post('/meeting/search', [MeetingController::class, 'search'])->name('meeting-search');
-	Route::put('/meeting/{id?}/update-attachments-file', [MeetingController::class, 'updateAttachmentsFile'])->name('update-attachments-file');
-	Route::post('/meeting/meeting-update-feedback/{id?}', [MeetingController::class, 'updateFeedback'])->name('meeting-update-feedback');
-	Route::get('/meeting-feedback/{id?}', [MeetingController::class, 'getMeetingFeedback'])->name('meeting-feedback');
-
-    // invoice route
-	Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice-index')->middleware(['check-permission']);
-	Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice-create')->middleware(['check-permission']);
-	Route::post('/invoice', [InvoiceController::class, 'store'])->name('invoice-store');
-	Route::get('/invoice/{id?}', [InvoiceController::class, 'show'])->name('invoice-show')->middleware(['check-permission']);
-	Route::get('/invoice/{id?}/edit', [InvoiceController::class, 'edit'])->name('invoice-edit')->middleware(['check-permission']);
-	Route::put('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice-update');
-	Route::delete('/invoice/{id?}', [InvoiceController::class, 'destroy'])->name('invoice-destroy');
-	Route::post('/invoice/search', [InvoiceController::class, 'search'])->name('invoice-search');
-	Route::get('/invoice/{invoiceId}/download', [InvoiceController::class, 'downloadInvoice'])->name('invoice-download');
-	Route::post('/invoice/{invoice}/payment', [InvoiceController::class, 'storePayment'])->name('invoice-payment');
-
-	// invoice custom form route
-	Route::get('/invoice-custom', [InvoiceCustomFormController::class, 'index'])->name('invoice-custom-index')->middleware(['check-permission']);
-	Route::get('/invoice-custom/create', [InvoiceCustomFormController::class, 'create'])->name('invoice-custom-create')->middleware(['check-permission']);
-	Route::post('/invoice-custom', [InvoiceCustomFormController::class, 'store'])->name('invoice-custom-store');
-	Route::get('/invoice-custom/{id?}', [InvoiceCustomFormController::class, 'show'])->name('invoice-custom-show')->middleware(['check-permission']);
-	Route::get('/invoice-custom/{id?}/edit', [InvoiceCustomFormController::class, 'edit'])->name('invoice-custom-edit')->middleware(['check-permission']);
-	Route::put('/invoice-custom/{id}', [InvoiceCustomFormController::class, 'update'])->name('invoice-custom-update');
-	Route::delete('/invoice-custom/{id?}', [InvoiceCustomFormController::class, 'destroy'])->name('invoice-custom-destroy');
-	Route::post('/invoice-custom/search', [InvoiceCustomFormController::class, 'search'])->name('invoice-custom-search');
-	Route::get('/invoice-custom/{invoiceId}/download', [InvoiceCustomFormController::class, 'downloadInvoice'])->name('invoice-custom-download');
 	
 
 	
@@ -217,57 +78,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('role-delete/{id}',   [UserController::class, 'role_destroy'])->name('role-destroy')->middleware(['check-permission']);
 	Route::post('/role/search', [UserController::class, 'role_search'])->name('role-search')->middleware(['check-permission']);
 
-	// Email template routes start
-	Route::get('email-template', [EmailController::class, 'emailTemplateList'])->name('email-template')->middleware(['check-permission']);
-	Route::get('email-template/create', [EmailController::class, 'templateCreate'])->name('email-template-create')->middleware(['check-permission']);
-	Route::post('email-template/store', [EmailController::class, 'templateStore'])->name('email-template-store');
-	Route::get('email-template/edit/{id?}', [EmailController::class, 'templateEdit'])->name('email-template-edit')->middleware(['check-permission']);
-	Route::get('email-template/show/{id?}', [EmailController::class, 'templateShow'])->name('email-template-show')->middleware(['check-permission']);
-	Route::put('email-template/update/{id}', [EmailController::class, 'templateUpdate'])->name('email-template-update');
-	Route::delete('email-template/delete/{id?}', [EmailController::class, 'templateDelete'])->name('email-template-delete')->middleware(['check-permission']);
-	// Email template routes end
-
-	// Send email routes start
-	Route::get('send-email', [EmailController::class, 'sendEmail'])->name('send-email')->middleware(['check-permission']);
-	Route::post('send-email-process', [EmailController::class, 'sendEmailPro'])->name('send-email-process');
-
-	Route::get('send-email-list', [EmailController::class, 'sendEmailList'])->name('send-email-list')->middleware(['check-permission']);
-	Route::get('send-bulk-email', [EmailController::class, 'sendBulkEmail'])->name('send-bulk-email')->middleware(['check-permission']);
-	Route::post('send-bulk-email-process', [EmailController::class, 'sendBulkEmailPro'])->name('send-bulk-email-process');
-	Route::get('send-email/show/{id?}', [EmailController::class, 'getEmailSendById'])->name('send-email-show')->middleware(['check-permission']);
-
-	// Send email routes end
-
-	// Sms template routes start
-	Route::get('sms-template', [SmsController::class, 'smsTemplateList'])->name('sms-template')->middleware(['check-permission']);
-	Route::get('sms-template/create', [SmsController::class, 'templateCreate'])->name('sms-template-create')->middleware(['check-permission']);
-	Route::post('sms-template/store', [SmsController::class, 'templateStore'])->name('sms-template-store');
-
-	Route::get('sms-template/edit/{id?}', [SmsController::class, 'templateEdit'])->name('sms-template-edit')->middleware(['check-permission']);
-
-	Route::get('sms-template/show/{id?}', [SmsController::class, 'templateShow'])->name('sms-template-show')->middleware(['check-permission']);
-	Route::put('sms-template/update/{id}', [SmsController::class, 'templateUpdate'])->name('sms-template-update');
-	Route::delete('sms-template/delete/{id?}', [SmsController::class, 'templateDelete'])->name('sms-template-delete')->middleware(['check-permission']);
-	// SMS template routes end
-
-	// Send SMS routes start
-	Route::get('send-sms', [smsController::class, 'sendSms'])->name('send-sms')->middleware(['check-permission']);
-	Route::post('send-sms-process', [smsController::class, 'sendSmsPro'])->name('send-sms-pro');
-	Route::get('send-sms-list', [smsController::class, 'sendSmsList'])->name('send-sms-list')->middleware(['check-permission']);
-	Route::get('send-bulk-sms', [smsController::class, 'sendBulkSms'])->name('send-bulk-sms')->middleware(['check-permission']);
-	Route::post('send-bulk-sms-process', [smsController::class, 'sendBulkSmsPro'])->name('send-bulk-sms-pro');
-	Route::get('send-sms/show/{id?}', [SmsController::class, 'getSmsSendById'])->name('send-sms-show')->middleware(['check-permission']);
-
-	// Send SMS routes end
-
-	// Task routes start
-	Route::get('task-list', [TaskController::class, 'getTaskList'])->name('task-list')->middleware(['check-permission']);
-	Route::get('add-task', [TaskController::class, 'addTask'])->name('add-task')->middleware(['check-permission']);
-	Route::post('add-task-pro', [TaskController::class, 'addTaskPro'])->name('add-task-pro');
-	Route::put('task-status-change/{id}', [TaskController::class, 'changeStatus'])->name('task-status-change');
-	Route::delete('delete-task/{id?}', [TaskController::class, 'delete'])->name('delete-task')->middleware(['check-permission']);
-
-	// Task routes end
 
 
 	// Product routes start
@@ -278,19 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('product-show/{id?}', [ProductController::class, 'productShow'])->name('product-show')->middleware(['check-permission']);
 	Route::get('product-edit/{id?}', [ProductController::class, 'productEdit'])->name('product-edit')->middleware(['check-permission']);
 	Route::put('product-update-pro/{id}', [ProductController::class, 'productUpdate'])->name('product-update-pro');
-	// Product routes end
-
-    // Product Specification routes start
-	Route::get('/product-specification', [ProductSpecificationController::class, 'index'])->name('product-specification-index')->middleware(['check-permission']);
-    Route::get('/product-specification/create', [ProductSpecificationController::class, 'create'])->name('product-specification-create')->middleware(['check-permission']);
-    Route::post('/product-specification', [ProductSpecificationController::class, 'store'])->name('product-specification-store');
-    Route::get('/product-specification/{id}', [ProductSpecificationController::class, 'show'])->name('product-specification-show')->middleware(['check-permission']);
-    Route::get('/product-specification/{id}/edit', [ProductSpecificationController::class, 'edit'])->name('product-specification-edit')->middleware(['check-permission']);
-    Route::put('/product-specification/{id}', [ProductSpecificationController::class, 'update'])->name('product-specification-update');
-    Route::delete('/product-specification/{id}', [ProductSpecificationController::class, 'destroy'])->name('product-specification-destroy')->middleware(['check-permission']);
-	Route::post('/product-specification/search', [ProductSpecificationController::class, 'search'])->name('product-specification-search');
-
-
+	
 	// Country routes start
 	Route::get('country-list', [countryController::class, 'countryList'])->name('country-list');
 	Route::get('add-country', [countryController::class, 'countryCreate'])->name('add-country');
@@ -304,28 +102,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('add-currency', [CurrencyController::class, 'currencyCreate'])->name('add-currency');
 	Route::post('add-currency-pro', [CurrencyController::class, 'currencyStore'])->name('add-currency-pro');
 	Route::delete('currency-delete/{id?}', [CurrencyController::class, 'currencyDelete'])->name('currency-delete');
-	// Currency routes end
-
-	// Proposal routes start
-	Route::get('proposal-list', [ProposalController::class, 'proposalList'])->name('proposal-list')->middleware(['check-permission']);
-	Route::get('add-proposal', [ProposalController::class, 'addProposal'])->name('add-proposal')->middleware(['check-permission']);
-	Route::post('add-proposal', [ProposalController::class, 'saveProposal'])->name('store-proposal');
-	Route::delete('delete-proposal/{id?}', [ProposalController::class, 'delete_proposal'])->name('delete-proposal')->middleware(['check-permission']);
-	Route::get('/proposal/{id?}', [ProposalController::class, 'show'])->name('proposal-show')->middleware(['check-permission']);
-	Route::get('/proposal/{id?}/edit', [ProposalController::class, 'edit'])->name('proposal-edit')->middleware(['check-permission']);
-	Route::put('/proposal/{id?}', [ProposalController::class, 'update'])->name('proposal-update');
 	
-
-
-	// Proposal routes end
-
-	// Log
-	Route::get('log-list', [LogController::class, 'getLogList'])->name('log-list')->middleware(['check-permission']);
-
-	// Customer routes start
-	Route::get('customers', [CustomerController::class, 'index'])->name('customers')->middleware(['check-permission']);
-	Route::get('add-customer/{leadid?}', [CustomerController::class, 'add_customer'])->name('add-customer')->middleware(['check-permission']);
-	Route::post('add-customer', [CustomerController::class, 'save_customer'])->name('post-add-customer');
+	
 
 	// slider routes
 	Route::get('sliders', [SliderController::class, 'index'])->name('slider-list')->middleware(['check-permission']);
@@ -360,27 +138,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::delete('category/{id?}', [CategoryController::class, 'destroy'])->name('category-destroy')->middleware(['check-permission']);
 	Route::put('category/{id}/update-category-image', [CategoryController::class, 'updatecategoryImage'])->name('update-category-image');
 
-	// blogger category routes
-	Route::get('blog-category-list', [BloggerCategoryController::class, 'index'])->name('blogger-category-list')->middleware(['check-permission']);
-	Route::get('blog-category/create', [BloggerCategoryController::class, 'create'])->name('blogger-category-create')->middleware(['check-permission']);
-	Route::post('blogger-category', [BloggerCategoryController::class, 'store'])->name('blogger-category-store');
-	Route::get('blog-category/{id?}', [BloggerCategoryController::class, 'show'])->name('blogger-category-show')->middleware(['check-permission']);
-	Route::get('blog-category/{id?}/edit', [BloggerCategoryController::class, 'edit'])->name('blogger-category-edit')->middleware(['check-permission']);
-	Route::put('blogger-category/{id?}', [BloggerCategoryController::class, 'update'])->name('blogger-category-update');
-	Route::post('blogger-category/search', [BloggerCategoryController::class, 'search'])->name('blogger-category-search');
-	Route::delete('blogger-category/{id?}', [BloggerCategoryController::class, 'destroy'])->name('blogger-category-destroy')->middleware(['check-permission']);
-	Route::put('blogger-category/{id}/update-blogger-category-image', [BloggerCategoryController::class, 'updatebloggercategoryImage'])->name('update-blogger-category-image');
-
-	Route::get('blog-list', [BlogController::class, 'index'])->name('blog-list')->middleware(['check-permission']);
-	Route::get('blog/create', [BlogController::class, 'create'])->name('create-blog')->middleware(['check-permission']);
-	Route::post('blog-create', [BlogController::class, 'store'])->name('blog-store');
-	Route::get('blog/{id?}', [BlogController::class, 'show'])->name('blog-show')->middleware(['check-permission']);
-	Route::get('blog/{id?}/edit', [BlogController::class, 'edit'])->name('blog-edit')->middleware(['check-permission']);
-	Route::put('blog-update/{id?}', [BlogController::class, 'update'])->name('blog-update');
-	Route::post('blog/search', [BlogController::class, 'search'])->name('blog-search');
-	Route::delete('blog-delete/{id?}', [BlogController::class, 'destroy'])->name('blog-delete')->middleware(['check-permission']);
-	Route::put('blog/{id}/update-blog-image', [BlogController::class, 'update_blog_image'])->name('update-blog-image');
-
 
 	// Orders Routes
 	Route::get('/orders', [OrderController::class, 'index'])->name('orders-index')->middleware(['check-permission']);
@@ -393,19 +150,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::delete('/orders/{id?}', [OrderController::class, 'destroy'])->name('orders-destroy')->middleware(['check-permission']);
 	Route::post('/orders/order-status-update/{id?}', [OrderController::class, 'updateOrderStatus'])->name('order-status-update');
 	Route::get('/order-status/{id?}', [OrderController::class, 'getOrderStatus'])->name('order-status');
-
-
-	// Careers Routes
-	Route::get('/careers', [CareerController::class, 'index'])->name('careers-index')->middleware(['check-permission']);
-	Route::get('/careers/create', [CareerController::class, 'create'])->name('careers-create')->middleware(['check-permission']);
-	Route::post('/careers', [CareerController::class, 'store'])->name('careers-store');
-	Route::get('/careers/{id?}', [CareerController::class, 'show'])->name('careers-show')->middleware(['check-permission']);
-	Route::get('/careers/{id?}/edit', [CareerController::class, 'edit'])->name('careers-edit')->middleware(['check-permission']);
-	Route::put('/careers/{id?}', [CareerController::class, 'update'])->name('careers-update');
-	Route::post('/careers/search', [CareerController::class, 'search'])->name('careers-search');
-    Route::delete('/careers/{id?}', [CareerController::class, 'destroy'])->name('careers-destroy')->middleware(['check-permission']);
-
-
 
 
 

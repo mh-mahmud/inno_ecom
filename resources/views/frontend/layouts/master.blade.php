@@ -428,11 +428,11 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="copy-right">
-                                <span> Copyright &copy; <a href="http://infinitelayout.com/">infinitelayout</a>. All Rights Reserved.</span>
+                                <span> Copyright &copy; <a href="http://infinitelayout.com/">Sami Export Collection</a>. All Rights Reserved.</span>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="payment-area">
+                            <!-- <div class="payment-area">
                                 <ul>
                                     <li><a title="Paypal" href="#"><img src="{{url('/')}}/assets/frontend/images/payment/1.png" alt="Paypal"></a></li>
                                     <li><a title="Visa" href="#"><img src="{{url('/')}}/assets/frontend/images/payment/2.png" alt="Visa"></a></li>
@@ -440,7 +440,7 @@
                                     <li class="hidden-xs"><a title="Mastercard" href="#"><img src="{{url('/')}}/assets/frontend/images/payment/4.png" alt="Mastercard"></a></li>
                                     <li><a title="Discover" href="#"><img src="{{url('/')}}/assets/frontend/images/payment/5.png" alt="Discover"></a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
