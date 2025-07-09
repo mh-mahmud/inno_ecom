@@ -45,64 +45,67 @@ use Carbon\Carbon;
                     <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                         <!-- Single Product View -->
                         <div class="single-procuct-view">
-                            <!-- Simple Lence Gallery Container -->
+                            <!-- Simple Lens Gallery Container -->
                             <div class="simpleLens-gallery-container" id="p-view">
                                 <div class="simpleLens-container tab-content">
-                                    @php $active = true; @endphp
-                                    @for($i = 1; $i <= 6; $i++)
-                                        @php $img='img_path_' . ($i==1 ? '' : $i); @endphp
-                                        @if(!empty($product->$img))
-                                        <div class="tab-pane {{ $active ? 'active' : '' }}" id="p-view-{{ $i }}">
-                                            <div class="simpleLens-big-image-container">
-                                                <a class="simpleLens-lens-image" data-lens-image="{{ asset('uploads/products/' . $product->$img) }}">
-                                                    <img src="{{ asset('uploads/products/' . $product->$img) }}" class="simpleLens-big-image" alt="product">
-                                                </a>
+                                    @php
+                                        $active = true;
+                                        $imageFields = ['img_path', 'img_path_2', 'img_path_3', 'img_path_4', 'img_path_5', 'img_path_6'];
+                                        $index = 1;
+                                    @endphp
+
+                                    @foreach($imageFields as $field)
+                                        @if(!empty($product->$field))
+                                            <div class="tab-pane fade {{ $active ? 'in active' : '' }}" id="p-view-{{ $index }}">
+                                                <div class="simpleLens-big-image-container">
+                                                    <a class="simpleLens-lens-image" data-lens-image="{{ asset('uploads/products/' . $product->$field) }}">
+                                                        <img src="{{ asset('uploads/products/' . $product->$field) }}" class="simpleLens-big-image" alt="product">
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @php $active = false; @endphp
+                                            @php
+                                                $active = false;
+                                                $index++;
+                                            @endphp
                                         @endif
-                                        @endfor
+                                    @endforeach
                                 </div>
-                                <!-- Simple Lence Thumbnail -->
+
+                                <!-- Thumbnails -->
                                 <div class="simpleLens-thumbnails-container text-center">
                                     <div id="single-product" class="owl-carousel custom-carousel">
-                                        <ul class="nav nav-tabs" role="tablist">
-                                            @php
+                                        @php
                                             $active = true;
                                             $count = 0;
-                                            @endphp
+                                            $index = 1;
+                                        @endphp
 
-                                            @for ($i = 1; $i <= 6; $i++)
-                                                @php
-                                                $imgField='img_path' . ($i==1 ? '' : '_' . $i);
-                                                @endphp
-
-                                                @if (!empty($product->$imgField))
-                                                @if ($count > 0 && $count % 3 == 0)
-                                        </ul>
                                         <ul class="nav nav-tabs" role="tablist">
-                                            @endif
+                                            @foreach($imageFields as $field)
+                                                @if(!empty($product->$field))
+                                                    @if($count > 0 && $count % 3 == 0)
+                                                        </ul><ul class="nav nav-tabs" role="tablist">
+                                                    @endif
 
-                                            <li class="{{ $active ? 'active' : '' }}">
-                                                <a href="#p-view-{{ $i }}" role="tab" data-toggle="tab">
-                                                    <img src="{{ asset('uploads/products/' . $product->$imgField) }}" alt="product-thumb" width="100" height="100">
-                                                </a>
-                                            </li>
+                                                    <li class="{{ $active ? 'active' : '' }}">
+                                                        <a href="#p-view-{{ $index }}" role="tab" data-toggle="tab">
+                                                            <img src="{{ asset('uploads/products/' . $product->$field) }}" alt="product-thumb" width="100" height="100">
+                                                        </a>
+                                                    </li>
 
-                                            @php
-                                            $active = false;
-                                            $count++;
-                                            @endphp
-                                            @endif
-                                            @endfor
+                                                    @php
+                                                        $active = false;
+                                                        $count++;
+                                                        $index++;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
-
-                                <!-- End Simple Lence Thumbnail -->
                             </div>
-                            <!-- End Simple Lence Gallery Container -->
                         </div>
+
                         <!-- End Single Product View -->
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 single-product-details">
@@ -350,6 +353,7 @@ use Carbon\Carbon;
         </div>
     </div>
 </div>
+
 @endsection
 <!-- End Single Description Tab -->
 <!--Start-upsell-products-wrap-->

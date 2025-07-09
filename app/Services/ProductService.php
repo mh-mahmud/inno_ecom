@@ -112,7 +112,7 @@ class ProductService
             $dataObj->created_by            = Auth::id();
             $dataObj->save();
 
-            Helper::storeLog($data['name'], "Products", "Add Product {$data['name']}", "Added");
+            //Helper::storeLog($data['name'], "Products", "Add Product {$data['name']}", "Added");
 
             return (object)[
                 'status' => 201,
@@ -130,6 +130,7 @@ class ProductService
 
    public function productUpdate($request, $id)
 {
+    //dd($request);
     $request->validate([
         'name' => 'required|max:191',
         'product_code' => 'required|max:20',
@@ -200,7 +201,7 @@ class ProductService
 
             $dataObj->save();
 
-            Helper::storeLog($data['name'], "Products", "Update Product", "Updated");
+            //Helper::storeLog($data['name'], "Products", "Update Product", "Updated");
 
             return (object)[
                 'status' => 208,

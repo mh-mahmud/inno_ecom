@@ -55,7 +55,7 @@ class OrderController extends Controller
         }
     
         $this->orderService->createOrder($request);
-        Helper::storeLog("Order created successfully", "Order", "Create Order", null,null);
+       // Helper::storeLog("Order created successfully", "Order", "Create Order", null,null);
         return redirect()->route('orders-index')->with('success', 'Order created successfully.');
     }
     
@@ -133,10 +133,10 @@ class OrderController extends Controller
         $result = $this->orderService->updateOrderStatus($id, $request->input('status'));
 
         if ($result) {
-            Helper::storeLog("Order Status updated successfully", "Order", "updateOrderStatus", null);
+            //Helper::storeLog("Order Status updated successfully", "Order", "updateOrderStatus", null);
             return redirect()->route('orders-index')->with('success', 'Order Status updated successfully.');
         } else {
-            Helper::storeLog("Failed to update the Order status", "Order", "updateOrderStatus", null);
+            //Helper::storeLog("Failed to update the Order status", "Order", "updateOrderStatus", null);
             return back()->withErrors(['error' => 'Failed to update Order.']);
         }
     }
