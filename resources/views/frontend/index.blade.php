@@ -144,7 +144,7 @@
                                                 <a href="#"><div><i class="fa fa-random"></i><span>Add to compare</span></div></a>
                                             </div> -->
                                             <div class="add-to-cart">
-                                                <a href="#" title="add to cart">
+                                                <a href="{{ route('add-to-cart', $product->id) }}" title="add to cart">
                                                     <div><i class="fa fa-shopping-cart"></i><span>Add to cart</span></div>
                                                 </a>
                                             </div>

@@ -33,8 +33,8 @@ class Order extends Model
     ];
 
    
-    public function setTotalPriceAttribute()
+    /*public function setTotalPriceAttribute()
     {
         $this->attributes['total_price'] = $this->attributes['unit_price'] * $this->attributes['quantity'];
-    }
+    }*/
 }

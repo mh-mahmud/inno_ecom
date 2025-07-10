@@ -29,19 +29,39 @@ use App\Http\Controllers\CountryController;
 */
 
 
-//Route::get('/', [FrontController::class, 'html'])->name('index');
+//Route::get('/', [FrontendController::class, 'html'])->name('index');
 Route::get('/index', [FrontendController::class, 'index'])->name('index');
 Route::get('category-products/{category_id}', [FrontendController::class, 'categoryProduct'])->name('category-products');
 Route::get('/product-details/{id}', [FrontendController::class, 'productDetails'])->name('product-details');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/post_login', [AuthController::class, 'postLogin'])->name('login.post');
 
+# added routes
+Route::get('user-login', [AuthController::class, 'user_login'])->name('user-login');
+Route::get('user-register', [AuthController::class, 'user_register'])->name('user-register');
+Route::get('all-products', [FrontendController::class, 'all_products'])->name('all-products');
+Route::get('track-your-order', [FrontendController::class, 'track_your_order'])->name('track-your-order');
+Route::post('track-your-order', [FrontendController::class, 'post_track_your_order'])->name('post-track-your-order');
+Route::get('user-carts', [FrontendController::class, 'user_cart'])->name('user-carts');
+Route::get('add-to-cart/{product_id}', [FrontendController::class, 'add_to_cart'])->name('add-to-cart');
+Route::get('add-to-cart-details', [FrontendController::class, 'add_to_cart_details'])->name('add-to-cart-details');
+Route::get('add-to-wishlist/{product_id}', [FrontendController::class, 'add_to_wishlist'])->name('add-to-wishlist');
+Route::get('my-wishlist', [FrontendController::class, 'my_wishlist'])->name('my-wishlist');
+Route::post('/wishlist/add', [FrontendController::class, 'add_wishlist'])->name('wishlist.add');
+Route::get('remove-wishlist/{id}', [FrontendController::class, 'remove_wishlist'])->name('remove-wishlist');
+Route::get('remove-from-cart/{id}', [FrontendController::class, 'remove_from_cart'])->name('remove-from-cart');
+
+Route::get('checkout', [FrontendController::class, 'checkout_page'])->name('checkout');
+Route::post('go-checkout', [FrontendController::class, 'go_checkout'])->name('go-checkout');
+Route::post('checkout', [FrontendController::class, 'checkout_store'])->name('checkout-store');
+Route::post('product-search', [FrontendController::class, 'product_search'])->name('product-search');
+Route::post('post-contact-form', [FrontendController::class, 'post_contact_form'])->name('post-contact-form');
+
 
 Route::group(['middleware' => ['auth']], function () {
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 	Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 	Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
-	
 
 	
 	// users route

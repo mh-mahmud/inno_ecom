@@ -3,6 +3,7 @@
 
 namespace App\Helpers;
 use App\Models\Logs;
+use App\Models\Settings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -81,12 +82,41 @@ class Helper
     }
 
     public static function isDateRangeValid($startDate, $endDate):bool{
-        if(strtotime($startDate) > strtotime($endDate)){// Start date is after end date
+        if(strtotime($startDate) > strtotime($endDate)) {
+            // Start date is after end date
             return false;
         }
         $startDate  = Carbon::parse($startDate);
         $endDate    = Carbon::parse($endDate);
         return config('constants.MAX_REPORT_DAYS') >= $startDate->diffInDays($endDate);
+    }
+
+    public static function settings() {
+        return Settings::first();
+    }
+
+    public static function send_sms($phone, $custom_message) {
+        $url = "http://127.0.0.1/api";
+        $api_key = "FUGBUIUHNKHIHNKHKMHKLMHH";
+        $senderid = "79797979797";
+        $number = $phone;
+        $message = $custom_message;
+     
+        $data = [
+            "api_key" => $api_key,
+            "senderid" => $senderid,
+            "number" => $number,
+            "message" => $message
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $response;
     }
 
 }
