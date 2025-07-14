@@ -26,7 +26,7 @@
                         <div class="col-lg-12">
                             <div class="shop-head-menu">
                                 <ul>
-                                    <li><i class="fa fa-home"></i><a class="shop-home" href="index.html"><span>Home</span></a><span><i class="fa fa-angle-right"></i></span></li>
+                                    <li><i class="fa fa-home"></i><a class="shop-home" href="{{ route('index') }}"><span>Home</span></a><span><i class="fa fa-angle-right"></i></span></li>
                                     <li class="shop-pro">Shop grid</li>
                                 </ul>
                             </div>
