@@ -42,6 +42,7 @@ class CategoryController extends Controller
             'category_name' => 'required|string|max:191',
             'category_description' => 'nullable|string',
             'category_image' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:2048',
+            'order_by' => 'nullable|integer|min:0',
         ]);
         $this->cat_service->createCategory($request);
 
@@ -67,6 +68,7 @@ class CategoryController extends Controller
             'category_name' => 'required|string|max:191',
             'category_description' => 'nullable|string',
             'category_image' => 'image|mimes:avif,jpeg,png,jpg,gif,webp|max:2048',
+            'order_by' => 'nullable|integer|min:0',
         ]);
 
         $this->cat_service->update_category($request, $id);

@@ -187,7 +187,7 @@
                                     <!--end::Svg Icon-->
                                     <input type="text" name="search"
                                            class="form-control form-control-sm form-control-solid w-250px ps-15"
-                                           value="{{ request('search') }}" placeholder="Search by Form Name">
+                                           value="{{ request('search') }}" placeholder="Search by Name">
                                 </div>
                                 <!--end::Input group-->
                                 <button type="submit" class="btn btn-primary btn-sm ms-2">Search</button>
@@ -221,6 +221,7 @@
                                         <th class="min-w-140px">Parent Name</th>
                                         <th class="min-w-150px">Description</th>
                                         <th class="min-w-150px">Category Image</th>
+                                        <th class="min-w-120px">Order By</th>
                                         <th class="min-w-120px">Status</th>
                                         <th class="min-w-100px text-end rounded-end text-end-new">Actions</th>
                                     </tr>
@@ -234,9 +235,10 @@
                                             <td class="ps-5 text-dark fs-6">{{($cats->currentPage() - 1) * $cats->perPage() + $loop->iteration}}</td>
 
                                             <td class="text-dark fs-6">{{$cat->category_name }}</td>
-                                            <td class="text-dark fs-6">{{$cat->parent_name }}</td>
+                                            <td class="text-dark fs-6">{{$cat->parent ? $cat->parent->category_name : '—'  }}</td>
                                             <td class="text-dark fs-6 ">{{ $cat->category_description }}</td>
                                             <td class="text-dark fs-6">{{$cat->category_image }}</td>
+                                            <td class="text-dark fs-6">{{$cat->order_by }}</td>
                                             <td>
                                                 @if ($cat->status == 1)
                                                     <span class="badge badge-light-success">Active</span>

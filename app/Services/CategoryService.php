@@ -21,6 +21,7 @@ class CategoryService
         $category->category_name = $request->category_name;
         $category->category_description = $request->category_description;
         $category->parent_id = $request->parent_id;
+        $category->order_by = $request->order_by;
         $category->status = $request->status;
 
         if ($request->hasFile('category_image')) {
@@ -58,12 +59,21 @@ class CategoryService
                     ->paginate(config('constants.ROW_PER_PAGE'));*/
     }
 
-    public function getAllCategory()
+    public function getAllCategory_backup()
     {
         return Category::where('status', '!=', 3)
             ->orderBy('id', 'desc')
             ->paginate(config('constants.ROW_PER_PAGE'));
     }
+
+    public function getAllCategory()
+    {
+        return Category::with('parent')
+            ->where('status', '!=', 3)
+            ->orderBy('order_by', 'asc')
+            ->paginate(config('constants.ROW_PER_PAGE'));
+    }
+
 
 
     public function getAllLeadsForms()
@@ -122,6 +132,7 @@ class CategoryService
             'parent_id' => $request->parent_id,
             'category_image' => $fileNameToStore,
             'category_description' => $request->category_description,
+            'order_by' => $request->order_by,
             'status' => $request->status
         ]);
 

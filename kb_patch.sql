@@ -197,3 +197,8 @@ CREATE TABLE IF NOT EXISTS `wishlists` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+---add db 19-07-2025
+ALTER TABLE categories ADD COLUMN order_by INT DEFAULT 0 AFTER status;
+ALTER TABLE products ADD COLUMN size_list VARCHAR(255) DEFAULT '' AFTER colors;
+

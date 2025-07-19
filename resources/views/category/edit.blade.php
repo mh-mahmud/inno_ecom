@@ -111,7 +111,17 @@
                                 </div>
                             </div>
 
-
+                           <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-bolder text-dark">Order By</label>
+                                    <input class="form-control form-control-sm form-control-solid" type="number" name="order_by" value="{{ old('order_by', $category->order_by) }}" autocomplete="off" />
+                                    <!--end::Input-->
+                                    @if ($errors->has('order_by'))
+                                    <span class="text-danger">{{ $errors->first('order_by') }}</span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Status</label>

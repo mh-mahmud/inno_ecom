@@ -190,6 +190,47 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-6">
+                                                <label class="form-label fw-bolder text-dark">Product Colors</label>
+                                                <select id="product-color"
+                                                        class="form-control form-control-sm form-control-solid"
+                                                        name="colors[]"
+                                                        multiple="multiple"
+                                                        data-allow-clear="true"
+                                                        data-kt-select2="select2">
+                                                    @foreach (config('constants.PRODUCT_COLORS') as $key => $value)
+                                                        <option value="{{ $key }}" {{ in_array($key, old('colors', [])) ? 'selected' : '' }}>
+                                                            {{ $value }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @if ($errors->has('colors'))
+                                                    <div class="text-danger">{{ $errors->first('colors') }}</div>
+                                                @endif
+                                            </div>
+
+                                             <div class="col-md-6">
+                                                <label class="form-label fw-bolder text-dark">Product Sizes</label>
+                                                <select id="product-size"
+                                                        class="form-control form-control-sm form-control-solid"
+                                                        name="size_list[]"
+                                                        multiple="multiple"
+                                                        data-allow-clear="true"
+                                                        data-kt-select2="select2">
+                                                    @foreach (config('constants.PRODUCT_SIZES') as $key => $value)
+                                                        <option value="{{ $key }}" {{ in_array($key, old('size_list', [])) ? 'selected' : '' }}>
+                                                            {{ $value }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @if ($errors->has('size_list'))
+                                                    <div class="text-danger">{{ $errors->first('size_list') }}</div>
+                                                @endif
+                                            </div>
+
+
                                             {{--<div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label fw-bolder text-dark" for="textarea">How to Order</label>
@@ -418,6 +459,30 @@
 
 @endsection
 @section('endScript')
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+        $('#product-color').select2({
+            placeholder: "Select Product color",
+            allowClear: true,
+        });
+
+        $('#product-color').on("change", function() {
+            var val = $(this).val();
+        });
+
+        $('#product-size').select2({
+            placeholder: "Select Product Size",
+            allowClear: true,
+        });
+
+        $('#product-size').on("change", function() {
+            var val = $(this).val();
+        });
+        
+
+
+    });
+</script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 

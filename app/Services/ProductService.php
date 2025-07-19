@@ -82,6 +82,10 @@ class ProductService
 
     try {
         return DB::transaction(function () use ($data, $uploadedImages) {
+            $colors = request()->input('colors', []);
+            $colorString = implode(',', $colors);
+            $size_list = request()->input('size_list', []);
+            $sizeString = implode(',', $size_list);
             $dataObj = new Product();
             $dataObj->name                  = $data['name'];
             $dataObj->product_code          = $data['product_code'];
@@ -109,6 +113,8 @@ class ProductService
             $dataObj->max_purchase_limit    = $data['max_purchase_limit'] ?? null;
             $dataObj->status                = $data['status'] ?? 1;
             $dataObj->product_tag           = $data['product_tag'] ?? null;
+            $dataObj->colors                = $colorString;
+            $dataObj->size_list             = $sizeString;
             $dataObj->created_by            = Auth::id();
             $dataObj->save();
 
@@ -170,6 +176,10 @@ class ProductService
 
     try {
         return DB::transaction(function () use ($data, $uploadedImages, $id) {
+            $colors = request()->input('colors', []);
+            $colorString = implode(',', $colors);
+            $size_list = request()->input('size_list', []);
+            $sizeString = implode(',', $size_list);
             $dataObj = Product::findOrFail($id);
 
             $dataObj->name                  = $data['name'];
@@ -192,6 +202,8 @@ class ProductService
             $dataObj->max_purchase_limit    = $data['max_purchase_limit'] ?? $dataObj->max_purchase_limit;
             $dataObj->status                = $data['status'] ?? $dataObj->status;
             $dataObj->product_tag           = $data['product_tag'] ?? $dataObj->product_tag;
+            $dataObj->colors                = $colorString;
+            $dataObj->size_list             = $sizeString;
             $dataObj->updated_by            = Auth::id();
 
             // Update only if file was uploaded

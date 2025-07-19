@@ -14,7 +14,27 @@ return [
         'Home Made',
         'Organic',
         'Imported',
-    ],  
+    ], 
+      'PRODUCT_COLORS' => [
+        'Red' => 'Red',
+        'Blue' => 'Blue',
+        'White' => 'White',
+        'Green' => 'Green',
+        'Black' => 'Black',
+    ],
+
+    'PRODUCT_SIZES' => [
+        'XS' => 'XS',
+        'S'  => 'S',
+        'M'  => 'M',
+        'L'  => 'L',
+        'XL' => 'XL',
+        'XXL' => 'XXL',
+        '3XL' => '3XL',
+        '4XL' => '4XL'
+    ],
+
+ 
     'TASK_STATUS' => [
         0 => 'PENDING',
         1 => 'In Progress',

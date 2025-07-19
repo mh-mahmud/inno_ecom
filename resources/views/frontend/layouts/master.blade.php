@@ -28,11 +28,23 @@
     @php
     use App\Models\Category;
 
-    $categories = Category::with('children')
+    //$categories = Category::with('children')
+    //->whereNull('parent_id')
+    //->where('status', 1)
+    //->get();
+    //$allCategories = Category::where('status', 1)->get(); 
+
+    $categories = Category::with(['children' => function($query) {
+        $query->orderBy('order_by', 'asc');
+    }])
     ->whereNull('parent_id')
     ->where('status', 1)
+    ->orderBy('order_by', 'asc')
     ->get();
-    $allCategories = Category::where('status', 1)->get();
+
+$allCategories = Category::where('status', 1)
+    ->orderBy('order_by', 'asc')
+    ->get();
     @endphp
 
     <div class="page-1">

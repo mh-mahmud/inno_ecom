@@ -14,7 +14,8 @@ class Category extends Model
         'category_name',
         'category_description',
         'category_image',
-        'status'
+        'status',
+        'order_by'
     ];
 
     public function product()
