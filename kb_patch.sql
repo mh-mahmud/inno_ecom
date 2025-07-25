@@ -202,3 +202,7 @@ CREATE TABLE IF NOT EXISTS `wishlists` (
 ALTER TABLE categories ADD COLUMN order_by INT DEFAULT 0 AFTER status;
 ALTER TABLE products ADD COLUMN size_list VARCHAR(255) DEFAULT '' AFTER colors;
 
+---add db 26-07-2025
+ALTER TABLE carts ADD COLUMN colors VARCHAR(255) DEFAULT '' AFTER product_name;
+ALTER TABLE carts ADD COLUMN size_list VARCHAR(255) DEFAULT '' AFTER colors;
+

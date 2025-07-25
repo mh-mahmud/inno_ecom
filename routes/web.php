@@ -43,7 +43,8 @@ Route::get('all-products', [FrontendController::class, 'all_products'])->name('a
 Route::get('track-your-order', [FrontendController::class, 'track_your_order'])->name('track-your-order');
 Route::post('track-your-order', [FrontendController::class, 'post_track_your_order'])->name('post-track-your-order');
 Route::get('user-carts', [FrontendController::class, 'user_cart'])->name('user-carts');
-Route::get('add-to-cart/{product_id}', [FrontendController::class, 'add_to_cart'])->name('add-to-cart');
+//Route::get('add-to-cart/{product_id}', [FrontendController::class, 'add_to_cart'])->name('add-to-cart');
+Route::post('add-to-cart/{product_id}', [FrontendController::class, 'add_to_cart'])->name('add-to-cart');
 Route::get('add-to-cart-details', [FrontendController::class, 'add_to_cart_details'])->name('add-to-cart-details');
 Route::get('add-to-wishlist/{product_id}', [FrontendController::class, 'add_to_wishlist'])->name('add-to-wishlist');
 Route::get('my-wishlist', [FrontendController::class, 'my_wishlist'])->name('my-wishlist');

@@ -5,6 +5,39 @@ use Carbon\Carbon;
 
 @section('content')
 
+<style>
+    /* existing style for price */
+    .pro-price.single-p .normal-price {
+        font-size: 20px;
+        color: #222;
+    }
+
+    /* remove default button styles */
+    .add-to-cartbest.single-add .custom-cart-btn {
+        all: unset;
+        cursor: pointer;
+    }
+
+    /* button span styling */
+    .add-to-cartbest.single-add .custom-cart-btn span {
+        float: left;
+        display: inline-block;
+        line-height: 21px;
+        padding: 8px 20px;
+        border: 2px solid #ffbb00;
+        margin-left: 30px;
+        color: #ffbb00;
+        font-size: 17px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* hover effect */
+    .add-to-cartbest.single-add .custom-cart-btn:hover span {
+        background-color: #ffbb00;
+        color: #fff;
+    }
+</style>
+
 
 <div class="single-banner-top">
     <div class="container">
@@ -49,25 +82,25 @@ use Carbon\Carbon;
                             <div class="simpleLens-gallery-container" id="p-view">
                                 <div class="simpleLens-container tab-content">
                                     @php
-                                        $active = true;
-                                        $imageFields = ['img_path', 'img_path_2', 'img_path_3', 'img_path_4', 'img_path_5', 'img_path_6'];
-                                        $index = 1;
+                                    $active = true;
+                                    $imageFields = ['img_path', 'img_path_2', 'img_path_3', 'img_path_4', 'img_path_5', 'img_path_6'];
+                                    $index = 1;
                                     @endphp
 
                                     @foreach($imageFields as $field)
-                                        @if(!empty($product->$field))
-                                            <div class="tab-pane fade {{ $active ? 'in active' : '' }}" id="p-view-{{ $index }}">
-                                                <div class="simpleLens-big-image-container">
-                                                    <a class="simpleLens-lens-image" data-lens-image="{{ asset('uploads/products/' . $product->$field) }}">
-                                                        <img src="{{ asset('uploads/products/' . $product->$field) }}" class="simpleLens-big-image" alt="product">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            @php
-                                                $active = false;
-                                                $index++;
-                                            @endphp
-                                        @endif
+                                    @if(!empty($product->$field))
+                                    <div class="tab-pane fade {{ $active ? 'in active' : '' }}" id="p-view-{{ $index }}">
+                                        <div class="simpleLens-big-image-container">
+                                            <a class="simpleLens-lens-image" data-lens-image="{{ asset('uploads/products/' . $product->$field) }}">
+                                                <img src="{{ asset('uploads/products/' . $product->$field) }}" class="simpleLens-big-image" alt="product">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    @php
+                                    $active = false;
+                                    $index++;
+                                    @endphp
+                                    @endif
                                     @endforeach
                                 </div>
 
@@ -75,30 +108,31 @@ use Carbon\Carbon;
                                 <div class="simpleLens-thumbnails-container text-center">
                                     <div id="single-product" class="owl-carousel custom-carousel">
                                         @php
-                                            $active = true;
-                                            $count = 0;
-                                            $index = 1;
+                                        $active = true;
+                                        $count = 0;
+                                        $index = 1;
                                         @endphp
 
                                         <ul class="nav nav-tabs" role="tablist">
                                             @foreach($imageFields as $field)
-                                                @if(!empty($product->$field))
-                                                    @if($count > 0 && $count % 3 == 0)
-                                                        </ul><ul class="nav nav-tabs" role="tablist">
-                                                    @endif
+                                            @if(!empty($product->$field))
+                                            @if($count > 0 && $count % 3 == 0)
+                                        </ul>
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            @endif
 
-                                                    <li class="{{ $active ? 'active' : '' }}">
-                                                        <a href="#p-view-{{ $index }}" role="tab" data-toggle="tab">
-                                                            <img src="{{ asset('uploads/products/' . $product->$field) }}" alt="product-thumb" width="100" height="100">
-                                                        </a>
-                                                    </li>
+                                            <li class="{{ $active ? 'active' : '' }}">
+                                                <a href="#p-view-{{ $index }}" role="tab" data-toggle="tab">
+                                                    <img src="{{ asset('uploads/products/' . $product->$field) }}" alt="product-thumb" width="100" height="100">
+                                                </a>
+                                            </li>
 
-                                                    @php
-                                                        $active = false;
-                                                        $count++;
-                                                        $index++;
-                                                    @endphp
-                                                @endif
+                                            @php
+                                            $active = false;
+                                            $count++;
+                                            $index++;
+                                            @endphp
+                                            @endif
                                             @endforeach
                                         </ul>
                                     </div>
@@ -131,7 +165,7 @@ use Carbon\Carbon;
                                         <a href="#" class="add-to-review">Add Your Review</a>
                                     </div>
                                 </div> -->
-                              
+
 
                                 <!-- Price -->
                                 <div class="pro-price single-p">
@@ -152,66 +186,79 @@ use Carbon\Carbon;
                             </div>
 
                             <div class="clear"></div>
+                            <!-- Error Message for Stock -->
 
+                            <div id="stockError" class="text-danger mb-2" style="display:none;"></div>
                             <!-- Size Selection -->
+                            @if(!empty($sizes))
                             <div class="skill-checklist">
-                                <label for="skillc"><span class="size-cho">Size:</span></label><br>
-                                <select id="skillc">
-                                    @foreach(['xxs','xs','s','m','l','xl','xxl','xxxl','xxxxl'] as $size)
-                                    @php $stockField = $size . '_stock'; @endphp
-                                    @if ($product->$stockField > 0)
-                                    <option value="{{ strtoupper($size) }}">{{ strtoupper($size) }}</option>
-                                    @endif
+                                <label for="sizeSelect"><span class="size-cho">Size:</span></label><br>
+                                <select id="sizeSelect" class="form-control">
+                                    <option value="">Select Size</option>
+                                    @foreach($sizes as $size)
+                                    <option value="{{ trim($size) }}">{{ trim($size) }}</option>
                                     @endforeach
                                 </select>
+                                <span id="sizeError" class="text-danger" style="display:none;">Please select a size.</span>
                             </div>
+                            @endif
+
 
                             <!-- Color Options -->
-                            @if($product->colors)
-                            <div class="color-instock">
-                                <div class="skill-colors">
-                                    <span class="color-cho">Color</span>
-                                    <ul class="skill-ulli">
-                                        @foreach(explode(',', $product->colors) as $color)
-                                            @php
-                                                $colorName = strtolower(trim($color)); // normalize color name
-                                            @endphp
-                                            <li class="skill-{{ $colorName }}">
-                                                <a href="#">
-                        
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                            @if(!empty($colors))
+                            <div class="skill-checklist">
+                                <label for="colorSelect"><span class="size-cho">Color:</span></label><br>
+                                <select id="colorSelect" class="form-control">
+                                    <option value="">Select Color</option>
+                                    @foreach($colors as $color)
+                                    <option value="{{ trim($color) }}">{{ trim($color) }}</option>
+                                    @endforeach
+                                </select>
+                                <span id="colorError" class="text-danger" style="display:none;">Please select a color.</span>
                             </div>
-                        @endif
+                            @endif
 
 
                             <!-- Quantity & Add to Cart -->
                             <div class="">
                                 <div class="quick-add-to-cart">
-                                    <form method="POST" action="#" class="cart">
+                                    <form method="POST" action="{{ route('add-to-cart', $product->id) }}" class="cart" id="addToCartForm">
+                                        @csrf
+                                        <input type="hidden" name="color" id="selectedColor">
+                                        <input type="hidden" name="size" id="selectedSize">
+                                        <input type="hidden" name="purchase_limit" value="{{ $product->max_purchase_limit }}">
 
                                         <div class="qty-button">
-                                            <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                            <input type="text" class="input-text qty" title="Qty" value="1" maxlength="500" id="qty" name="qty">
                                             <div class="box-icon button-plus">
                                                 <input type="button" class="qty-increase" onclick="var qty_el = document.getElementById('qty'); var qty = parseInt(qty_el.value); if(!isNaN(qty)) qty_el.value = qty + 1;" value="+">
                                             </div>
                                             <div class="box-icon button-minus">
                                                 <input type="button" class="qty-decrease" onclick="var qty_el = document.getElementById('qty'); var qty = parseInt(qty_el.value); if(!isNaN(qty) && qty > 1) qty_el.value = qty - 1;" value="-">
                                             </div>
+                                              <div id="qtyError" style="display:none; color:red; margin-top:5px;"></div>
                                         </div>
                                         <div class="add-to-cartbest single-add">
-                                            <a href="#" title="add to cart">
+                                            <button type="submit" class="custom-cart-btn">
+                                                <span>Add to cart</span>
+                                            </button>
+                                        </div>
+
+                                        <!-- <div class="add-to-cartbest single-add">
+                                            <a href="{{ route('add-to-cart', $product->id) }}" title="add to cart">
                                                 <div><span>Add to cart</span></div>
                                             </a>
-                                        </div>
+                                        </div> -->
+                                        <!-- <div class="add-to-cartbest single-add">
+                                            <button type="submit">
+                                                <div><span>Add to cart</span></div>
+                                            </button>
+                                        </div>  -->
                                     </form>
                                 </div>
                             </div>
 
-                          
+
                             <div class="clear"></div>
                             <!-- <div class="single-pro-cart">
                                 <div class="add-to-link single-p">
@@ -260,7 +307,7 @@ use Carbon\Carbon;
                             {!! $product->product_specification !!}
                         </div>
                         <div class="tab-pane" id="product-rev">
-                           {!! $product->how_to_order !!}
+                            {!! $product->how_to_order !!}
                         </div>
                         <div class="tab-pane" id="product-tag">
                             {!! $product->return_policy !!}
@@ -353,6 +400,79 @@ use Carbon\Carbon;
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('addToCartForm').addEventListener('submit', function(e) {
+        let hasError = false;
+
+        let availability = "{{ $product->stock_status }}";
+        //let maxLimit = "{{ $product->max_purchase_limit }}";
+        let maxLimit = parseInt(document.querySelector('input[name="purchase_limit"]').value);
+        //console.log("Max Purchase Limit:", maxLimit);
+
+        let colorSelect = document.getElementById('colorSelect');
+        let sizeSelect = document.getElementById('sizeSelect');
+        let qtyInput = document.getElementById('qty');
+        let qty = parseInt(qtyInput.value.trim()) || 1;
+
+        let qtyErrorDiv = document.getElementById('qtyError');
+        let stockErrorDiv = document.getElementById('stockError');
+
+        // Reset error messages
+        document.getElementById('colorError')?.style.setProperty('display', 'none');
+        document.getElementById('sizeError')?.style.setProperty('display', 'none');
+        if (qtyErrorDiv) qtyErrorDiv.style.display = 'none';
+        if (stockErrorDiv) {
+            stockErrorDiv.style.display = 'none';
+            stockErrorDiv.innerText = '';
+        }
+
+        // Stock check
+        if (availability !== "In Stock") {
+            if (stockErrorDiv) {
+                stockErrorDiv.style.display = 'block';
+                stockErrorDiv.innerText = "Product is not in stock.";
+            }
+            e.preventDefault();
+            return;
+        }
+
+        // Color validation
+        if (colorSelect && colorSelect.value.trim() === "") {
+            document.getElementById('colorError')?.style.setProperty('display', 'inline');
+            hasError = true;
+        }
+
+        // Size validation
+        if (sizeSelect && sizeSelect.value.trim() === "") {
+            document.getElementById('sizeError')?.style.setProperty('display', 'inline');
+            hasError = true;
+        }
+
+        // Quantity limit validation
+        if (qty > maxLimit) {
+            //alert(maxLimit);
+            if (qtyErrorDiv) {
+                qtyErrorDiv.style.display = 'block';
+                qtyErrorDiv.innerText = "You can only purchase up to " + maxLimit + " units.";
+            }
+            e.preventDefault();
+            return;
+        }
+
+        if (hasError) {
+            e.preventDefault();
+            return;
+        }
+
+        // Set hidden fields
+        document.getElementById('selectedColor').value = colorSelect ? colorSelect.value.trim() : '';
+        document.getElementById('selectedSize').value = sizeSelect ? sizeSelect.value.trim() : '';
+    });
+</script>
+
+
+
 
 @endsection
 <!-- End Single Description Tab -->

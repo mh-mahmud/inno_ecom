@@ -61,12 +61,15 @@ class FrontendController extends Controller
     public function productDetails($id)
     {
         $product = Product::where('status', 1)->findOrFail($id);
+        //dd($product);
         $newArrivals = Product::where('status', 1)
             ->where('product_tag', 'New Arrival')
             ->latest()
             ->limit(10)
             ->get();
-        return view('frontend.product_details', compact('product','newArrivals'));
+        $colors = $product->colors ? explode(',', $product->colors) : [];
+        $sizes = $product->size_list ? explode(',', $product->size_list) : [];
+        return view('frontend.product_details', compact('product','newArrivals', 'colors', 'sizes'));
     }
 
 
@@ -75,7 +78,8 @@ class FrontendController extends Controller
         return view('frontend.about');
     }
 
-    public function add_to_cart($product_id) {
+    public function add_to_cart(Request $request,$product_id) {
+        //dd($request);
 
             // return Session::forget('sami-fashions-visitor');
             // dd(Session::get('sami-fashions-visitor'));
@@ -110,6 +114,9 @@ class FrontendController extends Controller
             $cart->product_image = $product_data->img_path;
             $cart->product_name = $product_data->name;
             $cart->unit_price = $product_data->product_value;
+            $cart->colors = $request->color;
+            $cart->size_list = $request->size;
+            //$cart->max_purchase_limit = $product_data->max_purchase_limit;
             $cart->quantity = $product_quantity;
             $cart->total_price = $product_quantity*$product_data->product_value;
             $cart->discount = $discount;

@@ -79,6 +79,12 @@
                                     <th class="cart-product-name">Name</th>
                                     <th class="product-price">Unit Price</th>
                                     <th class="product-quantity">Quantity</th>
+                                     @if(!empty($colors))
+                                    <th class="product-quantity">Color</th>
+                                    @endif
+                                     @if(!empty($size_list))
+                                     <th class="product-quantity">Size</th>
+                                    @endif
                                     <th class="product-subtotal">Total</th>
                                     <th class="product-remove">Remove</th>
                                  </tr>
@@ -110,6 +116,22 @@
                                           <span class="cart-plus">+</span> -->
                                           <input class="cart-input quantity" name="quantity[]" type="number" value="{{ $cart->quantity }}"/>
                                     </td>
+                                       @if(!empty($colors))
+                                     <td class="product-quantity">
+                                          <!-- <span class="cart-minus">-</span>
+                                          <input class="cart-input quantity" name="quantity[]" type="text" value="{{ $cart->quantity }}"/>
+                                          <span class="cart-plus">+</span> -->
+                                          <a href="{{ route('product-details', $cart->product_id) }}">{{ $cart->colors }}</a>
+                                    </td>
+                                    @endif
+                                      @if(!empty($size_list))
+                                    <td class="product-quantity">
+                                          <!-- <span class="cart-minus">-</span>
+                                          <input class="cart-input quantity" name="quantity[]" type="text" value="{{ $cart->quantity }}"/>
+                                          <span class="cart-plus">+</span> -->
+                                           <a href="{{ route('product-details', $cart->product_id) }}">{{ $cart->size_list }}</a>
+                                    </td>
+                                    @endif
                                     <td class="product-subtotal">
                                        TK. <span class="product-total">{{ $cart->total_price }}</span>
                                     </td>
