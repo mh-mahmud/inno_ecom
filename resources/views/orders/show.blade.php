@@ -152,12 +152,18 @@ use Carbon\Carbon;
                 </div>
                 <!--begin::Body-->
                 <div class="card-body p-1">
+                    @php
+                        $subtotal = 0;
+                    @endphp
+
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Product</th>
+                                <th>Product Image</th>
                                 <th>Size</th>
+                                <th>Color</th>
                                 <th>Code</th>
                                 <th>Qty</th>
                                 <th>Price</th>
@@ -166,40 +172,49 @@ use Carbon\Carbon;
                         </thead>
                         <tbody>
                             @foreach ($orderDetails as $key => $detail)
+                            @php
+                                $lineTotal = $detail->quantity * $detail->unit_price;
+                                $subtotal += $lineTotal;
+                            @endphp
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $detail->product_name }}</td>
-                                <td>{{ $detail->product_size }}</td>
+                                <td>
+                                    @if($detail->img_path)
+                                        <img style="width: 60px;" src="{{ asset('uploads/products/' . $detail->img_path) }}" alt="{{ $detail->product_name }}">
+                                    @else
+                                        <img style="width: 60px;" src="{{ asset('uploads/noimage.jpg') }}" alt="No image">
+                                    @endif
+                                </td>
+                                                        <td>{{ $detail->size_list }}</td>
+                                <td>{{ $detail->colors }}</td>
                                 <td>{{ $detail->product_code }}</td>
                                 <td>{{ $detail->quantity }}</td>
                                 <td>{{ $detail->unit_price }}</td>
-                                <td>{{ $detail->quantity * $detail->unit_price }}</td>
+                                <td>{{ $lineTotal }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="6" class="text-end fw-bold">Sub Total</td>
-                                <td>{{ $order->sub_total }}</td>
+                                <td colspan="2">{{ number_format($subtotal, 2) }}</td>
                             </tr>
                             <tr>
                                 <td colspan="6" class="text-end fw-bold">Discount (%)</td>
-                                <td>{{ number_format($order->discount, 1) }}%</td>
+                                <td colspan="2">{{ number_format($order->discount, 1) }}%</td>
                             </tr>
                             <tr>
                                 <td colspan="6" class="text-end fw-bold">Shipping Charge</td>
-                                <td>{{ $order->shipping_charge }}</td>
+                                <td colspan="2">{{ number_format($order->delivery_charge, 2) }}</td>
                             </tr>
                             <tr>
                                 <td colspan="6" class="text-end fw-bold">Payable Amount</td>
-                                <td>{{ $order->payable_amount }}</td>
+                                <td colspan="2">{{ number_format($order->final_price, 2) }}</td>
                             </tr>
-                            <!-- <tr>
-                                <td colspan="6" class="text-end fw-bold text-primary">Due Amount</td>
-                                <td class="text-primary">{{ $order->due_amount }}</td>
-                            </tr> -->
                         </tfoot>
                     </table>
+
                 </div>
 
 

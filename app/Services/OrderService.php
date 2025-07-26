@@ -13,11 +13,19 @@ class OrderService
 {
     public function getAllOrders()
     {
-        return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id')
-            ->select('order_info.*', 'customers.name as customer_name')
-            ->orderBy('order_info.order_date', 'desc')
+        return Order::join('billing_address', 'orders.billing_address_id', '=', 'billing_address.id')
+            ->select(
+                'orders.*',
+                'billing_address.first_name',
+                'billing_address.last_name',
+                'billing_address.shipping_address'
+            )
+            ->orderBy('orders.id', 'desc')
             ->paginate(config('constants.ROW_PER_PAGE'));
     }
+
+
+
 
     public function createOrder_backup($request)
     {
@@ -97,7 +105,7 @@ class OrderService
         ->firstOrFail();
     }
 
-    public function getOrder($id)
+    public function getOrder_backup_final($id)
     {
 
         $order = OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id')
@@ -111,6 +119,36 @@ class OrderService
             'orderDetails' => $orderDetails,
         ];
     }
+    public function getOrder($id)
+{
+    // Get single order row
+    $order = Order::join('billing_address', 'orders.billing_address_id', '=', 'billing_address.id')
+        ->select(
+            'orders.*',
+            'billing_address.first_name',
+            'billing_address.last_name',
+            'billing_address.shipping_address'
+        )
+        ->where('orders.id', $id)
+        ->firstOrFail();
+
+    // Get all related products
+    $orderDetails = OrderDetail::join('products', 'order_details.product_id', '=', 'products.id')
+        ->select(
+            'order_details.*',
+            'products.name as product_name',
+            'products.img_path',
+            'products.product_code'
+        )
+        ->where('order_details.order_id', $id)
+        ->get();
+
+    return [
+        'order' => $order,
+        'orderDetails' => $orderDetails,
+    ];
+}
+
 
 
 
@@ -132,24 +170,33 @@ class OrderService
 
 
     public function searchOrders($request)
-    {
-        $searchTerm = trim($request->input('search'));
+{
+    $searchTerm = trim($request->input('search'));
 
-        return OrderInfo::join('customers', 'order_info.customer_id', '=', 'customers.id')
-        ->select('order_info.*', 'customers.name as customer_name')
-        ->where('customers.name', 'LIKE', "%$searchTerm%")
-        ->orWhere('order_info.invoice_no', 'LIKE', "%$searchTerm%")
-        ->orderBy('order_info.order_date', 'desc')
+    return Order::join('billing_address', 'orders.billing_address_id', '=', 'billing_address.id')
+        ->select(
+            'orders.*',
+            'billing_address.first_name',
+            'billing_address.last_name',
+            'billing_address.shipping_address'
+        )
+        ->where(function ($query) use ($searchTerm) {
+            $query->where('orders.order_phone_number', 'LIKE', "%$searchTerm%")
+                ->orWhere('orders.custom_order_id', 'LIKE', "%$searchTerm%");
+        })
+        ->orderBy('orders.id', 'desc')
         ->paginate(config('constants.ROW_PER_PAGE'));
-    }
+}
+
+
 
     public function updateOrderStatus($id, $status)
     {
-        $order = OrderInfo::find($id);
+        $order = Order::find($id);
         if (!$order) {
             return false;
         }
-        $order->status = $status;
+        $order->order_status = $status;
         return $order->save();
     }
 

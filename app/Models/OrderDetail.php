@@ -15,10 +15,12 @@ class OrderDetail extends Model
         'product_id',
         'order_id',
         'quantity',
+        'colors',
+        'size_list',
         'unit_price',
         'total',
         'delivery_status',
-        'order_status'
+        'order_status',
     ];
 
     public $timestamps = true;

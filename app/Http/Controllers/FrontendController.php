@@ -117,8 +117,9 @@ class FrontendController extends Controller
             $cart->colors = $request->color;
             $cart->size_list = $request->size;
             //$cart->max_purchase_limit = $product_data->max_purchase_limit;
-            $cart->quantity = $product_quantity;
-            $cart->total_price = $product_quantity*$product_data->product_value;
+            //$cart->quantity = $product_quantity;
+            $cart->quantity = $request->qty;
+            $cart->total_price = $request->qty*$product_data->product_value;
             $cart->discount = $discount;
             $cart->final_price = $cart->total_price - $discount;
             $cart->save();
@@ -366,6 +367,8 @@ class FrontendController extends Controller
                     'product_id' => $cart->product_id,
                     'order_id' => $order->id,
                     'quantity' => $cart->quantity,
+                    'colors' => $cart->colors,
+                    'size_list' => $cart->size_list,
                     'unit_price' => $cart->unit_price,
                     'total' => $cart->total_price
                 ]);

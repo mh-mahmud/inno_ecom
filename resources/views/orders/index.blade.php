@@ -200,11 +200,9 @@ use Carbon\Carbon;
                             <div class="col-md-12">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Order Status</label>
-                                    <select name="status" class="form-control form-control-sm form-control-solid">
+                                    <select name="order_status" class="form-control form-control-sm form-control-solid">
                                         <option value="">Select Order Status</option>
-                                        <option value="New">New</option>
-                                        <option value="Pending">Pending</option>
-                                        <option value="Processing">Processing</option>
+                                        <option value="PROCESSING">Processing</option>
                                         <option value="Completed">Completed</option>
                                         <option value="Cancelled">Cancelled</option>
                                     </select>
@@ -261,7 +259,7 @@ use Carbon\Carbon;
                                 <!--end::Svg Icon-->
                                 <input type="text" name="search"
                                     class="form-control form-control-sm form-control-solid w-250px ps-15"
-                                    value="{{ request('search') }}" placeholder="Search by Invoice No">
+                                    value="{{ request('search') }}" placeholder="Search by Order ID">
                             </div>
                             <!--end::Input group-->
                             <button type="submit" class="btn btn-primary btn-sm ms-2">Search</button>
@@ -282,11 +280,12 @@ use Carbon\Carbon;
                             <thead>
                                 <tr class="fw-bolder text-muted bg-light bd-cyan">
                                     <th class="ps-4 min-w-50px">SL</th>
-                                    <th class="min-w-150px">Invoice No</th>
+                                    <th class="min-w-150px">Order ID</th>
                                     <th class="min-w-150px">Customer Name</th>
-                                    <th class="min-w-150px">Discount</th>
-                                    <th class="min-w-150px">Payable Amount</th>
+                                    <th class="min-w-150px">Phone Number</th>
+                                    <th class="min-w-150px">Total Amount</th>
                                     <th class="min-w-150px">Order Date</th>
+                                    <th class="min-w-150px">Address</th>
                                     <th class="min-w-120px">Status</th>
                                     <th class="min-w-100px text-end-new">Actions</th>
                                 </tr>
@@ -297,21 +296,18 @@ use Carbon\Carbon;
                                 @foreach ($orders as $order)
                                 <tr>
                                     <td class="ps-5 text-dark fs-6">{{ ($orders->currentPage() - 1) * $orders->perPage() + $loop->iteration }}</td>
-                                    <td class="text-dark fs-6">{{ $order->invoice_no }}</td>
-                                    <td class="text-dark fs-6">{{ $order->customer_name }}</td>
-                                    <td class="text-dark fs-6">{{ number_format($order->discount, 1) }}%</td>
-                                    <td class="text-dark fs-6">{{ number_format($order->payable_amount, 2) }}</td>
-                                    <td class="text-dark fs-6">{{ \Carbon\Carbon::parse($order->order_date)->format('d-m-Y') }}</td>
+                                    <td class="text-dark fs-6">{{ $order->custom_order_id }}</td>
+                                    <td class="text-dark fs-6">{{ $order->first_name }} {{ $order->last_name }}</td>
+                                    <td class="text-dark fs-6">{{ $order->order_phone_number }} </td>
+                                    <td class="text-dark fs-6">{{ $order->final_price }}</td>
+                                    <td class="text-dark fs-6">{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y') }}</td>
+                                    <td class="text-dark fs-6">{{ $order->shipping_address }}</td>
                                     <td>
-                                        @if ($order->status == 'New')
-                                        <span class="badge badge-light-info">New</span>
-                                        @elseif ($order->status == 'Pending')
-                                        <span class="badge badge-light-warning">Pending</span>
-                                        @elseif ($order->status == 'Processing')
-                                        <span class="badge badge-light-primary">Processing</span>
-                                        @elseif ($order->status == 'Completed')
+                                        @if ($order->order_status == 'PROCESSING')
+                                        <span class="badge badge-light-info">Processing</span>
+                                        @elseif ($order->order_status == 'Completed')
                                         <span class="badge badge-light-success">Completed</span>
-                                        @elseif ($order->status == 'Cancelled')
+                                        @elseif ($order->order_status == 'Cancelled')
                                         <span class="badge badge-light-danger">Cancelled</span>
                                         @endif
 
@@ -322,13 +318,13 @@ use Carbon\Carbon;
                                             <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#add_order_status_modal"
-                                                data-id="{{ $order->order_id }}"> <!-- Pass meeting ID here -->
+                                                data-id="{{ $order->id }}"> <!-- Pass meeting ID here -->
                                                 <!-- Svg Icon -->
                                                 <span class="svg-icon svg-icon-3">
                                                 <svg fill="#000000" width="800px" height="800px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M7.536 8.657l2.828-2.83c.39-.39 1.024-.39 1.414 0 .39.392.39 1.025 0 1.416l-3.535 3.535c-.196.195-.452.293-.707.293-.256 0-.512-.097-.708-.292l-2.12-2.12c-.39-.392-.39-1.025 0-1.415s1.023-.39 1.413 0zM8 16c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6z"/></svg>
                                                 </span>
                                             </a>
-                                            <a href="{{ route('orders-show', $order->order_id) }}"
+                                            <a href="{{ route('orders-show', $order->id) }}"
                                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
@@ -349,7 +345,7 @@ use Carbon\Carbon;
                                                     </svg>
                                                 </span>
                                             </a> -->
-                                            <form action="{{ route('orders-destroy', $order->order_id) }}" method="POST" style="display: inline;">
+                                            <!-- <form action="{{ route('orders-destroy', $order->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
@@ -363,7 +359,7 @@ use Carbon\Carbon;
                                                         </svg>
                                                     </span>
                                                 </button>
-                                            </form>
+                                            </form> -->
                                         </div>
                                     </td>
                                 </tr>

@@ -126,11 +126,11 @@ class OrderController extends Controller
     {
         // Validation
         $request->validate([
-            'meeting_feedback' => 'string|max:255',
+            'order_status' => 'string|max:255',
         ]);
 
         // Update the meeting via service
-        $result = $this->orderService->updateOrderStatus($id, $request->input('status'));
+        $result = $this->orderService->updateOrderStatus($id, $request->input('order_status'));
 
         if ($result) {
             //Helper::storeLog("Order Status updated successfully", "Order", "updateOrderStatus", null);

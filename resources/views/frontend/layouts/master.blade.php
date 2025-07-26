@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{url('/')}}/assets/frontend/style.css">
     <!-- modernizr css -->
     <script src="{{url('/')}}/assets/frontend/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="{{url('/')}}/assets/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -118,7 +119,7 @@ $allCategories = Category::where('status', 1)
                             <!--End-gategory-searchbox-->
                             <!--Start-cart-wrap-->
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <ul class="header-cart-wrap">
+                                <!-- <ul class="header-cart-wrap">
                                     <li><a class="cart" href="#">My Cart: 2 items</a>
                                         <div class="mini-cart-content">
                                             <div class="cart-products-list">
@@ -162,7 +163,7 @@ $allCategories = Category::where('status', 1)
                                             </div>
                                         </div>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </div>
                             <!--End-cart-wrap-->
                         </div>

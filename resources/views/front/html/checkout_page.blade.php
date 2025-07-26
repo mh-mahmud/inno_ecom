@@ -152,7 +152,7 @@
                               <label>Shipping Address <span class="required">*</span></label>
                             <div class="order-notes">
                                <div class="checkout-form-list">
-                                  <textarea id="checkout-mess" cols="30" rows="10" name="shipping_address">{{ Auth::user() ? Auth::user()->address : null }}</textarea>
+                                  <textarea id="checkout-mess" cols="30" rows="10" name="shipping_address" required>{{ Auth::user() ? Auth::user()->address : null }}</textarea>
                                </div>
                             </div>
 
@@ -315,9 +315,42 @@
 
 </div>
 
+<script>
+   $(document).ready(function() {
+      // Order total calculation
+      var order_total = parseInt($("#order_total").val());
+
+      $(document).on('change', 'input[name="shipping"]', function() {
+         var selectedValue = $('input[name="shipping"]:checked').val();
+         var total = order_total + parseInt(selectedValue || 0);
+         $("span.total_amount").text(total);
+         $("#order_total").val(total);
+         console.log("Shipping selected:", selectedValue);
+      });
+
+      // Phone number validation function
+      window.validatePhone = function(input) {
+         let phone = input.value;
+         let errorMessage = document.getElementById("error-message");
+
+         // BD phone number regex (supports +8801XXXXXXXXX or 01XXXXXXXXX)
+         let bdPhoneRegex = /^(?:\+8801[3-9]\d{8}|01[3-9]\d{8})$/;
+
+         if (!bdPhoneRegex.test(phone)) {
+            errorMessage.textContent = "Invalid Bangladeshi phone number!";
+            input.style.borderColor = "red";
+         } else {
+            errorMessage.textContent = "";
+            input.style.borderColor = "green";
+         }
+      };
+   });
+</script>
+
 @endsection
 
 @section('custom_js')
+
 <script type="text/javascript">
    $('.cat-menu__category .category-menu').css('display', 'none');
    $("#apply-coupon").on("click", function(e) {

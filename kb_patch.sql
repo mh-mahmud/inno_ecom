@@ -206,3 +206,7 @@ ALTER TABLE products ADD COLUMN size_list VARCHAR(255) DEFAULT '' AFTER colors;
 ALTER TABLE carts ADD COLUMN colors VARCHAR(255) DEFAULT '' AFTER product_name;
 ALTER TABLE carts ADD COLUMN size_list VARCHAR(255) DEFAULT '' AFTER colors;
 
+---add db 27-07-2025
+ALTER TABLE order_details ADD COLUMN colors VARCHAR(255) DEFAULT '' AFTER quantity;
+ALTER TABLE order_details ADD COLUMN size_list VARCHAR(255) DEFAULT '' AFTER colors;
+
