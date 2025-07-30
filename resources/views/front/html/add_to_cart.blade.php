@@ -23,7 +23,7 @@
     }
 @endphp
 
-<div class="single-banner-top">
+<!-- <div class="single-banner-top">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!--end-single-heading-banner-->
             <!--start-single-heading-->
             <div class="signle-heading">

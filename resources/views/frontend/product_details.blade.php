@@ -39,7 +39,7 @@ use Carbon\Carbon;
 </style>
 
 
-<div class="single-banner-top">
+<!-- <div class="single-banner-top">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -49,7 +49,7 @@ use Carbon\Carbon;
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Breadcrumb -->
 <div class="signle-heading">

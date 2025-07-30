@@ -6,7 +6,7 @@
 @section('content')
 
 
- <div class="single-banner-top">
+ <!-- <div class="single-banner-top">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
@@ -16,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+    </div> -->
             <!--end-single-heading-banner-->
             <!--start-single-heading-->
             <div class="signle-heading">
@@ -27,7 +27,7 @@
                             <div class="shop-head-menu">
                                 <ul>
                                     <li><i class="fa fa-home"></i><a class="shop-home" href="{{ route('index') }}"><span>Home</span></a><span><i class="fa fa-angle-right"></i></span></li>
-                                    <li class="shop-pro">Shop grid</li>
+                                    <li class="shop-pro">{{ $category->category_name }}</li>
                                 </ul>
                             </div>
                         </div>

@@ -31,7 +31,22 @@ return [
         'XL' => 'XL',
         'XXL' => 'XXL',
         '3XL' => '3XL',
-        '4XL' => '4XL'
+        '4XL' => '4XL',
+        '5XL' => '5XL',
+        '6-9 Months' =>'6-9 Months',
+        '9-12 Months' =>'9-12 Months',
+        '12-18 Months' => '12-18 Months',
+        '18-24 Months' => '18-24 Months',
+        '1-2 Years' => '1-2 Years',
+        '2-3 Years' => '2-3 Years',
+        '3-4 Years' => '3-4 Years',
+        '4-5 Years' => '4-5 Years',
+        '5-6 Years' => '5-6 Years',
+        '6-8 Years' => '6-8 Years',
+        '8-10 Years' => '8-10 Years',
+        '10-12 Years' => '10-12 Years',
+        '12-14 Years' => '12-14 Years',
+        
     ],
 
  

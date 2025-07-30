@@ -135,7 +135,7 @@
                                         @endif
                                         <div class="sale-border"></div>
                                         <div class="product-img-wrap">
-                                            <a class="product-img" href="#">
+                                            <a class="product-img" href="{{ route('product-details', $product->id) }}">
                                                 <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
                                             <!-- <div class="add-to-link">
@@ -210,7 +210,7 @@
                                         @endif
                                         <div class="sale-border"></div>
                                         <div class="product-img-wrap">
-                                            <a class="product-img" href="#">
+                                            <a class="product-img" href="{{ route('product-details', $product->id) }}">
                                                 <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
                                             <!-- <div class="add-to-link">
@@ -279,7 +279,7 @@
                                         @endif
                                         <div class="sale-border"></div>
                                         <div class="product-img-wrap">
-                                            <a class="product-img" href="#">
+                                            <a class="product-img" href="{{ route('product-details', $product->id) }}">
                                                 <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
                                             <!-- <div class="add-to-link">
@@ -346,7 +346,7 @@
                                         @endif
                                         <div class="sale-border"></div>
                                         <div class="product-img-wrap">
-                                            <a class="product-img" href="#">
+                                            <a class="product-img" href="{{ route('product-details', $product->id) }}">
                                                 <img src="{{ asset('uploads/products/' . $product->img_path) }}" alt="{{ $product->name }}" />
                                             </a>
                                             <!-- <div class="add-to-link">
