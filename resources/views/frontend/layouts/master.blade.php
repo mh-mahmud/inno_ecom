@@ -33,17 +33,17 @@
     //->whereNull('parent_id')
     //->where('status', 1)
     //->get();
-    //$allCategories = Category::where('status', 1)->get(); 
+    //$allCategories = Category::where('status', 1)->get();
 
     $categories = Category::with(['children' => function($query) {
-        $query->orderBy('order_by', 'asc');
+    $query->orderBy('order_by', 'asc');
     }])
     ->whereNull('parent_id')
     ->where('status', 1)
     ->orderBy('order_by', 'asc')
     ->get();
 
-$allCategories = Category::where('status', 1)
+    $allCategories = Category::where('status', 1)
     ->orderBy('order_by', 'asc')
     ->get();
     @endphp
@@ -57,13 +57,13 @@ $allCategories = Category::where('status', 1)
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="header-top-left">
                                 <!--Start-Header-language dd-->
-                            
+
                                 <!--End-Header-language-->
                                 <!--Start-Header-currency-->
-                             
+
                                 <!--End-Header-currency-->
                                 <!--Start-welcome-message-->
-                                <div class="welcome-mg hidden-xs"><span>Default Welcome Message!</span></div>
+                                <!-- <div class="welcome-mg hidden-xs"><span>Default Welcome Message!</span></div> -->
                                 <!--End-welcome-message-->
                             </div>
                         </div>
@@ -72,10 +72,18 @@ $allCategories = Category::where('status', 1)
                             <div class="header-top-right">
                                 <div class="top-link-wrap">
                                     <div class="single-link">
-                                        <div class="my-account"><a href="my-account.html"><span class="">My Account</span></a></div>
-                                        <div class="wishlist"><a href="wishlist.html"><span class="">Wishlist</span></a></div>
-                                        <div class="check"><a href="checkout.html"><span class="">Checkout</span></a></div>
-                                        <div class="login"><a href="login.html"><span class="">Log In</span></a></div>
+                                        <div class="my-account">
+                                            <!-- <a href="my-account.html"><span class="">My Account</span></a> -->
+                                        </div>
+                                        <div class="wishlist">
+                                            <!-- <a href="wishlist.html"><span class="">Wishlist</span></a> -->
+                                        </div>
+                                        <div class="check">
+                                            <!-- <a href="checkout.html"><span class="">Checkout</span></a> -->
+                                        </div>
+                                        <div class="login">
+                                            <!-- <a href="login.html"><span class="">Log In</span></a> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +107,8 @@ $allCategories = Category::where('status', 1)
                             <!--Start-gategory-searchbox-->
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div id="search-category-wrap">
-                                    <form class="header-search-box" action="#" method="post">
+                                   <form class="header-search-box" action="{{ route('search-products') }}" method="GET">
+
                                         <div class="search-cat">
                                             <select class="category-items" name="category">
                                                 <option value="">All Categories</option>
@@ -184,7 +193,7 @@ $allCategories = Category::where('status', 1)
 
 
                                         <ul id="nav">
-                                            <li><a href="{{ route('index') }}">Home</a>
+                                            <li><a href="{{ route('index') }}">Home</a></li>
                                                 @foreach($categories as $parent)
                                                 @if($parent->children->count())
                                             <li class="angle-down">
@@ -222,109 +231,24 @@ $allCategories = Category::where('status', 1)
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul>
-                                        <li><a href="index.html">Home</a>
+                                         <li><a href="{{ route('index') }}">Home</a></li>
+                                        @foreach($categories as $parent)
+                                        @if($parent->children->count())
+                                        <li>
+                                            <a href="{{ url('category-products/' . $parent->id) }}">{{ $parent->category_name }}</a>
                                             <ul>
-                                                <li><a href="index-2.html">Home 2</a></li>
-                                                <li><a href="index-3.html">Home 3</a></li>
-                                                <li><a href="index-4.html">Home 4</a></li>
-                                                <li><a href="index-5.html">Home 5</a></li>
-                                                <li><a href="index-6.html">Home 6</a></li>
-                                                <li><a href="index-7.html">Home 7</a></li>
+                                                @foreach($parent->children as $child)
+                                                <li><a href="{{ url('category-products/' . $child->id) }}">{{ $child->category_name }}</a></li>
+                                                @endforeach
                                             </ul>
                                         </li>
-                                        <li><a href="shop-grid.html">Men</a>
-                                            <ul>
-                                                <li><a href="shop-grid.html">Clothing</a>
-                                                    <ul>
-                                                        <li><a href="shop-grid.html">Jackets</a></li>
-                                                        <li><a href="shop-grid.html">Blazers</a></li>
-                                                        <li><a href="shop-grid.html">T-Shirts</a></li>
-                                                        <li><a href="shop-grid.html">Collections</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="shop-grid.html">Dresses</a>
-                                                    <ul>
-                                                        <li><a href="shop-grid.html">Evening</a></li>
-                                                        <li><a href="shop-grid.html">Cocktail</a></li>
-                                                        <li><a href="shop-grid.html">Footwear</a></li>
-                                                        <li><a href="shop-grid.html">Sunglass</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="shop-grid.html">Handbags</a>
-                                                    <ul>
-                                                        <li><a href="shop-grid.html">Bootees Bags</a></li>
-                                                        <li><a href="shop-grid.html">Exclusive</a></li>
-                                                        <li><a href="shop-grid.html">Jackets</a></li>
-                                                        <li><a href="shop-grid.html">Furniture</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="shop-grid.html">Jewellery</a>
-                                                    <ul>
-                                                        <li><a href="shop-grid.html">Earrings</a></li>
-                                                        <li><a href="shop-grid.html">Braclets
-                                                            </a></li>
-                                                        <li><a href="shop-grid.html">Nosepins</a></li>
-                                                        <li><a href="shop-grid.html">SweaBangelsters</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
+                                        @else
+                                        <li>
+                                            <a href="{{ url('category-products/' . $parent->id) }}">{{ $parent->category_name }}</a>
                                         </li>
-                                        <li><a href="shop-grid.html">Women</a>
-                                            <ul>
-                                                <li><a href="shop-grid.html">Clothing</a>
-                                                    <ul>
-                                                        <li><a href="shop-grid.html">Jackets</a></li>
-                                                        <li><a href="shop-grid.html">Blazers</a></li>
-                                                        <li><a href="shop-grid.html">T-Shirts</a></li>
-                                                        <li><a href="shop-grid.html">Collections</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="shop-grid.html">Dresses</a>
-                                                    <ul>
-                                                        <li><a href="shop-grid.html">Evening</a></li>
-                                                        <li><a href="shop-grid.html">Cocktail</a></li>
-                                                        <li><a href="shop-grid.html">Footwear</a></li>
-                                                        <li><a href="shop-grid.html">Sunglass</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="shop-grid.html">Handbags</a>
-                                                    <ul>
-                                                        <li><a href="shop-grid.html">Bootees Bags</a></li>
-                                                        <li><a href="shop-grid.html">Exclusive</a></li>
-                                                        <li><a href="shop-grid.html">Jackets</a></li>
-                                                        <li><a href="shop-grid.html">Furniture</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="shop-grid.html">Jewellery</a>
-                                                    <ul>
-                                                        <li><a href="shop-grid.html">Earrings</a></li>
-                                                        <li><a href="shop-grid.html">Braclets
-                                                            </a></li>
-                                                        <li><a href="shop-grid.html">Nosepins</a></li>
-                                                        <li><a href="shop-grid.html">SweaBangelsters</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="shop-grid.html">Pages</a>
-                                            <ul>
-                                                <li><a href="about-us.html">About Us</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                                <li><a href="my-account.html">My Account</a></li>
-                                                <li><a href="login.html">Login</a></li>
-                                                <li><a href="single-product.html">Single Product</a></li>
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                                <li><a href="shop-grid.html">Shop Grid</a></li>
-                                                <li><a href="shop-list.html">Shop List</a></li>
-                                                <li><a href="shop-right-sidebar.html">Shop Right Sidbar</a></li>
-                                                <li><a href="404.html">404</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact-us.html">Contact Us</a></li>
+                                        @endif
+                                        @endforeach
+
                                     </ul>
                                 </nav>
                             </div>

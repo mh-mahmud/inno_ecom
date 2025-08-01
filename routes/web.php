@@ -57,6 +57,8 @@ Route::post('go-checkout', [FrontendController::class, 'go_checkout'])->name('go
 Route::post('checkout', [FrontendController::class, 'checkout_store'])->name('checkout-store');
 Route::post('product-search', [FrontendController::class, 'product_search'])->name('product-search');
 Route::post('post-contact-form', [FrontendController::class, 'post_contact_form'])->name('post-contact-form');
+Route::get('/search-products', [FrontendController::class, 'searchProduct'])->name('search-products');
+
 
 
 Route::group(['middleware' => ['auth']], function () {

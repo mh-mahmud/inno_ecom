@@ -54,7 +54,7 @@ class FrontendController extends Controller
         $category = Category::findOrFail($category_id);
         $products = Product::where('category_id', $category_id)
                     ->where('status', 1)
-                    ->paginate(10); 
+                    ->paginate(20); 
         return view('frontend.category_product', compact('products', 'category'));
     }
 
@@ -71,6 +71,28 @@ class FrontendController extends Controller
         $sizes = $product->size_list ? explode(',', $product->size_list) : [];
         return view('frontend.product_details', compact('product','newArrivals', 'colors', 'sizes'));
     }
+
+
+    public function searchProduct(Request $request)
+    {
+        $query = Product::query();
+        $category = null; // default if not selected
+
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+            $category = Category::find($request->category); // get the category object
+        }
+
+        $products = $query->where('status', 1)->paginate(12);
+
+        return view('frontend.search_product', compact('products', 'category'));
+    }
+
+
 
 
     public function about()
