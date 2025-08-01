@@ -87,7 +87,7 @@ class FrontendController extends Controller
             $category = Category::find($request->category); // get the category object
         }
 
-        $products = $query->where('status', 1)->paginate(12);
+        $products = $query->where('status', 1)->paginate(20);
 
         return view('frontend.search_product', compact('products', 'category'));
     }
