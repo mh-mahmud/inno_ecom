@@ -76,7 +76,8 @@ class FrontendController extends Controller
     public function searchProduct(Request $request)
     {
         $query = Product::query();
-        $category = null; // default if not selected
+        $category = null;
+        $searchTerm = $request->search; // capture search term
 
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
@@ -84,13 +85,14 @@ class FrontendController extends Controller
 
         if ($request->filled('category')) {
             $query->where('category_id', $request->category);
-            $category = Category::find($request->category); // get the category object
+            $category = Category::find($request->category);
         }
 
         $products = $query->where('status', 1)->paginate(20);
 
-        return view('frontend.search_product', compact('products', 'category'));
+        return view('frontend.search_product', compact('products', 'category', 'searchTerm'));
     }
+
 
 
 
