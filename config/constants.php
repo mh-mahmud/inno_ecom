@@ -42,6 +42,7 @@ return [
         '3-4 Years' => '3-4 Years',
         '4-5 Years' => '4-5 Years',
         '5-6 Years' => '5-6 Years',
+        '6-7 Years' => '6-7 Years',
         '6-8 Years' => '6-8 Years',
         '8-10 Years' => '8-10 Years',
         '10-12 Years' => '10-12 Years',
