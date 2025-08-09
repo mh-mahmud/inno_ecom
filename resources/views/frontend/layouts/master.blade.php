@@ -8,6 +8,7 @@
     <meta name="description" content="SAMI Export Collection offers premium quality garments and apparel for global markets. Explore our curated collection of fashion-forward exports.">
     <meta name="keywords" content="SAMI Export, Garments, Apparel, Export House, Fashion, Clothing, Bangladesh">
     <meta name="author" content="SAMI Export Collection">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Fonts -->
@@ -76,7 +77,7 @@
                                             <!-- <a href="my-account.html"><span class="">My Account</span></a> -->
                                         </div>
                                         <div class="wishlist">
-                                            <!-- <a href="wishlist.html"><span class="">Wishlist</span></a> -->
+                                            <a href="{{ route('my-wishlist') }}"><span class="">My Wishlist</span></a>
                                         </div>
                                         <div class="check">
                                             <!-- <a href="checkout.html"><span class="">Checkout</span></a> -->
@@ -128,7 +129,7 @@
                             <!--End-gategory-searchbox-->
                             <!--Start-cart-wrap-->
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <!-- <ul class="header-cart-wrap">
+                                <ul class="header-cart-wrap">
                                     <li><a class="cart" href="#">My Cart: 2 items</a>
                                         <div class="mini-cart-content">
                                             <div class="cart-products-list">
@@ -172,7 +173,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                </ul> -->
+                                </ul>
                             </div>
                             <!--End-cart-wrap-->
                         </div>

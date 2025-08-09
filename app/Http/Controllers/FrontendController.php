@@ -72,6 +72,70 @@ class FrontendController extends Controller
         return view('frontend.product_details', compact('product','newArrivals', 'colors', 'sizes'));
     }
 
+    public function my_wishlist() {
+        if(Auth::user()) {
+            $lists = Wishlist::where('user_id', Auth::user()->id)->get();
+        }
+        else {
+            $lists = Wishlist::where('session_id', Session::get('sami-fashions-visitor'))->get();
+        }
+        // dd(Session::get('sami-fashions-visitor'));
+        
+        return view('frontend.my_wishlist', compact('lists'));
+    }
+
+    public function remove_wishlist($id) {
+        if(Auth::user()) {
+            $lists = Wishlist::where('user_id', Auth::user()->id)->where('id', $id)->delete();
+        }
+        else {
+            $lists = Wishlist::where('session_id', Session::get('sami-fashions-visitor'))->where('id', $id)->delete();
+        }
+        return redirect()->route('my-wishlist')->with('success', 'Item deleted from wishlist successfully');
+    }
+
+    public function add_wishlist(Request $request)
+    {
+        if(Session::get('sami-fashions-visitor')==null) {
+            $session_value = str_pad(mt_rand(1, 9999999999999), 10);
+            Session::put('sami-fashions-visitor', $session_value);
+        }
+        $request->validate([
+            'product_id' => 'required|exists:products,id', // Validate the product ID
+        ]);
+
+        // Check if the product is already in the wishlist
+        if(Auth::user()) {
+            $exists = Wishlist::where('user_id', auth()->id())->where('product_id', $request->product_id)->exists();
+        }
+        else {
+            $exists = Wishlist::where('session_id', Session::get('sami-fashions-visitor'))->where('product_id', $request->product_id)->exists();
+        }
+
+        if ($exists) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This product is already in your wishlist!',
+            ]);
+        }
+
+        // Add the product to the wishlist
+        $product_data = Product::findOrFail($request->product_id);
+        Wishlist::create([
+            'user_id' => !empty(auth()->id()) ? auth()->id() : null,
+            'session_id' => !empty(Session::get('sami-fashions-visitor')) ? Session::get('sami-fashions-visitor') : null,
+            'product_id' => $request->product_id,
+            'unit_price' => $product_data->product_value,
+            'product_image' => $product_data->img_path,
+            'product_name' => $product_data->name
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Product added to wishlist!',
+        ]);
+    }
+
 
     public function searchProduct(Request $request)
     {
@@ -222,28 +286,6 @@ class FrontendController extends Controller
         return view('front.html.post_track_your_order', compact('lists', 'chk_data'));
     }
 
-    public function my_wishlist() {
-        if(Auth::user()) {
-            $lists = Wishlist::where('user_id', Auth::user()->id)->get();
-        }
-        else {
-            $lists = Wishlist::where('session_id', Session::get('sami-fashions-visitor'))->get();
-        }
-        // dd(Session::get('sami-fashions-visitor'));
-        
-        return view('front.html.my_wishlist', compact('lists'));
-    }
-
-    public function remove_wishlist($id) {
-        if(Auth::user()) {
-            $lists = Wishlist::where('user_id', Auth::user()->id)->where('id', $id)->delete();
-        }
-        else {
-            $lists = Wishlist::where('session_id', Session::get('sami-fashions-visitor'))->where('id', $id)->delete();
-        }
-        return redirect()->route('my-wishlist')->with('success', 'Item deleted from wishlist successfully');
-    }
-
     public function remove_from_cart($id) {
         if(Auth::user()) {
             $lists = Cart::where('user_id', Auth::user()->id)->where('id', $id)->delete();
@@ -252,48 +294,6 @@ class FrontendController extends Controller
             $lists = Cart::where('session_id', Session::get('sami-fashions-visitor'))->where('id', $id)->delete();
         }
         return redirect()->route('add-to-cart-details')->with('success', 'Item deleted from cart successfully');
-    }
-
-    public function add_wishlist(Request $request)
-    {
-        if(Session::get('sami-fashions-visitor')==null) {
-            $session_value = str_pad(mt_rand(1, 9999999999999), 10);
-            Session::put('sami-fashions-visitor', $session_value);
-        }
-        $request->validate([
-            'product_id' => 'required|exists:products,id', // Validate the product ID
-        ]);
-
-        // Check if the product is already in the wishlist
-        if(Auth::user()) {
-            $exists = Wishlist::where('user_id', auth()->id())->where('product_id', $request->product_id)->exists();
-        }
-        else {
-            $exists = Wishlist::where('session_id', Session::get('sami-fashions-visitor'))->where('product_id', $request->product_id)->exists();
-        }
-
-        if ($exists) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'This product is already in your wishlist!',
-            ]);
-        }
-
-        // Add the product to the wishlist
-        $product_data = Product::findOrFail($request->product_id);
-        Wishlist::create([
-            'user_id' => !empty(auth()->id()) ? auth()->id() : null,
-            'session_id' => !empty(Session::get('sami-fashions-visitor')) ? Session::get('sami-fashions-visitor') : null,
-            'product_id' => $request->product_id,
-            'unit_price' => $product_data->product_value,
-            'product_image' => $product_data->img_path,
-            'product_name' => $product_data->name
-        ]);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Product added to wishlist!',
-        ]);
     }
 
     public function customer_order_history() {

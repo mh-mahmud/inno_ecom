@@ -36,6 +36,11 @@ Route::get('/product-details/{id}', [FrontendController::class, 'productDetails'
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/post_login', [AuthController::class, 'postLogin'])->name('login.post');
 
+Route::get('add-to-wishlist/{product_id}', [FrontendController::class, 'add_to_wishlist'])->name('add-to-wishlist');
+Route::get('my-wishlist', [FrontendController::class, 'my_wishlist'])->name('my-wishlist');
+Route::post('/wishlist/add', [FrontendController::class, 'add_wishlist'])->name('wishlist.add');
+Route::get('remove-wishlist/{id}', [FrontendController::class, 'remove_wishlist'])->name('remove-wishlist');
+
 # added routes
 Route::get('user-login', [AuthController::class, 'user_login'])->name('user-login');
 Route::get('user-register', [AuthController::class, 'user_register'])->name('user-register');

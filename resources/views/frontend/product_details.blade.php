@@ -243,6 +243,9 @@ use Carbon\Carbon;
                                                 <span>Add to cart</span>
                                             </button>
                                         </div>
+                                        <div class="add-to-cartbest single-add">
+                                            <a data-product_id="{{ $product->id }}" class="btn btn-sm btn-primary addinwishlist" href="#">Add To Wishlist</a>
+                                        </div>
 
                                         <!-- <div class="add-to-cartbest single-add">
                                             <a href="{{ route('add-to-cart', $product->id) }}" title="add to cart">
@@ -471,7 +474,41 @@ use Carbon\Carbon;
     });
 </script>
 
+<script type="text/javascript">
+   $(".addinwishlist").on("click", function(e) {
+      e.preventDefault();
+      // var pro_id = $(this).data("product_id");
+      // alert(pro_id);
 
+      let productId = $(this).data("product_id"); // Get the product ID from the data-id attribute
+
+      $.ajax({
+        url: '{{ route("wishlist.add") }}', // Laravel route for adding to wishlist
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
+            product_id: productId,
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert(response.message); // Success message
+            } else {
+                alert(response.message); // Error message
+            }
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText); // Log the error
+            alert('Something went wrong!');
+        }
+      });
+
+
+   });
+
+
+
+
+</script>
 
 
 @endsection
